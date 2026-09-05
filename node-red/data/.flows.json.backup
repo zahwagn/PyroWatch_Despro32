@@ -1,0 +1,250 @@
+[
+    {
+        "id": "59a5896486c42da9",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bad0353ba2f12888",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "376e9b694af84588",
+        "type": "mqtt-broker",
+        "name": "PyroWatch",
+        "broker": "mosquitto",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f09fc80afd185003",
+        "type": "sqlitedb",
+        "db": "/data/pyrowatch1.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "22122af52fd328fe",
+        "type": "mqtt in",
+        "z": "59a5896486c42da9",
+        "name": "",
+        "topic": "hutan/sensor/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "376e9b694af84588",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 500,
+        "y": 120,
+        "wires": [
+            [
+                "cbb31a8c52962806"
+            ]
+        ]
+    },
+    {
+        "id": "cbb31a8c52962806",
+        "type": "function",
+        "z": "59a5896486c42da9",
+        "name": "parse & validasi",
+        "func": "const payload = msg.payload;\nconst required = [\"co\", \"ch4\", \"temp\", \"hum\", \"node_id\"];\nconst missing = required.filter(k => !(k in payload));\n\nif (missing.length > 0) {\n    node.warn(\"Payload tidak lengkap, field hilang: \" + missing.join(\",\"));\n    return null; // stop flow kalau data tidak sesuai\n}\n\nmsg.payload = {\n    ...payload,\n    timestamp: new Date().toISOString()\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 200,
+        "wires": [
+            [
+                "f241f05ef5f5c3e6"
+            ]
+        ]
+    },
+    {
+        "id": "ae90330909f69495",
+        "type": "debug",
+        "z": "59a5896486c42da9",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f241f05ef5f5c3e6",
+        "type": "function",
+        "z": "59a5896486c42da9",
+        "name": "hitung FRI",
+        "func": "const d = msg.payload;\n\n// Normalisasi suhu (T_min=25, T_max=55)\nfunction fT(T) {\n    if (T < 25) return 0;\n    if (T > 55) return 1;\n    return (T - 25) / (55 - 25);\n}\n\n// Normalisasi kelembapan, inversi (H_min=30, H_max=90)\nfunction fH(H) {\n    if (H < 30) return 1;\n    if (H > 90) return 0;\n    return (90 - H) / (90 - 30);\n}\n\n// Normalisasi gas CO (0-200 ppm) dan CH4 (0-1000 ppm), ambil max\nfunction fG(co, ch4) {\n    const fCO = Math.min(Math.max(co / 200, 0), 1);\n    const fCH4 = Math.min(Math.max(ch4 / 1000, 0), 1);\n    return Math.max(fCO, fCH4);\n}\n\nconst fri = (0.3 * fT(d.temp)) + (0.2 * fH(d.hum)) + (0.5 * fG(d.co, d.ch4));\n\nlet level;\nif (fri < 0.4) level = \"Low\";\nelse if (fri <= 0.6) level = \"Moderate\";\nelse if (fri <= 0.8) level = \"High\";\nelse level = \"Extreme\";\n\nmsg.payload = {\n    ...d,\n    fri: Number(fri.toFixed(2)),\n    fri_level: level\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "033f22e6eff3ac2a"
+            ]
+        ]
+    },
+    {
+        "id": "033f22e6eff3ac2a",
+        "type": "function",
+        "z": "59a5896486c42da9",
+        "name": "insert query",
+        "func": "const d = msg.payload;\nmsg.topic = \"INSERT INTO sensor_readings (node_id, timestamp, co, ch4, temp, hum, fri, fri_level) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\";\nmsg.payload = [d.node_id, d.timestamp, d.co, d.ch4, d.temp, d.hum, d.fri ?? null, d.fri_level ?? null];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 340,
+        "wires": [
+            [
+                "164a7c4a1ec4e4e1"
+            ]
+        ]
+    },
+    {
+        "id": "164a7c4a1ec4e4e1",
+        "type": "sqlite",
+        "z": "59a5896486c42da9",
+        "mydb": "f09fc80afd185003",
+        "sqlquery": "prepared",
+        "sql": "   INSERT INTO sensor_readings (node_id, timestamp, co, ch4, temp, hum, fri, fri_level) VALUES ($node_id, $timestamp, $co, $ch4, $temp, $hum, $fri, $fri_level)",
+        "name": "",
+        "x": 520,
+        "y": 420,
+        "wires": [
+            [
+                "ae90330909f69495"
+            ]
+        ]
+    },
+    {
+        "id": "919b2659563044b8",
+        "type": "inject",
+        "z": "bad0353ba2f12888",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 80,
+        "wires": [
+            [
+                "cb3373964e7c979f"
+            ]
+        ]
+    },
+    {
+        "id": "cb3373964e7c979f",
+        "type": "function",
+        "z": "bad0353ba2f12888",
+        "name": "function 1",
+        "func": "   msg.topic = `CREATE TABLE IF NOT EXISTS sensor_readings (\n       id INTEGER PRIMARY KEY AUTOINCREMENT,\n       node_id TEXT,\n       timestamp TEXT,\n       co REAL,\n       ch4 REAL,\n       temp REAL,\n       hum REAL,\n       fri REAL,\n       fri_level TEXT\n   )`;\n   return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 160,
+        "wires": [
+            [
+                "836f39088dffbba6"
+            ]
+        ]
+    },
+    {
+        "id": "8ec85392931b11f5",
+        "type": "debug",
+        "z": "bad0353ba2f12888",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 220,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "836f39088dffbba6",
+        "type": "sqlite",
+        "z": "bad0353ba2f12888",
+        "mydb": "f09fc80afd185003",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "8ec85392931b11f5"
+            ]
+        ]
+    }
+]
