@@ -18,17 +18,18 @@
                     "v": 4,
                     "tabs": [],
                     "primary": {
-                        "width": 300,
+                        "width": 433,
                         "top": {
                             "tabs": [
                                 "info",
                                 "help",
                                 "config",
-                                "context"
+                                "context",
+                                "dashboard-2.0"
                             ],
-                            "height": 304.8,
+                            "height": 306.569778,
                             "hidden": false,
-                            "active": "config"
+                            "active": "dashboard-2.0"
                         },
                         "bottom": {
                             "tabs": [
@@ -44,7 +45,7 @@
                             "tabs": [
                                 "explorer"
                             ],
-                            "height": 304.8,
+                            "height": 306.569778,
                             "hidden": false,
                             "active": "explorer"
                         },
@@ -70,6 +71,7 @@
         },
         "debug": {
             "clearType": "all"
-        }
+        },
+        "menu-menu-item-right-sidebar": true
     }
 }

@@ -53,6 +53,95 @@
         "mode": "RWC"
     },
     {
+        "id": "18625deca68cf30c",
+        "type": "ui-base",
+        "name": "PyroWatch",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "87505c750b69f936",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#fcfcfd",
+            "primary": "#0d74ce",
+            "bgPage": "#f9f9fb",
+            "groupBg": "#ffffff",
+            "groupOutline": "#d9d9e0"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "d6f523873f5265eb",
+        "type": "ui-page",
+        "name": "Monitoring",
+        "ui": "18625deca68cf30c",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "87505c750b69f936",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "073feec3ce7fb5e5",
+        "type": "ui-group",
+        "name": "AI Risk Analysis",
+        "page": "d6f523873f5265eb",
+        "width": "12",
+        "height": "10",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
         "id": "22122af52fd328fe",
         "type": "mqtt in",
         "z": "59a5896486c42da9",
@@ -65,7 +154,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 500,
+        "x": 700,
         "y": 120,
         "wires": [
             [
@@ -78,14 +167,14 @@
         "type": "function",
         "z": "59a5896486c42da9",
         "name": "parse & validasi",
-        "func": "const payload = msg.payload;\nconst required = [\"co\", \"ch4\", \"temp\", \"hum\", \"node_id\"];\nconst missing = required.filter(k => !(k in payload));\n\nif (missing.length > 0) {\n    node.warn(\"Payload tidak lengkap, field hilang: \" + missing.join(\",\"));\n    return null; // stop flow kalau data tidak sesuai\n}\n\nmsg.payload = {\n    ...payload,\n    timestamp: new Date().toISOString()\n};\nreturn msg;",
+        "func": "const payload = msg.payload;\n\n// Tambah wind_speed ke required field\nconst required = [\"co\", \"ch4\", \"temp\", \"hum\", \"node_id\", \"wind_speed\"];\nconst missing = required.filter(k => !(k in payload));\n\nif (missing.length > 0) {\n    node.warn(\"Payload tidak lengkap, field hilang: \" + missing.join(\",\"));\n    return null;\n}\n\n// Validasi range nilai\nconst checks = [\n    { field: \"temp\",       min: -40,  max: 80    },\n    { field: \"hum\",        min: 0,    max: 100   },\n    { field: \"co\",         min: 0,    max: 2000  },\n    { field: \"ch4\",        min: 0,    max: 10000 },\n    { field: \"wind_speed\", min: 0,    max: 60    }\n];\n\nfor (const check of checks) {\n    const val = payload[check.field];\n    if (val < check.min || val > check.max) {\n        node.warn(`Field ${check.field} out of range: ${val}`);\n        return null;\n    }\n}\n\nmsg.payload = {\n    ...payload,\n    timestamp: new Date().toISOString()\n};\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
+        "x": 700,
         "y": 200,
         "wires": [
             [
@@ -106,8 +195,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 460,
-        "y": 500,
+        "x": 1060,
+        "y": 720,
         "wires": []
     },
     {
@@ -115,14 +204,14 @@
         "type": "function",
         "z": "59a5896486c42da9",
         "name": "hitung FRI",
-        "func": "const d = msg.payload;\n\n// Normalisasi suhu (T_min=25, T_max=55)\nfunction fT(T) {\n    if (T < 25) return 0;\n    if (T > 55) return 1;\n    return (T - 25) / (55 - 25);\n}\n\n// Normalisasi kelembapan, inversi (H_min=30, H_max=90)\nfunction fH(H) {\n    if (H < 30) return 1;\n    if (H > 90) return 0;\n    return (90 - H) / (90 - 30);\n}\n\n// Normalisasi gas CO (0-200 ppm) dan CH4 (0-1000 ppm), ambil max\nfunction fG(co, ch4) {\n    const fCO = Math.min(Math.max(co / 200, 0), 1);\n    const fCH4 = Math.min(Math.max(ch4 / 1000, 0), 1);\n    return Math.max(fCO, fCH4);\n}\n\nconst fri = (0.3 * fT(d.temp)) + (0.2 * fH(d.hum)) + (0.5 * fG(d.co, d.ch4));\n\nlet level;\nif (fri < 0.4) level = \"Low\";\nelse if (fri <= 0.6) level = \"Moderate\";\nelse if (fri <= 0.8) level = \"High\";\nelse level = \"Extreme\";\n\nmsg.payload = {\n    ...d,\n    fri: Number(fri.toFixed(2)),\n    fri_level: level\n};\nreturn msg;",
+        "func": "const d = msg.payload;\n\n// Normalisasi suhu\nfunction fT(T) {\n    if (T < 25) return 0;\n    if (T > 55) return 1;\n    return (T - 25) / (55 - 25);\n}\n\n// Normalisasi kelembapan (inversi)\nfunction fH(H) {\n    if (H < 30) return 1;\n    if (H > 90) return 0;\n    return (90 - H) / (90 - 30);\n}\n\n// Normalisasi gas CO dan CH4, ambil max\nfunction fG(co, ch4) {\n    const fCO  = Math.min(Math.max(co / 200, 0), 1);\n    const fCH4 = Math.min(Math.max(ch4 / 1000, 0), 1);\n    return Math.max(fCO, fCH4);\n}\n\n// Normalisasi kecepatan angin dari anemometer\nfunction fW(w) {\n    return Math.min(Math.max(w / 15, 0), 1); // max 15 m/s\n}\n\n// Hitung FRI dasar \nconst fri_base = (0.3 * fT(d.temp)) + (0.2 * fH(d.hum)) + (0.5 * fG(d.co, d.ch4));\n\n// Faktor penguat dari angin (1.0 - 1.2)\nconst wind_multiplier = 1.0 + (0.2 * fW(d.wind_speed));\n\n// FRI final, di-cap di 1.0\nconst fri = Math.min(fri_base * wind_multiplier, 1.0);\n\n// Klasifikasi level\nlet fri_level;\nif      (fri < 0.4)  fri_level = \"Low\";\nelse if (fri <= 0.6) fri_level = \"Moderate\";\nelse if (fri <= 0.8) fri_level = \"High\";\nelse                 fri_level = \"Extreme\";\n\n// BARU: Estimasi laju rambatan api dari kecepatan angin\nconst spread_rate = parseFloat((2.0 * Math.exp(0.3 * d.wind_speed)).toFixed(2));\n\n// Simpan ke flow context untuk diakses node LLM nanti\nflow.set(\"last_fri_data\", {\n    ...d,\n    fri_base: parseFloat(fri_base.toFixed(4)),\n    fri: parseFloat(fri.toFixed(2)),\n    fri_level: fri_level,\n    spread_rate_cmph: spread_rate\n});\n\nmsg.payload = {\n    ...d,\n    fri_base: parseFloat(fri_base.toFixed(4)),\n    fri: parseFloat(fri.toFixed(2)),\n    fri_level: fri_level,\n    spread_rate_cmph: spread_rate\n};\n\nnode.status({\n    fill: fri_level === \"Low\" ? \"green\" :\n          fri_level === \"Moderate\" ? \"yellow\" :\n          fri_level === \"High\" ? \"orange\" : \"red\",\n    shape: \"dot\",\n    text: `FRI: ${fri.toFixed(2)} (${fri_level}) | Angin: ${d.wind_speed} m/s`\n});\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
+        "x": 690,
         "y": 280,
         "wires": [
             [
@@ -135,14 +224,14 @@
         "type": "function",
         "z": "59a5896486c42da9",
         "name": "insert query",
-        "func": "const d = msg.payload;\nmsg.topic = \"INSERT INTO sensor_readings (node_id, timestamp, co, ch4, temp, hum, fri, fri_level) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\";\nmsg.payload = [d.node_id, d.timestamp, d.co, d.ch4, d.temp, d.hum, d.fri ?? null, d.fri_level ?? null];\nreturn msg;",
+        "func": "const d = msg.payload;\nmsg.params = {\n    $node_id:          d.node_id,\n    $timestamp:        d.timestamp,\n    $co:               d.co,\n    $ch4:              d.ch4,\n    $temp:             d.temp,\n    $hum:              d.hum,\n    $wind_speed:       d.wind_speed ?? null,        \n    $fri:              d.fri ?? null,\n    $fri_level:        d.fri_level ?? null,\n    $spread_rate_cmph: d.spread_rate_cmph ?? null   \n};\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
+        "x": 690,
         "y": 340,
         "wires": [
             [
@@ -156,14 +245,185 @@
         "z": "59a5896486c42da9",
         "mydb": "f09fc80afd185003",
         "sqlquery": "prepared",
-        "sql": "   INSERT INTO sensor_readings (node_id, timestamp, co, ch4, temp, hum, fri, fri_level) VALUES ($node_id, $timestamp, $co, $ch4, $temp, $hum, $fri, $fri_level)",
+        "sql": "INSERT INTO sensor_readings \n(node_id, timestamp, co, ch4, temp, hum, wind_speed, fri, fri_level, spread_rate_cmph)\nVALUES \n($node_id, $timestamp, $co, $ch4, $temp, $hum, $wind_speed, $fri, $fri_level, $spread_rate_cmph)",
         "name": "",
-        "x": 520,
-        "y": 420,
+        "x": 720,
+        "y": 400,
         "wires": [
             [
-                "ae90330909f69495"
+                "4aeb1887fa825b89"
             ]
+        ]
+    },
+    {
+        "id": "4aeb1887fa825b89",
+        "type": "function",
+        "z": "59a5896486c42da9",
+        "name": "format prompt LLM",
+        "func": "const d = flow.get(\"last_fri_data\") || msg.payload;\n\nconst systemPrompt = `\nAnda adalah AI analisis risiko kebakaran hutan untuk sistem PyroWatch.\n\nTugas:\n1. Analisis kondisi berdasarkan data sensor dan FRI.\n2. Jelaskan risiko secara singkat.\n3. Jelaskan potensi penyebaran secara singkat.\n4. Berikan maksimal 3 rekomendasi.\n\nWAJIB:\n- Output HARUS JSON valid.\n- Jangan gunakan Markdown.\n- Jangan gunakan backtick.\n- Jangan menambahkan teks sebelum atau sesudah JSON.\n- Semua nilai string harus singkat.\n- Maksimal 1-2 kalimat untuk analisis_risiko.\n- Maksimal 1 kalimat untuk estimasi_penyebaran.\n- rekomendasi maksimal 3 item.\n- Gunakan Bahasa Indonesia.\n\nFormat JSON WAJIB:\n\n{\n  \"analisis_risiko\": \"string\",\n  \"estimasi_penyebaran\": \"string\",\n  \"rekomendasi\": [\n    \"string\",\n    \"string\",\n    \"string\"\n  ],\n  \"tingkat_urgensi\": \"Low|Moderate|High|Extreme\"\n}\n`;\n\nconst userPrompt = `\nData sensor PyroWatch:\n\nNode: ${d.node_id}\nTimestamp: ${d.timestamp}\n\nTemperature: ${d.temp} °C\nHumidity: ${d.hum} %\nCO: ${d.co}\nCH4: ${d.ch4}\nWind speed: ${d.wind_speed} m/s\n\nFRI: ${d.fri}\nFRI level: ${d.fri_level}\nSpread rate: ${d.spread_rate_cmph} cm/h\n\nBerikan analisis sesuai format JSON.\nJangan membuat penjelasan panjang.\n`;\n\nmsg.payload = {\n    contents: [\n        {\n            parts: [\n                {\n                    text: systemPrompt + \"\\n\" + userPrompt\n                }\n            ]\n        }\n    ],\n\n    generationConfig: {\n        temperature: 0.1,\n\n        maxOutputTokens: 2048,\n\n        responseMimeType: \"application/json\"\n    }\n};\n\nmsg.headers = {\n    \"Content-Type\": \"application/json\",\n    \"x-goog-api-key\": env.get(\"GEMINI_API_KEY\")\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 460,
+        "wires": [
+            [
+                "83989e26696607fb"
+            ]
+        ]
+    },
+    {
+        "id": "83989e26696607fb",
+        "type": "http request",
+        "z": "59a5896486c42da9",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 690,
+        "y": 520,
+        "wires": [
+            [
+                "c7eff421508420d8"
+            ]
+        ]
+    },
+    {
+        "id": "c7eff421508420d8",
+        "type": "function",
+        "z": "59a5896486c42da9",
+        "name": "parse response LLM",
+        "func": "// DEBUG: lihat seluruh response dari Gemini\nnode.warn(\"=== GEMINI RAW RESPONSE ===\");\nnode.warn(JSON.stringify(msg.payload, null, 2));\n\n// Cek HTTP status\nif (msg.statusCode && msg.statusCode !== 200) {\n    node.error(\n        `Gemini HTTP Error ${msg.statusCode}: ${JSON.stringify(msg.payload)}`,\n        msg\n    );\n    return null;\n}\n\n// Cek apakah payload ada\nif (!msg.payload) {\n    node.error(\"Response Gemini benar-benar kosong\", msg);\n    return null;\n}\n\n// Cek error dari Gemini\nif (msg.payload.error) {\n    node.error(\n        `Gemini API Error: ${JSON.stringify(msg.payload.error)}`,\n        msg\n    );\n    return null;\n}\n\n// Cek candidates\nconst candidates = msg.payload.candidates;\n\nif (!candidates || candidates.length === 0) {\n\n    const reason =\n        msg.payload.promptFeedback?.blockReason ||\n        msg.payload.promptFeedback ||\n        \"Tidak ada candidates dari Gemini\";\n\n    node.error(\n        \"Gemini tidak mengembalikan candidate. Detail: \" +\n        JSON.stringify(reason),\n        msg\n    );\n\n    return null;\n}\n\n// Ambil text dari response\nconst parts = candidates[0]?.content?.parts || [];\n\nconst textPart = parts.find(\n    p => typeof p.text === \"string\" && p.text.trim() !== \"\"\n);\n\nif (!textPart) {\n    node.error(\n        \"Candidate Gemini ada, tetapi tidak ada text. Response: \" +\n        JSON.stringify(candidates[0]),\n        msg\n    );\n    return null;\n}\n\nconst raw = textPart.text.trim();\n\nnode.warn(\"=== GEMINI TEXT ===\");\nnode.warn(raw);\n\nlet parsed;\n\ntry {\n    parsed = JSON.parse(raw);\n} catch (e) {\n\n    try {\n        const cleaned = raw\n            .replace(/^```json\\s*/i, \"\")\n            .replace(/^```\\s*/i, \"\")\n            .replace(/\\s*```$/i, \"\")\n            .trim();\n\n        parsed = JSON.parse(cleaned);\n\n    } catch (e2) {\n\n        node.error(\n            \"Gemini mengembalikan text tetapi bukan JSON valid: \" +\n            raw,\n            msg\n        );\n\n        return null;\n    }\n}\n\nconst sensorData = flow.get(\"last_fri_data\") || {};\n\nmsg.payload = {\n    ...sensorData,\n    llm_insight: parsed\n};\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: \"LLM OK — \" + (parsed.tingkat_urgensi || \"Unknown\")\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 580,
+        "wires": [
+            [
+                "ae90330909f69495",
+                "d8c0bb413024b756",
+                "9116b5b663c4a9ca"
+            ]
+        ]
+    },
+    {
+        "id": "b82779b26766d7d6",
+        "type": "inject",
+        "z": "59a5896486c42da9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{   \"node_id\": \"sensor_01\",   \"timestamp\": \"2026-09-12T10:00:00\",   \"temp\": 40.0,   \"hum\": 45.0,   \"co\": 80.0,   \"ch4\": 300.0,   \"wind_speed\": 3.5 }",
+        "payloadType": "json",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "fd5933cc0ecb3b3e"
+            ]
+        ]
+    },
+    {
+        "id": "fd5933cc0ecb3b3e",
+        "type": "mqtt out",
+        "z": "59a5896486c42da9",
+        "name": "",
+        "topic": "hutan/sensor/data",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "376e9b694af84588",
+        "x": 370,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d8c0bb413024b756",
+        "type": "function",
+        "z": "59a5896486c42da9",
+        "name": "insert LLM insight",
+        "func": "const d = msg.payload;\n\nconst insight = d.llm_insight || {};\n\nmsg.params = {\n    $node_id: d.node_id,\n    $timestamp: d.timestamp,\n\n    $analisis_risiko:\n        insight.analisis_risiko || null,\n\n    $estimasi_penyebaran:\n        insight.estimasi_penyebaran || null,\n\n    $rekomendasi:\n        Array.isArray(insight.rekomendasi)\n            ? JSON.stringify(insight.rekomendasi)\n            : null,\n\n    $tingkat_urgensi:\n        insight.tingkat_urgensi || null\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 700,
+        "wires": [
+            [
+                "4898adb7d6158e70"
+            ]
+        ]
+    },
+    {
+        "id": "4898adb7d6158e70",
+        "type": "sqlite",
+        "z": "59a5896486c42da9",
+        "mydb": "f09fc80afd185003",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO llm_insights\n(\n    node_id,\n    timestamp,\n    analisis_risiko,\n    estimasi_penyebaran,\n    rekomendasi,\n    tingkat_urgensi\n)\nVALUES\n(\n    $node_id,\n    $timestamp,\n    $analisis_risiko,\n    $estimasi_penyebaran,\n    $rekomendasi,\n    $tingkat_urgensi\n);",
+        "name": "",
+        "x": 600,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9116b5b663c4a9ca",
+        "type": "ui-template",
+        "z": "59a5896486c42da9",
+        "group": "073feec3ce7fb5e5",
+        "page": "",
+        "ui": "",
+        "name": "AI Risk Monitoring",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "head": "",
+        "format": "<template>\n    <div class=\"pyrowatch-dashboard\">\n\n        <!-- HEADER -->\n        <div class=\"header\">\n            <div>\n                <h1>🔥 PyroWatch</h1>\n                <p>Wildfire Risk Monitoring & AI Analysis</p>\n            </div>\n\n            <div\n                v-if=\"msg && msg.payload\"\n                class=\"risk-badge\"\n                :class=\"getRiskClass(msg.payload.fri_level)\"\n            >\n                {{ msg.payload.fri_level || 'Unknown' }}\n            </div>\n        </div>\n\n\n        <!-- SENSOR DATA -->\n        <div\n            v-if=\"msg && msg.payload\"\n            class=\"sensor-grid\"\n        >\n\n            <!-- FRI -->\n            <div class=\"card\">\n                <div class=\"card-title\">🔥 Fire Risk Index</div>\n\n                <div class=\"big-value\">\n                    {{ formatNumber(msg.payload.fri) }}\n                </div>\n\n                <div class=\"progress\">\n                    <div\n                        class=\"progress-bar\"\n                        :style=\"{ width: ((msg.payload.fri || 0) * 100) + '%' }\"\n                    ></div>\n                </div>\n            </div>\n\n\n            <!-- TEMPERATURE -->\n            <div class=\"card\">\n                <div class=\"card-title\">🌡️ Temperature</div>\n\n                <div class=\"big-value\">\n                    {{ formatNumber(msg.payload.temp) }} °C\n                </div>\n            </div>\n\n\n            <!-- HUMIDITY -->\n            <div class=\"card\">\n                <div class=\"card-title\">💧 Humidity</div>\n\n                <div class=\"big-value\">\n                    {{ formatNumber(msg.payload.hum) }} %\n                </div>\n            </div>\n\n\n            <!-- WIND -->\n            <div class=\"card\">\n                <div class=\"card-title\">💨 Wind Speed</div>\n\n                <div class=\"big-value\">\n                    {{ formatNumber(msg.payload.wind_speed) }} m/s\n                </div>\n            </div>\n\n\n            <!-- CO -->\n            <div class=\"card\">\n                <div class=\"card-title\">☁️ CO</div>\n\n                <div class=\"big-value\">\n                    {{ formatNumber(msg.payload.co) }}\n                </div>\n            </div>\n\n\n            <!-- CH4 -->\n            <div class=\"card\">\n                <div class=\"card-title\">⚠️ CH₄</div>\n\n                <div class=\"big-value\">\n                    {{ formatNumber(msg.payload.ch4) }}\n                </div>\n            </div>\n\n        </div>\n\n\n        <!-- SPREAD RATE -->\n        <div\n            v-if=\"msg && msg.payload\"\n            class=\"card spread-card\"\n        >\n            <div class=\"card-title\">\n                🔥 Estimated Fire Spread\n            </div>\n\n            <div class=\"spread-value\">\n                {{ formatNumber(msg.payload.spread_rate_cmph) }} cm/h\n            </div>\n        </div>\n\n\n        <!-- AI ANALYSIS -->\n        <div\n            v-if=\"msg && msg.payload && msg.payload.llm_insight\"\n            class=\"ai-section\"\n        >\n\n            <div class=\"ai-header\">\n                <h2>🤖 AI Risk Analysis</h2>\n\n                <span\n                    class=\"urgency\"\n                    :class=\"getUrgencyClass(\n                        msg.payload.llm_insight.tingkat_urgensi\n                    )\"\n                >\n                    {{ msg.payload.llm_insight.tingkat_urgensi || 'Unknown' }}\n                </span>\n            </div>\n\n\n            <!-- ANALISIS RISIKO -->\n            <div class=\"ai-card\">\n                <h3>📊 Analisis Risiko</h3>\n\n                <p>\n                    {{ msg.payload.llm_insight.analisis_risiko }}\n                </p>\n            </div>\n\n\n            <!-- ESTIMASI PENYEBARAN -->\n            <div class=\"ai-card\">\n                <h3>🔥 Estimasi Penyebaran</h3>\n\n                <p>\n                    {{ msg.payload.llm_insight.estimasi_penyebaran }}\n                </p>\n            </div>\n\n\n            <!-- REKOMENDASI -->\n            <div class=\"ai-card\">\n                <h3>🛡️ Rekomendasi</h3>\n\n                <ul\n                    v-if=\"Array.isArray(\n                        msg.payload.llm_insight.rekomendasi\n                    )\"\n                >\n                    <li\n                        v-for=\"(item, index) in\n                        msg.payload.llm_insight.rekomendasi\"\n                        :key=\"index\"\n                    >\n                        {{ item }}\n                    </li>\n                </ul>\n\n                <p\n                    v-else\n                >\n                    {{ msg.payload.llm_insight.rekomendasi }}\n                </p>\n            </div>\n\n        </div>\n\n\n        <!-- INFORMATION -->\n        <div\n            v-if=\"msg && msg.payload\"\n            class=\"info\"\n        >\n            <div>\n                <strong>Node:</strong>\n                {{ msg.payload.node_id }}\n            </div>\n\n            <div>\n                <strong>Timestamp:</strong>\n                {{ msg.payload.timestamp }}\n            </div>\n        </div>\n\n\n        <!-- NO DATA -->\n        <div\n            v-if=\"!msg || !msg.payload\"\n            class=\"no-data\"\n        >\n            <div class=\"no-data-icon\">📡</div>\n            <h2>Waiting for sensor data...</h2>\n            <p>PyroWatch is waiting for incoming MQTT data.</p>\n        </div>\n\n    </div>\n</template>\n\n\n<style>\n.pyrowatch-dashboard {\n    padding: 20px;\n    font-family: Arial, sans-serif;\n}\n\n\n/* HEADER */\n\n.header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 20px;\n}\n\n.header h1 {\n    margin: 0;\n    font-size: 28px;\n}\n\n.header p {\n    margin: 5px 0 0;\n    opacity: 0.7;\n}\n\n\n/* RISK BADGE */\n\n.risk-badge {\n    padding: 10px 20px;\n    border-radius: 20px;\n    font-weight: bold;\n    font-size: 16px;\n}\n\n\n/* SENSOR GRID */\n\n.sensor-grid {\n    display: grid;\n    grid-template-columns: repeat(6, minmax(140px, 1fr));\n    gap: 12px;\n    width: 100%;\n}\n\n\n/* CARD */\n\n.card {\n    padding: 16px;\n    border-radius: 12px;\n    background: rgba(128, 128, 128, 0.08);\n    margin-bottom: 12px;\n    min-width: 0;\n}\n\n.card-title {\n    font-size: 15px;\n    font-weight: bold;\n    margin-bottom: 10px;\n    opacity: 0.8;\n}\n\n.big-value {\n    font-size: 28px;\n    font-weight: bold;\n}\n\n\n/* FRI */\n\n.progress {\n    height: 8px;\n    background: rgba(128, 128, 128, 0.2);\n    border-radius: 5px;\n    margin-top: 15px;\n    overflow: hidden;\n}\n\n.progress-bar {\n    height: 100%;\n    border-radius: 5px;\n    background: currentColor;\n}\n\n\n/* SPREAD */\n\n.spread-card {\n    margin-top: 10px;\n}\n\n.spread-value {\n    font-size: 25px;\n    font-weight: bold;\n}\n\n\n/* AI */\n\n.ai-section {\n    margin-top: 25px;\n}\n\n.ai-header {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 15px;\n}\n\n.ai-header h2 {\n    margin: 0;\n}\n\n.ai-card {\n    padding: 18px;\n    margin-bottom: 15px;\n    border-radius: 12px;\n    background: rgba(128, 128, 128, 0.08);\n}\n\n.ai-card h3 {\n    margin-top: 0;\n}\n\n.ai-card p {\n    line-height: 1.6;\n}\n\n.ai-card li {\n    margin-bottom: 8px;\n    line-height: 1.5;\n}\n\n\n/* URGENCY */\n\n.urgency {\n    padding: 8px 15px;\n    border-radius: 15px;\n    font-weight: bold;\n}\n\n\n/* INFO */\n\n.info {\n    margin-top: 20px;\n    padding: 12px;\n    font-size: 13px;\n    opacity: 0.7;\n}\n\n\n/* NO DATA */\n\n.no-data {\n    text-align: center;\n    padding: 50px 20px;\n    opacity: 0.7;\n}\n\n.no-data-icon {\n    font-size: 50px;\n    margin-bottom: 10px;\n}\n</style>\n\n\n<script>\nexport default {\n    methods: {\n\n        formatNumber(value) {\n            if (value === undefined || value === null) {\n                return '-'\n            }\n\n            const number = Number(value)\n\n            if (Number.isNaN(number)) {\n                return value\n            }\n\n            return number.toFixed(2)\n        },\n\n        getRiskClass(level) {\n            if (!level) return ''\n\n            return 'risk-' + level\n                .toLowerCase()\n                .replace(/\\s+/g, '-')\n        },\n\n        getUrgencyClass(level) {\n            if (!level) return ''\n\n            return 'urgency-' + level\n                .toLowerCase()\n                .replace(/\\s+/g, '-')\n        }\n    }\n}\n</script>",
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 850,
+        "y": 720,
+        "wires": [
+            []
         ]
     },
     {
@@ -200,7 +460,7 @@
         "type": "function",
         "z": "bad0353ba2f12888",
         "name": "function 1",
-        "func": "   msg.topic = `CREATE TABLE IF NOT EXISTS sensor_readings (\n       id INTEGER PRIMARY KEY AUTOINCREMENT,\n       node_id TEXT,\n       timestamp TEXT,\n       co REAL,\n       ch4 REAL,\n       temp REAL,\n       hum REAL,\n       fri REAL,\n       fri_level TEXT\n   )`;\n   return msg;",
+        "func": "msg.topic = \"PRAGMA table_info(sensor_readings);\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -244,6 +504,87 @@
         "wires": [
             [
                 "8ec85392931b11f5"
+            ]
+        ]
+    },
+    {
+        "id": "8f19cb54e75084fb",
+        "type": "inject",
+        "z": "bad0353ba2f12888",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 560,
+        "y": 280,
+        "wires": [
+            [
+                "ef6d384d8fe4de4c"
+            ]
+        ]
+    },
+    {
+        "id": "ef6d384d8fe4de4c",
+        "type": "function",
+        "z": "bad0353ba2f12888",
+        "name": "create LLM insights table",
+        "func": "msg.topic = \"PRAGMA table_info(llm_insights);\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 360,
+        "wires": [
+            [
+                "294dec3f632993bd"
+            ]
+        ]
+    },
+    {
+        "id": "af70074766b8f20e",
+        "type": "debug",
+        "z": "bad0353ba2f12888",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "294dec3f632993bd",
+        "type": "sqlite",
+        "z": "bad0353ba2f12888",
+        "mydb": "f09fc80afd185003",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 580,
+        "y": 440,
+        "wires": [
+            [
+                "af70074766b8f20e"
             ]
         ]
     }

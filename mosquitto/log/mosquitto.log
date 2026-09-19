@@ -1298,3 +1298,264 @@ To fix this, use `chmod 0700 /mosquitto/config/passwd`.
 1788606900: Client auto-4A52211B-7A6F-BFE4-969A-C2DA4502894C [172.19.0.1:35992] disconnected.
 1788607551: Saving in-memory database to /mosquitto/data//mosquitto.db.
 1788607719: Client auto-C4912551-6A30-4DE9-8457-AD961C9D22FF [172.19.0.1:45054] disconnected: connection closed by client.
+1789193362: mosquitto version 2.1.2 starting
+1789193362: Config loaded from /mosquitto/config/mosquitto.conf.
+1789193362: Bridge support available.
+1789193362: Persistence support available.
+1789193362: TLS support available.
+1789193362: TLS-PSK support available.
+1789193362: Websockets support available.
+1789193362: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1789193362: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1789193362: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1789193362: Plugin builtin-security has registered to receive 'basic-auth' events.
+1789193362: Opening ipv4 listen socket on port 1883.
+1789193362: Opening ipv6 listen socket on port 1883.
+1789193362: mosquitto version 2.1.2 running
+1789193485: New connection from 172.19.0.3:53236 on port 1883.
+1789193485: New client connected from 172.19.0.3:53236 as noderedda8375c38fc4b2ad (p4, c1, k60, u'pyrowatch_gateway').
+1789193801: Client noderedda8375c38fc4b2ad [172.19.0.3:53236] disconnected.
+1789193801: New connection from 172.19.0.3:32792 on port 1883.
+1789193801: New client connected from 172.19.0.3:32792 as nodereddaa1ead0c7657c8b (p4, c1, k60, u'pyrowatch_gateway').
+1789194068: Client nodereddaa1ead0c7657c8b [172.19.0.3:32792] disconnected.
+1789194068: New connection from 172.19.0.3:55580 on port 1883.
+1789194068: New client connected from 172.19.0.3:55580 as nodered08f511cdbc607ca4 (p4, c1, k60, u'pyrowatch_gateway').
+1789194154: Client nodered08f511cdbc607ca4 [172.19.0.3:55580] disconnected.
+1789194154: New connection from 172.19.0.3:40478 on port 1883.
+1789194154: New client connected from 172.19.0.3:40478 as nodered2d0108441a76569f (p4, c1, k60, u'pyrowatch_gateway').
+1789194171: Client nodered2d0108441a76569f [172.19.0.3:40478] disconnected.
+1789194171: New connection from 172.19.0.3:56170 on port 1883.
+1789194171: New client connected from 172.19.0.3:56170 as nodered802612805f515b7e (p4, c1, k60, u'pyrowatch_gateway').
+1789194224: Client nodered802612805f515b7e [172.19.0.3:56170] disconnected.
+1789194224: New connection from 172.19.0.3:45234 on port 1883.
+1789194224: New client connected from 172.19.0.3:45234 as nodered95263fc4e898fd39 (p4, c1, k60, u'pyrowatch_gateway').
+1789194319: Client nodered95263fc4e898fd39 [172.19.0.3:45234] disconnected.
+1789194319: New connection from 172.19.0.3:43062 on port 1883.
+1789194319: New client connected from 172.19.0.3:43062 as nodered213f1b84d31ca2e8 (p4, c1, k60, u'pyrowatch_gateway').
+1789194447: Client nodered213f1b84d31ca2e8 [172.19.0.3:43062] disconnected.
+1789194448: mosquitto version 2.1.2 terminating
+1789194448: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789194448: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789194448: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789194448: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789194455: mosquitto version 2.1.2 starting
+1789194455: Config loaded from /mosquitto/config/mosquitto.conf.
+1789194455: Bridge support available.
+1789194455: Persistence support available.
+1789194455: TLS support available.
+1789194455: TLS-PSK support available.
+1789194455: Websockets support available.
+1789194455: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1789194455: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1789194455: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1789194455: Plugin builtin-security has registered to receive 'basic-auth' events.
+1789194455: Opening ipv4 listen socket on port 1883.
+1789194455: Opening ipv6 listen socket on port 1883.
+1789194455: mosquitto version 2.1.2 running
+1789194457: New connection from 172.19.0.3:54404 on port 1883.
+1789194457: New client connected from 172.19.0.3:54404 as nodered8567b6511d3fd233 (p4, c1, k60, u'pyrowatch_gateway').
+1789194651: Client nodered8567b6511d3fd233 [172.19.0.3:54404] disconnected.
+1789194652: mosquitto version 2.1.2 terminating
+1789194652: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789194652: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789194652: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789194652: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789194657: mosquitto version 2.1.2 starting
+1789194657: Config loaded from /mosquitto/config/mosquitto.conf.
+1789194657: Bridge support available.
+1789194657: Persistence support available.
+1789194657: TLS support available.
+1789194657: TLS-PSK support available.
+1789194657: Websockets support available.
+1789194657: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1789194657: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1789194657: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1789194657: Plugin builtin-security has registered to receive 'basic-auth' events.
+1789194657: Opening ipv4 listen socket on port 1883.
+1789194657: Opening ipv6 listen socket on port 1883.
+1789194657: mosquitto version 2.1.2 running
+1789194659: New connection from 172.19.0.3:50592 on port 1883.
+1789194659: New client connected from 172.19.0.3:50592 as nodered092f167ff7785d7f (p4, c1, k60, u'pyrowatch_gateway').
+1789194734: Client nodered092f167ff7785d7f [172.19.0.3:50592] disconnected.
+1789194734: New connection from 172.19.0.3:33674 on port 1883.
+1789194734: New client connected from 172.19.0.3:33674 as noderedbcc77164cb879e7e (p4, c1, k60, u'pyrowatch_gateway').
+1789194803: Client noderedbcc77164cb879e7e [172.19.0.3:33674] disconnected.
+1789194803: New connection from 172.19.0.3:47512 on port 1883.
+1789194803: New client connected from 172.19.0.3:47512 as nodereda28df279425b6630 (p4, c1, k60, u'pyrowatch_gateway').
+1789194906: Client nodereda28df279425b6630 [172.19.0.3:47512] disconnected.
+1789194906: New connection from 172.19.0.3:39362 on port 1883.
+1789194906: New client connected from 172.19.0.3:39362 as noderedaef963365c69b2d5 (p4, c1, k60, u'pyrowatch_gateway').
+1789194990: Client noderedaef963365c69b2d5 [172.19.0.3:39362] disconnected.
+1789194990: New connection from 172.19.0.3:54058 on port 1883.
+1789194990: New client connected from 172.19.0.3:54058 as nodered7e4d0ebf3c8ab868 (p4, c1, k60, u'pyrowatch_gateway').
+1789196302: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789196302: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789196302: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789196302: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789197937: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789197937: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789197937: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789197937: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789199576: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789199576: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789199576: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789199576: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789201229: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789201229: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789201229: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789201229: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789202866: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789202866: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789202866: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789202866: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789204503: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789204503: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789204503: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789204503: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789206248: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789206248: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789206248: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789206248: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789208047: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789208047: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789208047: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789208047: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789208339: Client nodered7e4d0ebf3c8ab868 [172.19.0.3:54058] disconnected.
+1789208339: New connection from 172.19.0.3:38992 on port 1883.
+1789208339: New client connected from 172.19.0.3:38992 as nodered32bfc2651152d2ad (p4, c1, k60, u'pyrowatch_gateway').
+1789208417: Client nodered32bfc2651152d2ad [172.19.0.3:38992] disconnected.
+1789208417: New connection from 172.19.0.3:49048 on port 1883.
+1789208417: New client connected from 172.19.0.3:49048 as noderedbe316b1552b897ce (p4, c1, k60, u'pyrowatch_gateway').
+1789208654: Client noderedbe316b1552b897ce [172.19.0.3:49048] disconnected.
+1789208654: New connection from 172.19.0.3:34446 on port 1883.
+1789208654: New client connected from 172.19.0.3:34446 as noderedcbd3a04b58ad9c7d (p4, c1, k60, u'pyrowatch_gateway').
+1789208678: Client noderedcbd3a04b58ad9c7d [172.19.0.3:34446] disconnected.
+1789208678: New connection from 172.19.0.3:35642 on port 1883.
+1789208678: New client connected from 172.19.0.3:35642 as nodered445fdd6ede088466 (p4, c1, k60, u'pyrowatch_gateway').
+1789208881: Client nodered445fdd6ede088466 [172.19.0.3:35642] disconnected.
+1789208881: New connection from 172.19.0.3:32768 on port 1883.
+1789208881: New client connected from 172.19.0.3:32768 as nodered9c4722c8eeba78d3 (p4, c1, k60, u'pyrowatch_gateway').
+1789209455: Client nodered9c4722c8eeba78d3 [172.19.0.3:32768] disconnected.
+1789209455: New connection from 172.19.0.3:42068 on port 1883.
+1789209455: New client connected from 172.19.0.3:42068 as noderedc778edb4263fcde3 (p4, c1, k60, u'pyrowatch_gateway').
+1789209695: Client noderedc778edb4263fcde3 [172.19.0.3:42068] disconnected.
+1789209695: New connection from 172.19.0.3:38050 on port 1883.
+1789209695: New client connected from 172.19.0.3:38050 as nodered38ecd5f8c3452798 (p4, c1, k60, u'pyrowatch_gateway').
+1789209720: Client nodered38ecd5f8c3452798 [172.19.0.3:38050] disconnected.
+1789209720: New connection from 172.19.0.3:44332 on port 1883.
+1789209720: New client connected from 172.19.0.3:44332 as nodered48d0db483eaf4d1b (p4, c1, k60, u'pyrowatch_gateway').
+1789209740: Client nodered48d0db483eaf4d1b [172.19.0.3:44332] disconnected.
+1789209740: New connection from 172.19.0.3:47202 on port 1883.
+1789209740: New client connected from 172.19.0.3:47202 as nodereda0d1b4650b747086 (p4, c1, k60, u'pyrowatch_gateway').
+1789209773: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789209773: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789209773: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789209773: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789209870: Client nodereda0d1b4650b747086 [172.19.0.3:47202] disconnected.
+1789209870: New connection from 172.19.0.3:51066 on port 1883.
+1789209870: New client connected from 172.19.0.3:51066 as nodered285a203d3a0eea31 (p4, c1, k60, u'pyrowatch_gateway').
+1789211435: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789211435: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789211435: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789211435: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789213095: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789213095: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789213095: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789213095: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789214749: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789214749: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789214749: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789214749: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789215369: Client nodered285a203d3a0eea31 [172.19.0.3:51066] disconnected.
+1789215369: New connection from 172.19.0.3:46704 on port 1883.
+1789215369: New client connected from 172.19.0.3:46704 as nodereda822a40333b4656e (p4, c1, k60, u'pyrowatch_gateway').
+1789215598: Client nodereda822a40333b4656e [172.19.0.3:46704] disconnected.
+1789215598: New connection from 172.19.0.3:57264 on port 1883.
+1789215598: New client connected from 172.19.0.3:57264 as nodereda83d1800b858c885 (p4, c1, k60, u'pyrowatch_gateway').
+1789215744: Client nodereda83d1800b858c885 [172.19.0.3:57264] disconnected.
+1789215744: New connection from 172.19.0.3:35950 on port 1883.
+1789215744: New client connected from 172.19.0.3:35950 as noderedae6920e21e018fcc (p4, c1, k60, u'pyrowatch_gateway').
+1789216387: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789216387: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789216387: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789216387: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789218024: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789218024: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789218024: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789218024: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+

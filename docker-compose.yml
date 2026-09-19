@@ -24,6 +24,7 @@ services:
       - ./node-red/data:/data
     environment:
       - TZ=Asia/Jakarta
+      - GEMINI_API_KEY=AQ.Ab8RN6KRjZH970nk6KRuRrtLEfDEhMMfjVKldAONiVXDgs7NEA
     depends_on:
       - mosquitto
     networks:

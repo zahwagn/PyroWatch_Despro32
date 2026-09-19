@@ -24,11 +24,12 @@
                                 "info",
                                 "help",
                                 "config",
-                                "context"
+                                "context",
+                                "dashboard-2.0"
                             ],
-                            "height": 304.8,
+                            "height": 306.40000000000003,
                             "hidden": false,
-                            "active": "config"
+                            "active": "dashboard-2.0"
                         },
                         "bottom": {
                             "tabs": [
@@ -44,7 +45,7 @@
                             "tabs": [
                                 "explorer"
                             ],
-                            "height": 304.8,
+                            "height": 306.40000000000003,
                             "hidden": false,
                             "active": "explorer"
                         },
@@ -64,12 +65,13 @@
             "dialog": {
                 "export": {
                     "pretty": true,
-                    "json-view": false
+                    "json-view": true
                 }
             }
         },
         "debug": {
             "clearType": "all"
-        }
+        },
+        "menu-menu-item-right-sidebar": true
     }
 }
