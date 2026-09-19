@@ -1684,3 +1684,215 @@ To fix this, use `chmod 0700 /mosquitto/config/passwd`.
 1789808681: Client nodered6dc6e675843fbb26 [172.19.0.4:41304] disconnected.
 1789808681: New connection from 172.19.0.4:58046 on port 1883.
 1789808681: New client connected from 172.19.0.4:58046 as noderedfefd279dbeeda0ae (p4, c1, k60, u'pyrowatch_gateway').
+1789808780: Client noderedfefd279dbeeda0ae [172.19.0.4:58046] disconnected.
+1789808780: New connection from 172.19.0.4:49710 on port 1883.
+1789808780: New client connected from 172.19.0.4:49710 as noderedf92faf3e2cc7ec87 (p4, c1, k60, u'pyrowatch_gateway').
+1789809714: Client noderedf92faf3e2cc7ec87 [172.19.0.4:49710] disconnected.
+1789809715: mosquitto version 2.1.2 terminating
+1789809715: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789809715: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789809715: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789809715: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789809723: mosquitto version 2.1.2 starting
+1789809723: Config loaded from /mosquitto/config/mosquitto.conf.
+1789809723: Bridge support available.
+1789809723: Persistence support available.
+1789809723: TLS support available.
+1789809723: TLS-PSK support available.
+1789809723: Websockets support available.
+1789809723: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1789809723: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1789809723: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1789809723: Plugin builtin-security has registered to receive 'basic-auth' events.
+1789809723: Opening ipv4 listen socket on port 1883.
+1789809723: Opening ipv6 listen socket on port 1883.
+1789809723: mosquitto version 2.1.2 running
+1789809734: New connection from 172.19.0.4:34954 on port 1883.
+1789809734: New client connected from 172.19.0.4:34954 as noderedbc03ef30919d877a (p4, c1, k60, u'pyrowatch_gateway').
+1789809844: Client noderedbc03ef30919d877a [172.19.0.4:34954] disconnected.
+1789809844: New connection from 172.19.0.4:44220 on port 1883.
+1789809844: New client connected from 172.19.0.4:44220 as nodered13936cf0de5b762f (p4, c1, k60, u'pyrowatch_gateway').
+1789809888: Client nodered13936cf0de5b762f [172.19.0.4:44220] disconnected.
+1789809888: New connection from 172.19.0.4:34012 on port 1883.
+1789809888: New client connected from 172.19.0.4:34012 as noderedd0fe7c96aa657496 (p4, c1, k60, u'pyrowatch_gateway').
+1789810017: Client noderedd0fe7c96aa657496 [172.19.0.4:34012] disconnected.
+1789810017: New connection from 172.19.0.4:41534 on port 1883.
+1789810017: New client connected from 172.19.0.4:41534 as nodered1a0c074a0d696a77 (p4, c1, k60, u'pyrowatch_gateway').
+1789810206: Client nodered1a0c074a0d696a77 [172.19.0.4:41534] disconnected.
+1789810206: New connection from 172.19.0.4:37486 on port 1883.
+1789810206: New client connected from 172.19.0.4:37486 as nodered12dee79162e2077e (p4, c1, k60, u'pyrowatch_gateway').
+1789810772: Client nodered12dee79162e2077e [172.19.0.4:37486] disconnected.
+1789810772: New connection from 172.19.0.4:52330 on port 1883.
+1789810772: New client connected from 172.19.0.4:52330 as nodered516723819305ae9a (p4, c1, k60, u'pyrowatch_gateway').
+1789810780: Client nodered516723819305ae9a [172.19.0.4:52330] disconnected.
+1789810780: New connection from 172.19.0.4:44444 on port 1883.
+1789810780: New client connected from 172.19.0.4:44444 as nodered0f8bd260451d9541 (p4, c1, k60, u'pyrowatch_gateway').
+1789810925: Client nodered0f8bd260451d9541 [172.19.0.4:44444] disconnected.
+1789810925: New connection from 172.19.0.4:47600 on port 1883.
+1789810925: New client connected from 172.19.0.4:47600 as noderedc1983ae346e47203 (p4, c1, k60, u'pyrowatch_gateway').
+1789811385: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789811385: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789811385: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789811385: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789812634: Client noderedc1983ae346e47203 [172.19.0.4:47600] disconnected.
+1789812634: New connection from 172.19.0.4:59460 on port 1883.
+1789812634: New client connected from 172.19.0.4:59460 as nodered1ffcf9291a6a7110 (p4, c1, k60, u'pyrowatch_gateway').
+1789812671: Client nodered1ffcf9291a6a7110 [172.19.0.4:59460] disconnected.
+1789812671: New connection from 172.19.0.4:60996 on port 1883.
+1789812671: New client connected from 172.19.0.4:60996 as nodered908a20b305669c6b (p4, c1, k60, u'pyrowatch_gateway').
+1789812836: Client nodered908a20b305669c6b [172.19.0.4:60996] disconnected.
+1789812836: New connection from 172.19.0.4:47822 on port 1883.
+1789812836: New client connected from 172.19.0.4:47822 as nodered96a33e61f695f1cd (p4, c1, k60, u'pyrowatch_gateway').
+1789812846: Client nodered96a33e61f695f1cd [172.19.0.4:47822] disconnected.
+1789812846: New connection from 172.19.0.4:34714 on port 1883.
+1789812846: New client connected from 172.19.0.4:34714 as nodered683b70d8720a7be7 (p4, c1, k60, u'pyrowatch_gateway').
+1789812990: Client nodered683b70d8720a7be7 [172.19.0.4:34714] disconnected.
+1789812990: New connection from 172.19.0.4:43230 on port 1883.
+1789812990: New client connected from 172.19.0.4:43230 as nodered97d0ebce4c78c987 (p4, c1, k60, u'pyrowatch_gateway').
+1789813011: Client nodered97d0ebce4c78c987 [172.19.0.4:43230] disconnected.
+1789813011: New connection from 172.19.0.4:47876 on port 1883.
+1789813011: New client connected from 172.19.0.4:47876 as nodered4e0041a911af45db (p4, c1, k60, u'pyrowatch_gateway').
+1789813025: Client nodered4e0041a911af45db [172.19.0.4:47876] disconnected.
+1789813025: New connection from 172.19.0.4:58164 on port 1883.
+1789813025: New client connected from 172.19.0.4:58164 as nodered22d5fe28388f4d35 (p4, c1, k60, u'pyrowatch_gateway').
+1789813038: Client nodered22d5fe28388f4d35 [172.19.0.4:58164] disconnected.
+1789813038: New connection from 172.19.0.4:33536 on port 1883.
+1789813038: New client connected from 172.19.0.4:33536 as nodered952b8e2631d6e518 (p4, c1, k60, u'pyrowatch_gateway').
+1789813047: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789813047: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789813047: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789813047: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789813064: Client nodered952b8e2631d6e518 [172.19.0.4:33536] disconnected.
+1789813064: New connection from 172.19.0.4:39892 on port 1883.
+1789813064: New client connected from 172.19.0.4:39892 as nodered6c1d05f3513e01e9 (p4, c1, k60, u'pyrowatch_gateway').
+1789813070: Client nodered6c1d05f3513e01e9 [172.19.0.4:39892] disconnected.
+1789813070: New connection from 172.19.0.4:39894 on port 1883.
+1789813070: New client connected from 172.19.0.4:39894 as nodered4f5ff52b12816160 (p4, c1, k60, u'pyrowatch_gateway').
+1789813149: Client nodered4f5ff52b12816160 [172.19.0.4:39894] disconnected.
+1789813149: New connection from 172.19.0.4:39412 on port 1883.
+1789813149: New client connected from 172.19.0.4:39412 as noderedba17bd3496db8386 (p4, c1, k60, u'pyrowatch_gateway').
+1789813180: Client noderedba17bd3496db8386 [172.19.0.4:39412] disconnected.
+1789813180: New connection from 172.19.0.4:58104 on port 1883.
+1789813180: New client connected from 172.19.0.4:58104 as noderedecd5f14554d1602d (p4, c1, k60, u'pyrowatch_gateway').
+1789813188: Client noderedecd5f14554d1602d [172.19.0.4:58104] disconnected.
+1789813188: New connection from 172.19.0.4:59634 on port 1883.
+1789813188: New client connected from 172.19.0.4:59634 as noderede8c839fa8fec5a5a (p4, c1, k60, u'pyrowatch_gateway').
+1789813325: Client noderede8c839fa8fec5a5a [172.19.0.4:59634] disconnected.
+1789813325: New connection from 172.19.0.4:46672 on port 1883.
+1789813325: New client connected from 172.19.0.4:46672 as nodered2b3dd6ad1015ff85 (p4, c1, k60, u'pyrowatch_gateway').
+1789813371: Client nodered2b3dd6ad1015ff85 [172.19.0.4:46672] disconnected.
+1789813371: New connection from 172.19.0.4:47832 on port 1883.
+1789813371: New client connected from 172.19.0.4:47832 as noderedadecad725e8ea386 (p4, c1, k60, u'pyrowatch_gateway').
+1789813394: Client noderedadecad725e8ea386 [172.19.0.4:47832] disconnected.
+1789813394: New connection from 172.19.0.4:56672 on port 1883.
+1789813394: New client connected from 172.19.0.4:56672 as nodered9908e9f7eb7e1e0b (p4, c1, k60, u'pyrowatch_gateway').
+1789813422: Client nodered9908e9f7eb7e1e0b [172.19.0.4:56672] disconnected.
+1789813422: New connection from 172.19.0.4:45532 on port 1883.
+1789813422: New client connected from 172.19.0.4:45532 as noderede20bf5f3b815be48 (p4, c1, k60, u'pyrowatch_gateway').
+1789813679: Client noderede20bf5f3b815be48 [172.19.0.4:45532] disconnected.
+1789813679: New connection from 172.19.0.4:52278 on port 1883.
+1789813679: New client connected from 172.19.0.4:52278 as nodereda2508fb645eaf402 (p4, c1, k60, u'pyrowatch_gateway').
+1789813693: Client nodereda2508fb645eaf402 [172.19.0.4:52278] disconnected.
+1789813693: New connection from 172.19.0.4:44780 on port 1883.
+1789813693: New client connected from 172.19.0.4:44780 as noderedaa6b9fe768536491 (p4, c1, k60, u'pyrowatch_gateway').
+1789813752: Client noderedaa6b9fe768536491 [172.19.0.4:44780] disconnected.
+1789813752: New connection from 172.19.0.4:37346 on port 1883.
+1789813752: New client connected from 172.19.0.4:37346 as nodered982bc10a2d4e0094 (p4, c1, k60, u'pyrowatch_gateway').
+1789813897: Client nodered982bc10a2d4e0094 [172.19.0.4:37346] disconnected.
+1789813897: New connection from 172.19.0.4:46478 on port 1883.
+1789813897: New client connected from 172.19.0.4:46478 as nodered5a086663104c2c93 (p4, c1, k60, u'pyrowatch_gateway').
+1789814115: Client nodered5a086663104c2c93 [172.19.0.4:46478] disconnected.
+1789814115: New connection from 172.19.0.4:41198 on port 1883.
+1789814115: New client connected from 172.19.0.4:41198 as nodered458f82b9680689bc (p4, c1, k60, u'pyrowatch_gateway').
+1789814143: Client nodered458f82b9680689bc [172.19.0.4:41198] disconnected.
+1789814143: New connection from 172.19.0.4:36884 on port 1883.
+1789814143: New client connected from 172.19.0.4:36884 as nodered03d10343512f85ca (p4, c1, k60, u'pyrowatch_gateway').
+1789814189: Client nodered03d10343512f85ca [172.19.0.4:36884] disconnected.
+1789814189: New connection from 172.19.0.4:41574 on port 1883.
+1789814189: New client connected from 172.19.0.4:41574 as nodered38a7668f1f7e290a (p4, c1, k60, u'pyrowatch_gateway').
+1789814239: Client nodered38a7668f1f7e290a [172.19.0.4:41574] disconnected.
+1789814239: New connection from 172.19.0.4:36422 on port 1883.
+1789814239: New client connected from 172.19.0.4:36422 as nodered46145d54838c4e26 (p4, c1, k60, u'pyrowatch_gateway').
+1789814362: Client nodered46145d54838c4e26 [172.19.0.4:36422] disconnected.
+1789814362: New connection from 172.19.0.4:40438 on port 1883.
+1789814362: New client connected from 172.19.0.4:40438 as nodered661569b262239cb8 (p4, c1, k60, u'pyrowatch_gateway').
+1789814378: Client nodered661569b262239cb8 [172.19.0.4:40438] disconnected.
+1789814378: New connection from 172.19.0.4:54792 on port 1883.
+1789814378: New client connected from 172.19.0.4:54792 as nodered5f5d671219b5c0fb (p4, c1, k60, u'pyrowatch_gateway').
+1789814709: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789814709: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789814709: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789814709: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789814857: Client nodered5f5d671219b5c0fb [172.19.0.4:54792] disconnected.
+1789814857: New connection from 172.19.0.4:58670 on port 1883.
+1789814857: New client connected from 172.19.0.4:58670 as noderedee87890a8886dfac (p4, c1, k60, u'pyrowatch_gateway').
+1789814931: Client noderedee87890a8886dfac [172.19.0.4:58670] disconnected.
+1789814931: New connection from 172.19.0.4:33734 on port 1883.
+1789814931: New client connected from 172.19.0.4:33734 as nodered94420f769f95c5cd (p4, c1, k60, u'pyrowatch_gateway').
+1789815013: Client nodered94420f769f95c5cd [172.19.0.4:33734] disconnected.
+1789815013: New connection from 172.19.0.4:48906 on port 1883.
+1789815013: New client connected from 172.19.0.4:48906 as noderedff81686af4f32789 (p4, c1, k60, u'pyrowatch_gateway').
+1789815086: Client noderedff81686af4f32789 [172.19.0.4:48906] disconnected.
+1789815086: New connection from 172.19.0.4:48770 on port 1883.
+1789815086: New client connected from 172.19.0.4:48770 as nodered09bce14eaa34124c (p4, c1, k60, u'pyrowatch_gateway').
+1789815184: Client nodered09bce14eaa34124c [172.19.0.4:48770] disconnected.
+1789815184: New connection from 172.19.0.4:44248 on port 1883.
+1789815184: New client connected from 172.19.0.4:44248 as nodered43d305c8cfb85053 (p4, c1, k60, u'pyrowatch_gateway').
+1789815212: Client nodered43d305c8cfb85053 [172.19.0.4:44248] disconnected.
+1789815212: New connection from 172.19.0.4:53764 on port 1883.
+1789815212: New client connected from 172.19.0.4:53764 as nodered9408e77e7d9697b4 (p4, c1, k60, u'pyrowatch_gateway').
+1789815252: Client nodered9408e77e7d9697b4 [172.19.0.4:53764] disconnected.
+1789815252: New connection from 172.19.0.4:53322 on port 1883.
+1789815252: New client connected from 172.19.0.4:53322 as noderedbb85c031fb14afa1 (p4, c1, k60, u'pyrowatch_gateway').
+1789815648: Client noderedbb85c031fb14afa1 [172.19.0.4:53322] disconnected.
+1789815648: New connection from 172.19.0.4:44888 on port 1883.
+1789815648: New client connected from 172.19.0.4:44888 as nodered0a57c88b6bef1030 (p4, c1, k60, u'pyrowatch_gateway').
+1789816009: Client nodered0a57c88b6bef1030 [172.19.0.4:44888] disconnected.
+1789816009: New connection from 172.19.0.4:57026 on port 1883.
+1789816009: New client connected from 172.19.0.4:57026 as nodered426603418a468459 (p4, c1, k60, u'pyrowatch_gateway').
+1789816371: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1789816371: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1789816371: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1789816371: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1789816742: Client nodered426603418a468459 [172.19.0.4:57026] disconnected.
+1789816742: New connection from 172.19.0.4:39236 on port 1883.
+1789816742: New client connected from 172.19.0.4:39236 as noderedcb77d3bb90f20328 (p4, c1, k60, u'pyrowatch_gateway').
+1789816787: Client noderedcb77d3bb90f20328 [172.19.0.4:39236] disconnected.
+1789816787: New connection from 172.19.0.4:43488 on port 1883.
+1789816787: New client connected from 172.19.0.4:43488 as nodered0486b3f6bcd41b77 (p4, c1, k60, u'pyrowatch_gateway').
+1789816912: Client nodered0486b3f6bcd41b77 [172.19.0.4:43488] disconnected.
+1789816912: New connection from 172.19.0.4:56762 on port 1883.
+1789816912: New client connected from 172.19.0.4:56762 as nodered30cf667cd0c65e48 (p4, c1, k60, u'pyrowatch_gateway').
+1789817008: Client nodered30cf667cd0c65e48 [172.19.0.4:56762] disconnected.
+1789817008: New connection from 172.19.0.4:41920 on port 1883.
+1789817008: New client connected from 172.19.0.4:41920 as nodereda38f67eb48d42c4d (p4, c1, k60, u'pyrowatch_gateway').
+1789817060: Client nodereda38f67eb48d42c4d [172.19.0.4:41920] disconnected.
+1789817060: New connection from 172.19.0.4:32844 on port 1883.
+1789817060: New client connected from 172.19.0.4:32844 as nodered2f4ad4e08a734599 (p4, c1, k60, u'pyrowatch_gateway').
+1789817173: Client nodered2f4ad4e08a734599 [172.19.0.4:32844] disconnected.
+1789817173: New connection from 172.19.0.4:58648 on port 1883.
+1789817173: New client connected from 172.19.0.4:58648 as noderedb4915146394eca46 (p4, c1, k60, u'pyrowatch_gateway').

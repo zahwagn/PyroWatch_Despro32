@@ -25,7 +25,7 @@ services:
       - ./ml:/ml
     environment:
       - TZ=Asia/Jakarta
-      - GEMINI_API_KEY=AQ.Ab8RN6KRjZH970nk6KRuRrtLEfDEhMMfjVKldAONiVXDgs7NEA
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
     depends_on:
       - mosquitto
     networks:

@@ -18,7 +18,7 @@
                     "v": 4,
                     "tabs": [],
                     "primary": {
-                        "width": 433,
+                        "width": 394.987,
                         "top": {
                             "tabs": [
                                 "info",
@@ -27,7 +27,7 @@
                                 "context",
                                 "dashboard-2.0"
                             ],
-                            "height": 306.569778,
+                            "height": 308.962,
                             "hidden": false,
                             "active": "dashboard-2.0"
                         },
@@ -40,12 +40,12 @@
                         }
                     },
                     "secondary": {
-                        "width": 210,
+                        "width": 231.994,
                         "top": {
                             "tabs": [
                                 "explorer"
                             ],
-                            "height": 306.569778,
+                            "height": 308.962,
                             "hidden": false,
                             "active": "explorer"
                         },
