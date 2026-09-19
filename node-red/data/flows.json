@@ -260,7 +260,7 @@
         "type": "function",
         "z": "59a5896486c42da9",
         "name": "format prompt LLM",
-        "func": "const d = flow.get(\"last_fri_data\") || msg.payload;\n\nconst systemPrompt =\n    \"Anda adalah sistem analitik risiko kebakaran lahan gambut PyroWatch. \" +\n    \"Jawab HANYA dalam format JSON valid tanpa teks tambahan. \" +\n    'Format: {\"analisis_risiko\":\"string\",\"estimasi_penyebaran\":\"string\",' +\n    '\"rekomendasi\":[\"string\",\"string\",\"string\"],\"tingkat_urgensi\":\"Low|Moderate|High|Extreme\"}';\n\nconst userPrompt =\n    `Data sensor node ${d.node_id} (${d.timestamp}):\\n` +\n    `- Suhu: ${d.temp} °C\\n` +\n    `- Kelembaban: ${d.hum} %\\n` +\n    `- CO: ${d.co} ppm (ambang smoldering: 50 ppm)\\n` +\n    `- CH4: ${d.ch4} ppm\\n` +\n    `- Kecepatan angin (anemometer): ${d.wind_speed} m/s\\n` +\n    `- FRI: ${d.fri} → Level: ${d.fri_level}\\n` +\n    `- Estimasi laju rambatan: ${d.spread_rate_cmph} cm/jam\\n` +\n    `- Prediksi ML (Logistic Regression): ${d.ml_prediction || 'N/A'} (confidence: ${d.ml_confidence || 'N/A'}%)\\n` +\n    `- Probabilitas tiap level: Low=${d.ml_proba?.Low || 0}%, Moderate=${d.ml_proba?.Moderate || 0}%, High=${d.ml_proba?.High || 0}%, Extreme=${d.ml_proba?.Extreme || 0}%\\n` +\n    `Catatan: sensor hanya ukur kecepatan angin, tidak ada data arah angin.\\n` +\n    `Analisis risiko dan berikan rekomendasi mitigasi untuk operator lapangan.`;\n\nmsg.payload = {\n    contents: [{\n        parts: [{ text: systemPrompt + \"\\n\\n\" + userPrompt }]\n    }],\n    generationConfig: {\n        temperature: 0.2,\n        maxOutputTokens: 512,\n        responseMimeType: \"application/json\"\n    }\n};\nmsg.headers = { \"Content-Type\": \"application/json\" };\nreturn msg;",
+        "func": "const d =\n    flow.get(\"last_fri_data\") ||\n    msg.payload ||\n    {};\n\nconst nodeId =\n    d.node_id ?? \"unknown\";\n\nconst timestamp =\n    d.timestamp ?? new Date().toISOString();\n\nconst temp =\n    d.temp ?? \"-\";\n\nconst hum =\n    d.hum ?? \"-\";\n\nconst co =\n    d.co ?? \"-\";\n\nconst ch4 =\n    d.ch4 ?? \"-\";\n\nconst windSpeed =\n    d.wind_speed ?? \"-\";\n\nconst fri =\n    d.fri ?? \"-\";\n\nconst friLevel =\n    d.fri_level ?? \"-\";\n\nconst spreadRate =\n    d.spread_rate_cmph ?? \"-\";\n\nconst mlPrediction =\n    d.ml_prediction ?? \"N/A\";\n\nconst mlConfidence =\n    d.ml_confidence ?? \"N/A\";\n\nconst mlProba =\n    d.ml_proba || {};\n\nconst systemPrompt = `\nAnda adalah AI analisis risiko kebakaran untuk sistem PyroWatch.\n\nGunakan:\n- Data sensor\n- Fire Risk Index (FRI)\n- Prediksi Machine Learning\n\nTujuan:\nMenjelaskan tingkat risiko kepada operator lapangan\nsecara singkat dan jelas.\n\nWAJIB menghasilkan JSON VALID.\n\nJangan menggunakan Markdown.\nJangan menggunakan code fence.\nJangan menambahkan teks di luar JSON.\n\nFormat:\n\n{\n  \"analisis_risiko\": \"string\",\n  \"estimasi_penyebaran\": \"string\",\n  \"rekomendasi\": [\n    \"string\",\n    \"string\",\n    \"string\"\n  ],\n  \"tingkat_urgensi\": \"Low|Moderate|High|Extreme\"\n}\n\nAturan:\n- analisis_risiko maksimal 2 kalimat\n- estimasi_penyebaran maksimal 2 kalimat\n- rekomendasi maksimal 3 item\n- gunakan Bahasa Indonesia\n`;\n\nconst userPrompt = `\nData PyroWatch:\n\nNode: ${nodeId}\nTimestamp: ${timestamp}\n\nSensor:\n- Suhu: ${temp} °C\n- Kelembapan: ${hum} %\n- CO: ${co} ppm\n- CH4: ${ch4} ppm\n- Kecepatan angin: ${windSpeed} m/s\n\nFRI:\n- Nilai: ${fri}\n- Level: ${friLevel}\n- Estimasi spread rate: ${spreadRate} cm/jam\n\nMachine Learning:\n- Prediction: ${mlPrediction}\n- Confidence: ${mlConfidence}%\n- Low: ${mlProba.Low ?? 0}%\n- Moderate: ${mlProba.Moderate ?? 0}%\n- High: ${mlProba.High ?? 0}%\n- Extreme: ${mlProba.Extreme ?? 0}%\n\nAnalisis kondisi tersebut dan berikan rekomendasi mitigasi.\n`;\n\nmsg.payload = {\n\n    contents: [\n\n        {\n\n            parts: [\n\n                {\n                    text:\n                        systemPrompt +\n                        \"\\n\\n\" +\n                        userPrompt\n                }\n\n            ]\n\n        }\n\n    ],\n\n    generationConfig: {\n\n        temperature: 0.1,\n\n        maxOutputTokens: 1024,\n\n        responseMimeType:\n            \"application/json\"\n\n    }\n\n};\n\nconst apiKey =\n    env.get(\"GEMINI_API_KEY\");\n\n\nif (!apiKey) {\n\n    node.error(\n        \"GEMINI_API_KEY tidak tersedia di environment Node-RED.\",\n        msg\n    );\n\n    return null;\n}\n\nmsg.headers = {\n\n    \"Content-Type\":\n        \"application/json\",\n\n    \"x-goog-api-key\":\n        apiKey\n\n};\n\nnode.warn(\n    \"Gemini request siap. API key tersedia: \" +\n    Boolean(apiKey)\n);\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -304,7 +304,7 @@
         "type": "function",
         "z": "59a5896486c42da9",
         "name": "parse response LLM",
-        "func": "// DEBUG: lihat seluruh response dari Gemini\nnode.warn(\"=== GEMINI RAW RESPONSE ===\");\nnode.warn(JSON.stringify(msg.payload, null, 2));\n\n// Cek HTTP status\nif (msg.statusCode && msg.statusCode !== 200) {\n    node.error(\n        `Gemini HTTP Error ${msg.statusCode}: ${JSON.stringify(msg.payload)}`,\n        msg\n    );\n    return null;\n}\n\n// Cek apakah payload ada\nif (!msg.payload) {\n    node.error(\"Response Gemini benar-benar kosong\", msg);\n    return null;\n}\n\n// Cek error dari Gemini\nif (msg.payload.error) {\n    node.error(\n        `Gemini API Error: ${JSON.stringify(msg.payload.error)}`,\n        msg\n    );\n    return null;\n}\n\n// Cek candidates\nconst candidates = msg.payload.candidates;\n\nif (!candidates || candidates.length === 0) {\n\n    const reason =\n        msg.payload.promptFeedback?.blockReason ||\n        msg.payload.promptFeedback ||\n        \"Tidak ada candidates dari Gemini\";\n\n    node.error(\n        \"Gemini tidak mengembalikan candidate. Detail: \" +\n        JSON.stringify(reason),\n        msg\n    );\n\n    return null;\n}\n\n// Ambil text dari response\nconst parts = candidates[0]?.content?.parts || [];\n\nconst textPart = parts.find(\n    p => typeof p.text === \"string\" && p.text.trim() !== \"\"\n);\n\nif (!textPart) {\n    node.error(\n        \"Candidate Gemini ada, tetapi tidak ada text. Response: \" +\n        JSON.stringify(candidates[0]),\n        msg\n    );\n    return null;\n}\n\nconst raw = textPart.text.trim();\n\nnode.warn(\"=== GEMINI TEXT ===\");\nnode.warn(raw);\n\nlet parsed;\n\ntry {\n    parsed = JSON.parse(raw);\n} catch (e) {\n\n    try {\n        const cleaned = raw\n            .replace(/^```json\\s*/i, \"\")\n            .replace(/^```\\s*/i, \"\")\n            .replace(/\\s*```$/i, \"\")\n            .trim();\n\n        parsed = JSON.parse(cleaned);\n\n    } catch (e2) {\n\n        node.error(\n            \"Gemini mengembalikan text tetapi bukan JSON valid: \" +\n            raw,\n            msg\n        );\n\n        return null;\n    }\n}\n\nconst sensorData = flow.get(\"last_fri_data\") || {};\n\nmsg.payload = {\n    ...sensorData,\n    llm_insight: parsed\n};\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: \"LLM OK — \" + (parsed.tingkat_urgensi || \"Unknown\")\n});\n\nreturn msg;",
+        "func": "const response =\n    msg.payload;\n\nnode.warn(\n    \"=== GEMINI RAW RESPONSE ===\"\n);\n\nnode.warn(\n    JSON.stringify(response)\n);\n\nif (\n    msg.statusCode &&\n    msg.statusCode >= 400\n) {\n\n    node.error(\n        `Gemini HTTP Error ${msg.statusCode}: ` +\n        JSON.stringify(response),\n        msg\n    );\n\n    return null;\n}\nif (\n    response &&\n    response.error\n) {\n\n    node.error(\n        \"Gemini API Error: \" +\n        JSON.stringify(response.error),\n        msg\n    );\n\n    return null;\n}\n\nif (\n    !response ||\n    !Array.isArray(response.candidates) ||\n    response.candidates.length === 0\n) {\n\n    node.error(\n        \"Gemini tidak mengembalikan candidates.\",\n        msg\n    );\n\n    return null;\n}\n\n\nconst candidate =\n    response.candidates[0];\n\nconst finishReason =\n    candidate.finishReason;\n\n\nnode.warn(\n    \"Gemini finishReason: \" +\n    finishReason\n);\n\n\nif (\n    finishReason === \"MAX_TOKENS\"\n) {\n\n    node.error(\n        \"Respons Gemini terpotong karena MAX_TOKENS.\",\n        msg\n    );\n\n    return null;\n}\n\nconst parts =\n    candidate.content?.parts || [];\n\nlet text = \"\";\n\nfor (\n    const part\n    of parts\n) {\n\n    if (\n        typeof part.text === \"string\"\n    ) {\n\n        text += part.text;\n    }\n}\n\n\ntext =\n    text.trim();\n\n\nif (!text) {\n\n    node.error(\n        \"Gemini menghasilkan text kosong.\",\n        msg\n    );\n\n    return null;\n}\n\n\nnode.warn(\n    \"=== GEMINI TEXT ===\"\n);\n\nnode.warn(text);\n\ntext = text\n    .replace(\n        /^```json\\s*/i,\n        \"\"\n    )\n    .replace(\n        /^```\\s*/i,\n        \"\"\n    )\n    .replace(\n        /\\s*```$/i,\n        \"\"\n    )\n    .trim();\n\nlet parsed;\n\ntry {\n\n    parsed =\n        JSON.parse(text);\n\n} catch (err) {\n\n    node.error(\n        \"Gemini menghasilkan JSON tidak valid: \" +\n        err.message +\n        \" | TEXT: \" +\n        text,\n        msg\n    );\n\n    return null;\n}\n\nconst baseData =\n    flow.get(\"last_fri_data\") ||\n    {};\n\nmsg.payload = {\n\n    ...baseData,\n\n    llm_insight:\n        parsed\n\n};\n\nnode.status({\n\n    fill: \"green\",\n\n    shape: \"dot\",\n\n    text:\n        \"LLM OK — \" +\n        (\n            parsed.tingkat_urgensi ||\n            \"Unknown\"\n        )\n\n});\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -431,7 +431,7 @@
         "type": "function",
         "z": "59a5896486c42da9",
         "name": "input ML",
-        "func": "const d = msg.payload;\n\n// data lengkap untuk digabungkan setelah ML selesai\nflow.set(\"pre_ml_data\", d);\n\n// kirim field untuk ML sebagai JSON string\nmsg.payload = JSON.stringify({\n    co:         d.co,\n    ch4:        d.ch4,\n    temp:       d.temp,\n    hum:        d.hum,\n    wind_speed: d.wind_speed\n});\n\nreturn msg;",
+        "func": "const d = msg.payload;\n\nif (!d) {\n    node.error(\"Data sensor kosong.\");\n    return null;\n}\n\nconst co = Number(d.co);\nconst ch4 = Number(d.ch4);\nconst temp = Number(d.temp);\nconst hum = Number(d.hum);\n\nconst wind_speed = Number(\n    d.wind_speed !== undefined\n        ? d.wind_speed\n        : d.windspeed\n);\n\nif (\n    !Number.isFinite(co) ||\n    !Number.isFinite(ch4) ||\n    !Number.isFinite(temp) ||\n    !Number.isFinite(hum) ||\n    !Number.isFinite(wind_speed)\n) {\n\n    node.error(\n        \"Data ML tidak valid: \" +\n        JSON.stringify({\n            co,\n            ch4,\n            temp,\n            hum,\n            wind_speed\n        })\n    );\n\n    return null;\n}\n\nflow.set(\n    \"pre_ml_data\",\n    d\n);\n\nmsg.payload = {\n\n    co: co,\n    ch4: ch4,\n    temp: temp,\n    hum: hum,\n    wind_speed: wind_speed\n\n};\n\nmsg.headers = {\n\n    \"Content-Type\":\n        \"application/json\"\n\n};\n\nnode.warn(\n    \"=== INPUT ML API ===\"\n);\n\nnode.warn(\n    JSON.stringify(msg.payload)\n);\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -442,32 +442,8 @@
         "y": 340,
         "wires": [
             [
-                "f308b666087c2b06"
+                "19d03471ae6d140f"
             ]
-        ]
-    },
-    {
-        "id": "f308b666087c2b06",
-        "type": "exec",
-        "z": "59a5896486c42da9",
-        "command": "python3 /mnt/c/Users/Zahwagn/OneDrive/PyroWatch_Despro32/ml/predict.py",
-        "addpay": "payload",
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "exec predict.py",
-        "x": 700,
-        "y": 400,
-        "wires": [
-            [
-                "25cf87e9b784b796"
-            ],
-            [
-                "ae90330909f69495"
-            ],
-            []
         ]
     },
     {
@@ -475,7 +451,7 @@
         "type": "function",
         "z": "59a5896486c42da9",
         "name": "parse hasil ML",
-        "func": "const prevData = flow.get(\"pre_ml_data\") || {};\n\ntry {\n    const mlResult = JSON.parse(msg.payload);\n\n    if (mlResult.error) {\n        node.warn(\"ML error: \" + mlResult.error);\n        msg.payload = {\n            ...prevData,\n            ml_prediction: prevData.fri_level,\n            ml_confidence: null,\n            ml_proba:      null,\n            ml_error:      mlResult.error\n        };\n        return msg;\n    }\n\n    // data sensor + FRI + hasil ML\n    msg.payload = {\n        ...prevData,\n        ml_prediction: mlResult.ml_prediction,\n        ml_confidence: mlResult.ml_confidence,\n        ml_proba:      mlResult.ml_proba\n    };\n\n    node.status({\n        fill:  mlResult.ml_prediction === \"Low\"      ? \"green\"  :\n               mlResult.ml_prediction === \"Moderate\" ? \"yellow\" :\n               mlResult.ml_prediction === \"High\"     ? \"orange\" : \"red\",\n        shape: \"dot\",\n        text:  `ML: ${mlResult.ml_prediction} (${mlResult.ml_confidence}%)`\n    });\n\n} catch (e) {\n    node.error(\"Gagal parse output ML: \" + e.message, msg);\n    msg.payload = { ...prevData };\n}\n\n// Update flow context dengan data ML\nflow.set(\"last_fri_data\", msg.payload);\n\nreturn msg;",
+        "func": "const prevData =\n    flow.get(\"pre_ml_data\") || {};\n\nnode.warn(\n    \"=== RAW RESPONSE ML ===\"\n);\n\nnode.warn(\n    JSON.stringify(msg.payload)\n);\n\nif (\n    !msg.payload ||\n    typeof msg.payload !== \"object\"\n) {\n\n    node.error(\n        \"Response ML kosong atau bukan object.\",\n        msg\n    );\n\n    return null;\n}\n\nif (msg.payload.error) {\n\n    node.error(\n        \"ML API Error: \" +\n        msg.payload.error,\n        msg\n    );\n\n    return null;\n}\n\nif (\n    msg.payload.ml_prediction === undefined ||\n    msg.payload.ml_confidence === undefined ||\n    msg.payload.ml_proba === undefined\n) {\n\n    node.error(\n        \"Response ML tidak lengkap: \" +\n        JSON.stringify(msg.payload),\n        msg\n    );\n\n    return null;\n}\n\nmsg.payload = {\n\n    ...prevData,\n\n    ml_prediction:\n        msg.payload.ml_prediction,\n\n    ml_label_idx:\n        msg.payload.ml_label_idx,\n\n    ml_confidence:\n        msg.payload.ml_confidence,\n\n    ml_proba:\n        msg.payload.ml_proba\n\n};\n\nflow.set(\n    \"last_fri_data\",\n    msg.payload\n);\n\nnode.status({\n\n    fill:\n        msg.payload.ml_prediction === \"Low\"\n            ? \"green\"\n            : msg.payload.ml_prediction === \"Moderate\"\n            ? \"yellow\"\n            : msg.payload.ml_prediction === \"High\"\n            ? \"orange\"\n            : \"red\",\n\n    shape: \"dot\",\n\n    text:\n        `ML: ${msg.payload.ml_prediction} (${msg.payload.ml_confidence}%)`\n\n});\n\nnode.warn(\n    \"=== ML BERHASIL ===\"\n);\n\nnode.warn(\n    JSON.stringify(msg.payload)\n);\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -487,6 +463,30 @@
         "wires": [
             [
                 "033f22e6eff3ac2a"
+            ]
+        ]
+    },
+    {
+        "id": "19d03471ae6d140f",
+        "type": "http request",
+        "z": "59a5896486c42da9",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://ml:5000/predict",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 690,
+        "y": 400,
+        "wires": [
+            [
+                "25cf87e9b784b796"
             ]
         ]
     },

@@ -22,6 +22,7 @@ services:
       - "1880:1880"
     volumes:
       - ./node-red/data:/data
+      - ./ml:/ml
     environment:
       - TZ=Asia/Jakarta
       - GEMINI_API_KEY=AQ.Ab8RN6KRjZH970nk6KRuRrtLEfDEhMMfjVKldAONiVXDgs7NEA
@@ -29,7 +30,18 @@ services:
       - mosquitto
     networks:
       - pyrowatch-net
+  ml:
+    build:
+      context: ./ml
+    container_name: pyrowatch-ml
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    networks:
+      - pyrowatch-net
+
 
 networks:
+
   pyrowatch-net:
     driver: bridge
