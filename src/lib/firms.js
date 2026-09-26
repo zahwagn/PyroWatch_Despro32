@@ -2,17 +2,12 @@
 // Daftar API key gratis: https://firms.modaps.eosdis.nasa.gov/api/area/
 
 const FIRMS_API_KEY = import.meta.env.VITE_FIRMS_API_KEY || 'YOUR_FIRMS_API_KEY'
+const SOURCE        = 'VIIRS_SNPP_NRT'
+const AREA          = 'world'
+const DAY_RANGE     = 5
 
-// Bounding box seluruh Indonesia
-const INDONESIA_BBOX = '94.0,-11.5,141.5,6.5' // west,south,east,north
+const FIRMS_URL = `/firms/api/area/csv/${FIRMS_API_KEY}/${SOURCE}/${AREA}/${DAY_RANGE}`
 
-// day_range: 1 = 24 jam terakhir
-const FIRMS_URL = `https://firms.modaps.eosdis.nasa.gov/api/area/csv/${FIRMS_API_KEY}/VIIRS_SNPP_NRT/${INDONESIA_BBOX}/1`
-
-/**
- * Parse CSV response dari FIRMS
- * Kolom yang relevan: latitude, longitude, bright_ti4 (brightness/intensitas)
- */
 function parseCSV(csvText) {
   const lines = csvText.trim().split('\n')
   if (lines.length < 2) return []
@@ -20,7 +15,7 @@ function parseCSV(csvText) {
   const headers = lines[0].split(',').map(h => h.trim())
   const latIdx  = headers.indexOf('latitude')
   const lngIdx  = headers.indexOf('longitude')
-  const frpIdx  = headers.indexOf('frp') // fire radiative power (MW) — intensitas
+  const frpIdx  = headers.indexOf('frp')
 
   if (latIdx === -1 || lngIdx === -1) return []
 
@@ -32,7 +27,6 @@ function parseCSV(csvText) {
 
     if (isNaN(lat) || isNaN(lng)) return null
 
-    // Temporary scaling for testing: keep low-FRP hotspots visible.
     const intensity = Math.max(Math.min(frp / 20, 1), 0.3)
     return { lat, lng, intensity }
   }).filter(Boolean)

@@ -9,8 +9,12 @@ export default function HotspotMap() {
   const mapRef      = useRef(null)
   const instanceRef = useRef(null)
   const heatRef     = useRef(null)
+  const detailRef   = useRef(null)
 
   const [hotspotCount, setHotspotCount] = useState(0)
+  const [hotspots, setHotspots]         = useState([])
+  const [zoomLevel, setZoomLevel]       = useState(4)
+  const [tick, setTick]                 = useState(0)
   const [loading, setLoading]           = useState(true)
   const [error, setError]               = useState(null)
   const [lastFetch, setLastFetch]       = useState(null)
@@ -30,12 +34,18 @@ export default function HotspotMap() {
       maxZoom: 18,
     }).addTo(map)
 
+    map.on('zoomend', () => setZoomLevel(map.getZoom()))
     instanceRef.current = map
 
     return () => {
       map.remove()
       instanceRef.current = null
     }
+  }, [])
+
+  useEffect(() => {
+    const interval = setInterval(() => setTick((value) => value + 1), 10 * 60 * 1000)
+    return () => clearInterval(interval)
   }, [])
 
   useEffect(() => {
@@ -53,32 +63,12 @@ export default function HotspotMap() {
         setHotspotCount(hotspots.length)
         setLastFetch(new Date())
 
-        if (heatRef.current) {
-          instanceRef.current.removeLayer(heatRef.current)
-        }
-
         const waitForHeat = () => new Promise((resolve) => {
           const check = () => window.L?.heatLayer ? resolve() : setTimeout(check, 100)
           check()
         })
         await waitForHeat()
-
-        if (hotspots.length > 0) {
-          const heatData = hotspots.map(({ lat, lng, intensity }) => [lat, lng, intensity])
-          const heat = window.L.heatLayer(heatData, {
-            radius: 25,
-            blur: 20,
-            max: 0.8,
-            maxZoom: 14,
-            gradient: {
-              0.0: '#52b788',
-              0.4: '#f4a261',
-              0.8: '#e63946',
-            },
-          })
-          heat.addTo(instanceRef.current)
-          heatRef.current = heat
-        }
+        setHotspots(hotspots)
       } catch (err) {
         setError(err.message)
       } finally {
@@ -86,14 +76,48 @@ export default function HotspotMap() {
       }
     }
 
-    const timer = setTimeout(loadHotspots, 300)
-    const interval = setInterval(loadHotspots, 10 * 60 * 1000)
+    loadHotspots()
+  }, [tick])
 
-    return () => {
-      clearTimeout(timer)
-      clearInterval(interval)
+  useEffect(() => {
+    const map = instanceRef.current
+    const L = window.L
+    if (!map || !L || !hotspots.length) return
+
+    if (heatRef.current) map.removeLayer(heatRef.current)
+    if (detailRef.current) map.removeLayer(detailRef.current)
+
+    const zoomedOut = zoomLevel <= 5
+    const heat = L.heatLayer(
+  hotspots.map(({ lat, lng, intensity }) => [lat, lng, intensity]),
+  {
+    radius: zoomedOut ? 20 : zoomLevel < 9 ? 14 : 8,
+    blur: zoomedOut ? 14 : zoomLevel < 9 ? 10 : 6,
+    max: 1.0,
+    maxZoom: 14,
+    gradient: {
+      0.0: '#52b788',
+      0.4: '#f4a261',
+      0.8: '#e63946',
+    },
+  },
+).addTo(map)
+    heatRef.current = heat
+
+    if (zoomLevel >= 8) {
+      const details = L.layerGroup(hotspots.map(({ lat, lng, intensity }) => {
+        const color = intensity >= 0.7 ? '#e63946' : intensity >= 0.4 ? '#f4a261' : '#52b788'
+        return L.circleMarker([lat, lng], {
+          radius: intensity >= 0.7 ? 7 : 5,
+          color: '#ffffff',
+          weight: 1.5,
+          fillColor: color,
+          fillOpacity: 0.95,
+        }).bindPopup(`Intensitas hotspot: ${(intensity * 100).toFixed(0)}%`)
+      })).addTo(map)
+      detailRef.current = details
     }
-  }, [])
+  }, [hotspots, zoomLevel])
 
   const timeStr = lastFetch
     ? lastFetch.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
