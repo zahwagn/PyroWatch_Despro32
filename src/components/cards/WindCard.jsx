@@ -2,16 +2,11 @@ import { Wind } from 'lucide-react'
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { mockWindHistory } from '../../lib/mockData.js'
 
-const directions = ['U','TL','T','TG','S','BD','B','BL']
-
-function compassLabel(deg) {
-  const idx = Math.round(deg / 45) % 8
-  return directions[idx]
-}
-
-export default function WindCard({ speed = 0, direction = 0 }) {
-  const label = compassLabel(direction)
-  const arrowStyle = { transform: `rotate(${direction}deg)` }
+export default function WindCard({
+  speed = 0,
+  direction = 0,
+  directionLabel = 'UNKNOWN',
+}) {
 
   return (
     <div className="bg-white rounded-3xl p-5 shadow-sm border border-forest-50 col-span-2 flex flex-col gap-4">
@@ -35,7 +30,7 @@ export default function WindCard({ speed = 0, direction = 0 }) {
               <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[3px] border-r-[3px] border-b-[5px] border-l-transparent border-r-transparent border-b-forest-500" />
             </div>
           </div>
-          <span className="text-xs text-forest-400">{direction}° {label}</span>
+          <span className="text-xs text-forest-400">{direction}° {directionLabel}</span>
         </div>
 
         {/* Speed + chart */}

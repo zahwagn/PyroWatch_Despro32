@@ -1,10 +1,10 @@
 import { Flame } from 'lucide-react'
 
 const riskBg = {
-  Low:      'from-forest-400 to-forest-600',
-  Medium:   'from-yellow-400 to-orange-400',
-  High:     'from-orange-400 to-red-500',
-  Critical: 'from-red-500 to-red-700',
+  Low: 'from-forest-400 to-forest-600',
+  Moderate: 'from-yellow-400 to-orange-400',
+  High: 'from-orange-400 to-red-500',
+  Extreme: 'from-red-500 to-red-700',
 }
 
 export default function FireRiskCard({ index = 0, riskLevel = 'Low' }) {
@@ -28,11 +28,11 @@ export default function FireRiskCard({ index = 0, riskLevel = 'Low' }) {
         />
       </div>
       <div className="flex justify-between text-xs text-forest-300">
-        <span>Rendah</span>
-        <span>Sedang</span>
-        <span>Tinggi</span>
-        <span>Kritis</span>
-      </div>
+      <span>Rendah</span>
+      <span>Sedang</span>
+      <span>Tinggi</span>
+      <span>Ekstrem</span>
+    </div>
     </div>
   )
 }

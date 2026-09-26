@@ -1,6 +1,10 @@
 import { Flame } from 'lucide-react'
 
-export default function FireSpreadCard({ spreadRate = 0 }) {
+export default function FireSpreadCard({
+  spreadRate = 0,
+  direction = 0,
+  directionLabel = 'UNKNOWN',
+}) {
   const pct = Math.min((spreadRate / 100) * 100, 100)
   const color = spreadRate < 10
     ? 'text-forest-600'
@@ -24,6 +28,11 @@ export default function FireSpreadCard({ spreadRate = 0 }) {
           {spreadRate.toFixed(2)}
         </span>
         <span className="text-base text-forest-400 mb-0.5">cm/jam</span>
+      </div>
+      <div className="flex items-center gap-2 text-sm text-forest-400">
+        <span>Arah penyebaran:</span>
+        <span className="font-semibold text-forest-700">{directionLabel}</span>
+        <span>({direction}°)</span>
       </div>
       <div className="h-1.5 bg-forest-50 rounded-full overflow-hidden">
         <div

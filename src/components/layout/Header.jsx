@@ -2,17 +2,17 @@ import { RefreshCw } from 'lucide-react'
 import Logo from '../../assets/pyrowatch_logo.svg'
 
 const riskColors = {
-  Low:      'bg-forest-100 text-forest-700',
-  Medium:   'bg-yellow-100 text-yellow-700',
-  High:     'bg-orange-100 text-orange-700',
-  Critical: 'bg-red-100 text-red-700',
+  Low: 'bg-forest-100 text-forest-700',
+  Moderate: 'bg-yellow-100 text-yellow-700',
+  High: 'bg-orange-100 text-orange-700',
+  Extreme: 'bg-red-100 text-red-700',
 }
 
 const riskDot = {
-  Low:      'bg-forest-500',
-  Medium:   'bg-yellow-500',
-  High:     'bg-orange-500',
-  Critical: 'bg-red-500',
+  Low: 'bg-forest-500',
+  Moderate: 'bg-yellow-500',
+  High: 'bg-orange-500',
+  Extreme: 'bg-red-500',
 }
 
 export default function Header({ riskLevel = 'Low', lastUpdated, onRefresh }) {
