@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Thermometer,
   Droplets,
@@ -24,6 +25,9 @@ import { useSensorData } from './hooks/useSensorData.js'
 
 export default function App() {
 
+  const [view, setView] = useState('monitoring')
+  const [expanded, setExpanded] = useState(false)
+
   const {
     sensor,
     ai,
@@ -39,27 +43,12 @@ export default function App() {
   // ==========================================================
 
   if (loading) {
-
     return (
       <div className="min-h-screen flex items-center justify-center bg-forest-50">
-
         <div className="flex flex-col items-center gap-3">
-
-          <div className="
-            w-10 h-10
-            rounded-full
-            border-2
-            border-forest-300
-            border-t-forest-600
-            animate-spin
-          " />
-
-          <p className="text-forest-400 text-sm">
-            Memuat data sensor...
-          </p>
-
+          <div className="w-10 h-10 rounded-full border-2 border-forest-300 border-t-forest-600 animate-spin" />
+          <p className="text-forest-400 text-sm">Memuat data sensor...</p>
         </div>
-
       </div>
     )
   }
@@ -70,42 +59,20 @@ export default function App() {
   // ==========================================================
 
   if (error || !sensor) {
-
     return (
       <div className="min-h-screen flex items-center justify-center bg-forest-50">
-
-        <div className="
-          bg-white
-          rounded-3xl
-          p-8
-          text-center
-          max-w-sm
-          shadow-sm
-        ">
-
-          <p className="text-red-500 font-semibold mb-2">
-            Gagal memuat data
-          </p>
-
+        <div className="bg-white rounded-3xl p-8 text-center max-w-sm shadow-sm">
+          <p className="text-red-500 font-semibold mb-2">Gagal memuat data</p>
           <p className="text-forest-400 text-sm mb-4">
             {error || 'Data sensor belum tersedia'}
           </p>
-
           <button
             onClick={refresh}
-            className="
-              px-4 py-2
-              bg-forest-500
-              text-white
-              rounded-2xl
-              text-sm
-            "
+            className="px-4 py-2 bg-forest-500 text-white rounded-2xl text-sm"
           >
             Coba lagi
           </button>
-
         </div>
-
       </div>
     )
   }
@@ -119,21 +86,18 @@ export default function App() {
 
     <div className="flex min-h-screen bg-forest-50">
 
-      <Sidebar />
+      <Sidebar
+        active={view}
+        onNavigate={setView}
+        expanded={expanded}
+        onToggle={() => setExpanded((v) => !v)}
+      />
 
-
-      <main className="
-        flex-1
-        ml-16
-        px-8
-        py-8
-        w-full
-      ">
-
-
-        {/* ==================================================
-            HEADER
-        ================================================== */}
+      <main
+        className={`flex-1 min-w-0 ml-24 px-8 py-8 w-full transition-[margin] duration-300 ease-out ${
+          expanded ? 'lg:ml-72' : ''
+        }`}
+      >
 
         <Header
           riskLevel={sensor.riskLevel}
@@ -143,117 +107,122 @@ export default function App() {
 
 
         {/* ==================================================
-            ROW 1 — SENSOR + FRI
+            VIEW: MONITORING
         ================================================== */}
 
-        <div className="
-          grid
-          grid-cols-6
-          gap-3
-          mb-4
-        ">
+        {view === 'monitoring' && (
+          <>
+            {/* ROW 1 — SENSOR + FRI */}
+            <div className="grid grid-cols-6 gap-4 mb-4">
 
-          <FireRiskCard
-            index={sensor.fireRiskIndex}
-            riskLevel={sensor.riskLevel}
-          />
+              <FireRiskCard
+                index={sensor.fireRiskIndex}
+                riskLevel={sensor.riskLevel}
+              />
 
-          <SensorCard
-            icon={Thermometer}
-            label="Suhu"
-            value={sensor.temperature.toFixed(1)}
-            unit="°C"
-          />
+              <SensorCard
+                icon={Thermometer}
+                tone="orange"
+                label="Suhu"
+                value={sensor.temperature.toFixed(1)}
+                unit="°C"
+              />
 
-          <SensorCard
-            icon={Droplets}
-            label="Kelembaban"
-            value={sensor.humidity.toFixed(1)}
-            unit="%"
-          />
+              <SensorCard
+                icon={Droplets}
+                tone="blue"
+                label="Kelembaban"
+                value={sensor.humidity.toFixed(1)}
+                unit="%"
+              />
 
-          <SensorCard
-            icon={Wind}
-            label="CO"
-            value={sensor.co.toFixed(1)}
-            unit="ppm"
-          />
+              <SensorCard
+                icon={Wind}
+                tone="slate"
+                label="CO"
+                value={sensor.co.toFixed(1)}
+                unit="ppm"
+              />
 
-          <SensorCard
-            icon={AlertTriangle}
-            label="CH₄"
-            value={sensor.ch4.toFixed(1)}
-            unit="ppm"
-          />
+              <SensorCard
+                icon={AlertTriangle}
+                tone="violet"
+                label="CH₄"
+                value={sensor.ch4.toFixed(1)}
+                unit="ppm"
+              />
 
-        </div>
+            </div>
+
+
+            {/* ROW 2 — WIND + FIRE SPREAD */}
+            <div className="grid grid-cols-3 gap-4 mb-4">
+
+              <WindCard
+                speed={sensor.windSpeed}
+                direction={sensor.windDirection}
+                directionLabel={sensor.windDirectionLabel}
+              />
+
+              <FireSpreadCard
+                spreadRate={sensor.fireSpread}
+                direction={sensor.windDirection}
+                directionLabel={sensor.windDirectionLabel}
+              />
+
+            </div>
+
+
+            {/* ROW 3 — MACHINE LEARNING */}
+            <div className="grid grid-cols-2 gap-4 mb-4">
+
+              <MLPredictionCard
+                prediction={sensor.mlPrediction}
+                confidence={sensor.mlConfidence}
+              />
+
+              <ProbabilityDistributionCard
+                probabilities={sensor.mlProba}
+              />
+
+            </div>
+
+
+            {/* ROW 4 — HOTSPOT MAP */}
+            <div className="mb-4">
+              <HotspotMap />
+            </div>
+
+
+            {/* ROW 5 — AI ANALYSIS */}
+            <AIAnalysis data={ai} />
+          </>
+        )}
 
 
         {/* ==================================================
-            ROW 2 — WIND + FIRE SPREAD
+            VIEW: PETA
         ================================================== */}
 
-        <div className="
-          grid
-          grid-cols-2
-          gap-3
-          mb-4
-        ">
-
-          <WindCard
-            speed={sensor.windSpeed}
-            direction={sensor.windDirection}
-            directionLabel={sensor.windDirectionLabel}
-          />
-
-          <FireSpreadCard
-            spreadRate={sensor.fireSpread}
-            direction={sensor.windDirection}
-            directionLabel={sensor.windDirectionLabel}
-          />
-
-        </div>
+        {view === 'map' && <HotspotMap height="h-[70vh]" />}
 
 
         {/* ==================================================
-            ROW 3 — MACHINE LEARNING
+            VIEW: AI
         ================================================== */}
 
-        <div className="
-          grid
-          grid-cols-2
-          gap-3
-          mb-4
-        ">
-
-          <MLPredictionCard
-            prediction={sensor.mlPrediction}
-            confidence={sensor.mlConfidence}
-          />
-
-          <ProbabilityDistributionCard
-            probabilities={sensor.mlProba}
-          />
-
-        </div>
+        {view === 'ai' && <AIAnalysis data={ai} />}
 
 
         {/* ==================================================
-            ROW 4 — HOTSPOT MAP
+            VIEW: SETELAN
         ================================================== */}
 
-        <div className="mb-4">
-
-          <HotspotMap />
-
-        </div>
-
-
-        {/* ==================================================
-            ROW 5 — AI ANALYSIS
-        ================================================== */}
-
-        <AIAnalysis data={ai} />
+        {view === 'settings' && (
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+            <p className="text-base text-gray-500">Settings is not available yet</p>
+          </div>
+        )}
 
       </main>
 

@@ -25,12 +25,12 @@ export default function Header({ riskLevel = 'Low', lastUpdated, onRefresh }) {
       <img src={Logo} alt="PyroWatch" className="w-36 h-auto" />
 
       <div className="flex items-center gap-3">
-        <span className="text-xs text-forest-400">Diperbarui {timeStr}</span>
+        <span className="text-sm text-gray-500">Diperbarui {timeStr}</span>
         <button
           onClick={onRefresh}
-          className="w-8 h-8 flex items-center justify-center rounded-xl bg-white hover:bg-forest-50 border border-forest-100 transition-colors"
+          className="w-9 h-9 flex items-center justify-center rounded-xl bg-white hover:bg-forest-50 border border-gray-200 transition-colors"
         >
-          <RefreshCw size={13} className="text-forest-400" strokeWidth={1.75} />
+          <RefreshCw size={15} className="text-gray-500" strokeWidth={2} />
         </button>
         <span className={`flex items-center gap-1.5 text-sm font-medium px-3 py-1 rounded-full ${riskColors[riskLevel]}`}>
           <span className={`w-2 h-2 rounded-full ${riskDot[riskLevel]}`} />

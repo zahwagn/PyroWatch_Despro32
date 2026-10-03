@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { Map } from 'lucide-react'
+import IconBadge from '../ui/IconBadge.jsx'
 import { fetchFIRMSHotspots } from '../../lib/firms.js'
 import { mockHotspots } from '../../lib/mockData.js'
 
 const USE_MOCK = !import.meta.env.VITE_FIRMS_API_KEY
 
-export default function HotspotMap() {
+export default function HotspotMap({ height = 'h-80' }) {
   const mapRef      = useRef(null)
   const instanceRef = useRef(null)
   const heatRef     = useRef(null)
@@ -37,7 +38,11 @@ export default function HotspotMap() {
     map.on('zoomend', () => setZoomLevel(map.getZoom()))
     instanceRef.current = map
 
+    const observer = new ResizeObserver(() => map.invalidateSize())
+    observer.observe(mapRef.current)
+
     return () => {
+      observer.disconnect()
       map.remove()
       instanceRef.current = null
     }
@@ -124,30 +129,30 @@ export default function HotspotMap() {
     : '—'
 
   return (
-    <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-forest-50">
-      <div className="px-5 pt-5 pb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Map size={16} strokeWidth={1.75} className="text-forest-400" />
-          <p className="text-sm font-semibold text-forest-700">Hotspot Aktif — Indonesia</p>
+    <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
+      <div className="px-6 pt-6 pb-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <IconBadge icon={Map} tone="green" />
+          <p className="text-lg font-semibold text-gray-900">Hotspot Aktif — Indonesia</p>
           {!loading && !error && (
-            <span className="text-xs bg-forest-100 text-forest-600 px-2 py-0.5 rounded-full font-medium">
+            <span className="text-sm bg-forest-100 text-forest-700 px-3 py-1 rounded-full font-semibold">
               {hotspotCount} titik
             </span>
           )}
           {loading && (
-            <span className="text-xs bg-forest-50 text-forest-400 px-2 py-0.5 rounded-full animate-pulse">
+            <span className="text-sm bg-gray-100 text-gray-500 px-3 py-1 rounded-full animate-pulse">
               Memuat...
             </span>
           )}
           {error && (
-            <span className="text-xs bg-red-50 text-red-400 px-2 py-0.5 rounded-full">
+            <span className="text-sm bg-red-50 text-red-500 px-3 py-1 rounded-full">
               Gagal memuat
             </span>
           )}
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-xs text-forest-400">
+          <div className="flex items-center gap-3 text-sm text-gray-500">
             <span className="flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-forest-400 inline-block" /> Rendah
             </span>
@@ -158,17 +163,17 @@ export default function HotspotMap() {
               <span className="w-2 h-2 rounded-full bg-red-400 inline-block" /> Tinggi
             </span>
           </div>
-          <span className="text-xs text-forest-300">
+          <span className="text-sm text-gray-500">
             {USE_MOCK ? 'Mock data' : `FIRMS VIIRS · ${timeStr}`}
           </span>
         </div>
       </div>
 
-      <div ref={mapRef} className="w-full h-80" />
+      <div ref={mapRef} className={`w-full ${height}`} />
 
       {!USE_MOCK && (
-        <div className="px-5 py-2 border-t border-forest-50">
-          <p className="text-xs text-forest-300">
+        <div className="px-6 py-3 border-t border-gray-100">
+          <p className="text-sm text-gray-500">
             Sumber: NASA FIRMS VIIRS SNPP Near Real-Time · Diperbarui otomatis tiap 10 menit
           </p>
         </div>
