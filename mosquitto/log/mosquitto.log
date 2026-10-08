@@ -2072,3 +2072,1752 @@ To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
 
 1790411603: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
 
+1790413404: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1790413404: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1790413404: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1790413404: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791005462: mosquitto version 2.1.2 starting
+1791005462: Config loaded from /mosquitto/config/mosquitto.conf.
+1791005462: Bridge support available.
+1791005462: Persistence support available.
+1791005462: TLS support available.
+1791005462: TLS-PSK support available.
+1791005462: Websockets support available.
+1791005462: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1791005462: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1791005462: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1791005462: Plugin builtin-security has registered to receive 'basic-auth' events.
+1791005462: Opening ipv4 listen socket on port 1883.
+1791005462: Opening ipv6 listen socket on port 1883.
+1791005462: mosquitto version 2.1.2 running
+1791005477: mosquitto version 2.1.2 terminating
+1791005477: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791005477: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791005477: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791005477: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791005480: mosquitto version 2.1.2 starting
+1791005480: Config loaded from /mosquitto/config/mosquitto.conf.
+1791005480: Bridge support available.
+1791005480: Persistence support available.
+1791005480: TLS support available.
+1791005480: TLS-PSK support available.
+1791005480: Websockets support available.
+1791005480: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1791005480: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1791005480: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1791005480: Plugin builtin-security has registered to receive 'basic-auth' events.
+1791005480: Opening ipv4 listen socket on port 1883.
+1791005480: Opening ipv6 listen socket on port 1883.
+1791005480: mosquitto version 2.1.2 running
+1791005501: New connection from 172.19.0.4:37330 on port 1883.
+1791005501: New client connected from 172.19.0.4:37330 as nodered7245e7000af55ea3 (p4, c1, k60, u'pyrowatch_gateway').
+1791007149: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791007149: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791007149: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791007149: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791008812: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791008812: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791008812: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791008812: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791010496: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791010496: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791010496: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791010496: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791011094: Client nodered7245e7000af55ea3 [172.19.0.4:37330] disconnected.
+1791011094: New connection from 172.19.0.4:55198 on port 1883.
+1791011094: New client connected from 172.19.0.4:55198 as noderedd6adaff5acbc9f5f (p4, c1, k60, u'pyrowatch_gateway').
+1791011141: New connection from 172.19.0.1:60048 on port 1883.
+1791011141: Client PyroWatch-sensor_01 [172.19.0.1:60048] disconnected: not authorised.
+1791011145: New connection from 172.19.0.1:60058 on port 1883.
+1791011145: Client PyroWatch-sensor_01 [172.19.0.1:60058] disconnected: not authorised.
+1791011148: New connection from 172.19.0.1:60074 on port 1883.
+1791011148: Client PyroWatch-sensor_01 [172.19.0.1:60074] disconnected: not authorised.
+1791011151: New connection from 172.19.0.1:41340 on port 1883.
+1791011151: Client PyroWatch-sensor_01 [172.19.0.1:41340] disconnected: not authorised.
+1791011153: New connection from 172.19.0.1:41352 on port 1883.
+1791011153: Client PyroWatch-sensor_01 [172.19.0.1:41352] disconnected: not authorised.
+1791011156: New connection from 172.19.0.1:41364 on port 1883.
+1791011156: Client PyroWatch-sensor_01 [172.19.0.1:41364] disconnected: not authorised.
+1791011159: New connection from 172.19.0.1:55010 on port 1883.
+1791011159: Client PyroWatch-sensor_01 [172.19.0.1:55010] disconnected: not authorised.
+1791011163: New connection from 172.19.0.1:55016 on port 1883.
+1791011163: Client PyroWatch-sensor_01 [172.19.0.1:55016] disconnected: not authorised.
+1791011166: New connection from 172.19.0.1:55030 on port 1883.
+1791011166: Client PyroWatch-sensor_01 [172.19.0.1:55030] disconnected: not authorised.
+1791011169: New connection from 172.19.0.1:52078 on port 1883.
+1791011169: Client PyroWatch-sensor_01 [172.19.0.1:52078] disconnected: not authorised.
+1791011173: New connection from 172.19.0.1:52092 on port 1883.
+1791011173: Client PyroWatch-sensor_01 [172.19.0.1:52092] disconnected: not authorised.
+1791011176: New connection from 172.19.0.1:52106 on port 1883.
+1791011176: Client PyroWatch-sensor_01 [172.19.0.1:52106] disconnected: not authorised.
+1791011180: New connection from 172.19.0.1:42802 on port 1883.
+1791011180: Client PyroWatch-sensor_01 [172.19.0.1:42802] disconnected: not authorised.
+1791011184: New connection from 172.19.0.1:42810 on port 1883.
+1791011184: Client PyroWatch-sensor_01 [172.19.0.1:42810] disconnected: not authorised.
+1791011187: New connection from 172.19.0.1:42826 on port 1883.
+1791011187: Client PyroWatch-sensor_01 [172.19.0.1:42826] disconnected: not authorised.
+1791011190: New connection from 172.19.0.1:60156 on port 1883.
+1791011190: Client PyroWatch-sensor_01 [172.19.0.1:60156] disconnected: not authorised.
+1791011193: New connection from 172.19.0.1:60166 on port 1883.
+1791011193: Client PyroWatch-sensor_01 [172.19.0.1:60166] disconnected: not authorised.
+1791011197: New connection from 172.19.0.1:60176 on port 1883.
+1791011197: Client PyroWatch-sensor_01 [172.19.0.1:60176] disconnected: not authorised.
+1791011200: New connection from 172.19.0.1:43764 on port 1883.
+1791011200: Client PyroWatch-sensor_01 [172.19.0.1:43764] disconnected: not authorised.
+1791011203: New connection from 172.19.0.1:43780 on port 1883.
+1791011203: Client PyroWatch-sensor_01 [172.19.0.1:43780] disconnected: not authorised.
+1791011206: New connection from 172.19.0.1:43786 on port 1883.
+1791011206: Client PyroWatch-sensor_01 [172.19.0.1:43786] disconnected: not authorised.
+1791011209: New connection from 172.19.0.1:43792 on port 1883.
+1791011209: Client PyroWatch-sensor_01 [172.19.0.1:43792] disconnected: not authorised.
+1791011212: New connection from 172.19.0.1:54542 on port 1883.
+1791011212: Client PyroWatch-sensor_01 [172.19.0.1:54542] disconnected: not authorised.
+1791011215: New connection from 172.19.0.1:54556 on port 1883.
+1791011215: Client PyroWatch-sensor_01 [172.19.0.1:54556] disconnected: not authorised.
+1791011218: New connection from 172.19.0.1:54572 on port 1883.
+1791011218: Client PyroWatch-sensor_01 [172.19.0.1:54572] disconnected: not authorised.
+1791011221: New connection from 172.19.0.1:57894 on port 1883.
+1791011221: Client PyroWatch-sensor_01 [172.19.0.1:57894] disconnected: not authorised.
+1791011224: New connection from 172.19.0.1:57902 on port 1883.
+1791011224: Client PyroWatch-sensor_01 [172.19.0.1:57902] disconnected: not authorised.
+1791011228: New connection from 172.19.0.1:57904 on port 1883.
+1791011228: Client PyroWatch-sensor_01 [172.19.0.1:57904] disconnected: not authorised.
+1791011231: New connection from 172.19.0.1:54222 on port 1883.
+1791011231: Client PyroWatch-sensor_01 [172.19.0.1:54222] disconnected: not authorised.
+1791011234: New connection from 172.19.0.1:54234 on port 1883.
+1791011234: Client PyroWatch-sensor_01 [172.19.0.1:54234] disconnected: not authorised.
+1791011237: New connection from 172.19.0.1:54244 on port 1883.
+1791011237: Client PyroWatch-sensor_01 [172.19.0.1:54244] disconnected: not authorised.
+1791011240: New connection from 172.19.0.1:59710 on port 1883.
+1791011240: Client PyroWatch-sensor_01 [172.19.0.1:59710] disconnected: not authorised.
+1791011243: New connection from 172.19.0.1:59712 on port 1883.
+1791011243: Client PyroWatch-sensor_01 [172.19.0.1:59712] disconnected: not authorised.
+1791011247: New connection from 172.19.0.1:59716 on port 1883.
+1791011247: Client PyroWatch-sensor_01 [172.19.0.1:59716] disconnected: not authorised.
+1791011250: New connection from 172.19.0.1:57352 on port 1883.
+1791011250: Client PyroWatch-sensor_01 [172.19.0.1:57352] disconnected: not authorised.
+1791011253: New connection from 172.19.0.1:57354 on port 1883.
+1791011253: Client PyroWatch-sensor_01 [172.19.0.1:57354] disconnected: not authorised.
+1791011256: New connection from 172.19.0.1:57358 on port 1883.
+1791011256: Client PyroWatch-sensor_01 [172.19.0.1:57358] disconnected: not authorised.
+1791011259: New connection from 172.19.0.1:57372 on port 1883.
+1791011259: Client PyroWatch-sensor_01 [172.19.0.1:57372] disconnected: not authorised.
+1791011262: New connection from 172.19.0.1:40522 on port 1883.
+1791011262: Client PyroWatch-sensor_01 [172.19.0.1:40522] disconnected: not authorised.
+1791011265: New connection from 172.19.0.1:40532 on port 1883.
+1791011265: Client PyroWatch-sensor_01 [172.19.0.1:40532] disconnected: not authorised.
+1791011268: New connection from 172.19.0.1:40538 on port 1883.
+1791011268: Client PyroWatch-sensor_01 [172.19.0.1:40538] disconnected: not authorised.
+1791011271: New connection from 172.19.0.1:38762 on port 1883.
+1791011271: Client PyroWatch-sensor_01 [172.19.0.1:38762] disconnected: not authorised.
+1791011274: New connection from 172.19.0.1:38776 on port 1883.
+1791011274: Client PyroWatch-sensor_01 [172.19.0.1:38776] disconnected: not authorised.
+1791011277: New connection from 172.19.0.1:38786 on port 1883.
+1791011277: Client PyroWatch-sensor_01 [172.19.0.1:38786] disconnected: not authorised.
+1791011281: New connection from 172.19.0.1:57008 on port 1883.
+1791011281: Client PyroWatch-sensor_01 [172.19.0.1:57008] disconnected: not authorised.
+1791011284: New connection from 172.19.0.1:57024 on port 1883.
+1791011284: Client PyroWatch-sensor_01 [172.19.0.1:57024] disconnected: not authorised.
+1791011287: New connection from 172.19.0.1:57038 on port 1883.
+1791011287: Client PyroWatch-sensor_01 [172.19.0.1:57038] disconnected: not authorised.
+1791011713: New connection from 172.19.0.1:45260 on port 1883.
+1791011713: Client PyroWatch-sensor_01 [172.19.0.1:45260] disconnected: not authorised.
+1791011717: New connection from 172.19.0.1:45274 on port 1883.
+1791011717: Client PyroWatch-sensor_01 [172.19.0.1:45274] disconnected: not authorised.
+1791011720: New connection from 172.19.0.1:46586 on port 1883.
+1791011720: Client PyroWatch-sensor_01 [172.19.0.1:46586] disconnected: not authorised.
+1791011723: New connection from 172.19.0.1:46598 on port 1883.
+1791011723: Client PyroWatch-sensor_01 [172.19.0.1:46598] disconnected: not authorised.
+1791011727: New connection from 172.19.0.1:46612 on port 1883.
+1791011727: Client PyroWatch-sensor_01 [172.19.0.1:46612] disconnected: not authorised.
+1791011731: New connection from 172.19.0.1:57576 on port 1883.
+1791011731: Client PyroWatch-sensor_01 [172.19.0.1:57576] disconnected: not authorised.
+1791011734: New connection from 172.19.0.1:57586 on port 1883.
+1791011734: Client PyroWatch-sensor_01 [172.19.0.1:57586] disconnected: not authorised.
+1791011734: New connection from 172.19.0.1:57598 on port 1883.
+1791011734: Client PyroWatch-sensor_01 [172.19.0.1:57598] disconnected: not authorised.
+1791011738: New connection from 172.19.0.1:42128 on port 1883.
+1791011738: Client PyroWatch-sensor_01 [172.19.0.1:42128] disconnected: not authorised.
+1791011741: New connection from 172.19.0.1:42130 on port 1883.
+1791011741: Client PyroWatch-sensor_01 [172.19.0.1:42130] disconnected: not authorised.
+1791011744: New connection from 172.19.0.1:42144 on port 1883.
+1791011744: Client PyroWatch-sensor_01 [172.19.0.1:42144] disconnected: not authorised.
+1791011747: New connection from 172.19.0.1:40590 on port 1883.
+1791011747: Client PyroWatch-sensor_01 [172.19.0.1:40590] disconnected: not authorised.
+1791011750: New connection from 172.19.0.1:40602 on port 1883.
+1791011750: Client PyroWatch-sensor_01 [172.19.0.1:40602] disconnected: not authorised.
+1791011753: New connection from 172.19.0.1:40604 on port 1883.
+1791011753: Client PyroWatch-sensor_01 [172.19.0.1:40604] disconnected: not authorised.
+1791011757: New connection from 172.19.0.1:44642 on port 1883.
+1791011757: Client PyroWatch-sensor_01 [172.19.0.1:44642] disconnected: not authorised.
+1791011760: New connection from 172.19.0.1:44650 on port 1883.
+1791011760: Client PyroWatch-sensor_01 [172.19.0.1:44650] disconnected: not authorised.
+1791011763: New connection from 172.19.0.1:44652 on port 1883.
+1791011763: Client PyroWatch-sensor_01 [172.19.0.1:44652] disconnected: not authorised.
+1791011767: New connection from 172.19.0.1:59472 on port 1883.
+1791011767: Client PyroWatch-sensor_01 [172.19.0.1:59472] disconnected: not authorised.
+1791011770: New connection from 172.19.0.1:59486 on port 1883.
+1791011770: Client PyroWatch-sensor_01 [172.19.0.1:59486] disconnected: not authorised.
+1791011773: New connection from 172.19.0.1:59492 on port 1883.
+1791011773: Client PyroWatch-sensor_01 [172.19.0.1:59492] disconnected: not authorised.
+1791011774: New connection from 172.19.0.1:44026 on port 1883.
+1791011774: Client PyroWatch-sensor_01 [172.19.0.1:44026] disconnected: not authorised.
+1791011778: New connection from 172.19.0.1:44038 on port 1883.
+1791011778: Client PyroWatch-sensor_01 [172.19.0.1:44038] disconnected: not authorised.
+1791011781: New connection from 172.19.0.1:44044 on port 1883.
+1791011781: Client PyroWatch-sensor_01 [172.19.0.1:44044] disconnected: not authorised.
+1791011784: New connection from 172.19.0.1:36242 on port 1883.
+1791011784: Client PyroWatch-sensor_01 [172.19.0.1:36242] disconnected: not authorised.
+1791011788: New connection from 172.19.0.1:36252 on port 1883.
+1791011788: Client PyroWatch-sensor_01 [172.19.0.1:36252] disconnected: not authorised.
+1791011791: New connection from 172.19.0.1:36264 on port 1883.
+1791011791: Client PyroWatch-sensor_01 [172.19.0.1:36264] disconnected: not authorised.
+1791011794: New connection from 172.19.0.1:34230 on port 1883.
+1791011794: Client PyroWatch-sensor_01 [172.19.0.1:34230] disconnected: not authorised.
+1791011798: New connection from 172.19.0.1:34242 on port 1883.
+1791011798: Client PyroWatch-sensor_01 [172.19.0.1:34242] disconnected: not authorised.
+1791011801: New connection from 172.19.0.1:34248 on port 1883.
+1791011801: Client PyroWatch-sensor_01 [172.19.0.1:34248] disconnected: not authorised.
+1791011802: New connection from 172.19.0.1:38228 on port 1883.
+1791011802: Client PyroWatch-sensor_01 [172.19.0.1:38228] disconnected: not authorised.
+1791011805: New connection from 172.19.0.1:38234 on port 1883.
+1791011805: Client PyroWatch-sensor_01 [172.19.0.1:38234] disconnected: not authorised.
+1791011809: New connection from 172.19.0.1:38242 on port 1883.
+1791011809: Client PyroWatch-sensor_01 [172.19.0.1:38242] disconnected: not authorised.
+1791011812: New connection from 172.19.0.1:60656 on port 1883.
+1791011812: Client PyroWatch-sensor_01 [172.19.0.1:60656] disconnected: not authorised.
+1791011815: New connection from 172.19.0.1:60672 on port 1883.
+1791011815: Client PyroWatch-sensor_01 [172.19.0.1:60672] disconnected: not authorised.
+1791011818: New connection from 172.19.0.1:60688 on port 1883.
+1791011818: Client PyroWatch-sensor_01 [172.19.0.1:60688] disconnected: not authorised.
+1791011822: New connection from 172.19.0.1:41672 on port 1883.
+1791011822: Client PyroWatch-sensor_01 [172.19.0.1:41672] disconnected: not authorised.
+1791011825: New connection from 172.19.0.1:41686 on port 1883.
+1791011825: Client PyroWatch-sensor_01 [172.19.0.1:41686] disconnected: not authorised.
+1791011828: New connection from 172.19.0.1:41688 on port 1883.
+1791011828: Client PyroWatch-sensor_01 [172.19.0.1:41688] disconnected: not authorised.
+1791011830: New connection from 172.19.0.1:55560 on port 1883.
+1791011830: Client PyroWatch-sensor_01 [172.19.0.1:55560] disconnected: not authorised.
+1791011833: New connection from 172.19.0.1:55562 on port 1883.
+1791011833: Client PyroWatch-sensor_01 [172.19.0.1:55562] disconnected: not authorised.
+1791011836: New connection from 172.19.0.1:55576 on port 1883.
+1791011836: Client PyroWatch-sensor_01 [172.19.0.1:55576] disconnected: not authorised.
+1791011840: New connection from 172.19.0.1:54962 on port 1883.
+1791011840: Client PyroWatch-sensor_01 [172.19.0.1:54962] disconnected: not authorised.
+1791011843: New connection from 172.19.0.1:54966 on port 1883.
+1791011843: Client PyroWatch-sensor_01 [172.19.0.1:54966] disconnected: not authorised.
+1791011846: New connection from 172.19.0.1:54968 on port 1883.
+1791011846: Client PyroWatch-sensor_01 [172.19.0.1:54968] disconnected: not authorised.
+1791011850: New connection from 172.19.0.1:53856 on port 1883.
+1791011850: Client PyroWatch-sensor_01 [172.19.0.1:53856] disconnected: not authorised.
+1791011853: New connection from 172.19.0.1:53870 on port 1883.
+1791011853: Client PyroWatch-sensor_01 [172.19.0.1:53870] disconnected: not authorised.
+1791011856: New connection from 172.19.0.1:53872 on port 1883.
+1791011856: Client PyroWatch-sensor_01 [172.19.0.1:53872] disconnected: not authorised.
+1791011859: New connection from 172.19.0.1:59708 on port 1883.
+1791011859: Client PyroWatch-sensor_01 [172.19.0.1:59708] disconnected: not authorised.
+1791011861: New connection from 172.19.0.1:59716 on port 1883.
+1791011861: Client PyroWatch-sensor_01 [172.19.0.1:59716] disconnected: not authorised.
+1791011865: New connection from 172.19.0.1:59726 on port 1883.
+1791011865: Client PyroWatch-sensor_01 [172.19.0.1:59726] disconnected: not authorised.
+1791011868: New connection from 172.19.0.1:57042 on port 1883.
+1791011868: Client PyroWatch-sensor_01 [172.19.0.1:57042] disconnected: not authorised.
+1791011871: New connection from 172.19.0.1:57054 on port 1883.
+1791011871: Client PyroWatch-sensor_01 [172.19.0.1:57054] disconnected: not authorised.
+1791011875: New connection from 172.19.0.1:57068 on port 1883.
+1791011875: Client PyroWatch-sensor_01 [172.19.0.1:57068] disconnected: not authorised.
+1791011878: New connection from 172.19.0.1:50190 on port 1883.
+1791011878: Client PyroWatch-sensor_01 [172.19.0.1:50190] disconnected: not authorised.
+1791011881: New connection from 172.19.0.1:50198 on port 1883.
+1791011881: Client PyroWatch-sensor_01 [172.19.0.1:50198] disconnected: not authorised.
+1791011884: New connection from 172.19.0.1:50212 on port 1883.
+1791011884: Client PyroWatch-sensor_01 [172.19.0.1:50212] disconnected: not authorised.
+1791011886: New connection from 172.19.0.1:59910 on port 1883.
+1791011886: Client PyroWatch-sensor_01 [172.19.0.1:59910] disconnected: not authorised.
+1791011890: New connection from 172.19.0.1:59922 on port 1883.
+1791011890: Client PyroWatch-sensor_01 [172.19.0.1:59922] disconnected: not authorised.
+1791011893: New connection from 172.19.0.1:59924 on port 1883.
+1791011893: Client PyroWatch-sensor_01 [172.19.0.1:59924] disconnected: not authorised.
+1791011896: New connection from 172.19.0.1:59320 on port 1883.
+1791011896: Client PyroWatch-sensor_01 [172.19.0.1:59320] disconnected: not authorised.
+1791011899: New connection from 172.19.0.1:59332 on port 1883.
+1791011899: Client PyroWatch-sensor_01 [172.19.0.1:59332] disconnected: not authorised.
+1791011903: New connection from 172.19.0.1:59340 on port 1883.
+1791011903: Client PyroWatch-sensor_01 [172.19.0.1:59340] disconnected: not authorised.
+1791011906: New connection from 172.19.0.1:43892 on port 1883.
+1791011906: Client PyroWatch-sensor_01 [172.19.0.1:43892] disconnected: not authorised.
+1791011909: New connection from 172.19.0.1:43902 on port 1883.
+1791011909: Client PyroWatch-sensor_01 [172.19.0.1:43902] disconnected: not authorised.
+1791011912: New connection from 172.19.0.1:43912 on port 1883.
+1791011912: Client PyroWatch-sensor_01 [172.19.0.1:43912] disconnected: not authorised.
+1791011916: New connection from 172.19.0.1:34698 on port 1883.
+1791011916: Client PyroWatch-sensor_01 [172.19.0.1:34698] disconnected: not authorised.
+1791011917: New connection from 172.19.0.1:34712 on port 1883.
+1791011917: Client PyroWatch-sensor_01 [172.19.0.1:34712] disconnected: not authorised.
+1791011920: New connection from 172.19.0.1:34720 on port 1883.
+1791011920: Client PyroWatch-sensor_01 [172.19.0.1:34720] disconnected: not authorised.
+1791011923: New connection from 172.19.0.1:38890 on port 1883.
+1791011923: Client PyroWatch-sensor_01 [172.19.0.1:38890] disconnected: not authorised.
+1791011927: New connection from 172.19.0.1:38894 on port 1883.
+1791011927: Client PyroWatch-sensor_01 [172.19.0.1:38894] disconnected: not authorised.
+1791011934: New connection from 172.19.0.1:38902 on port 1883.
+1791011934: Client PyroWatch-sensor_01 [172.19.0.1:38902] disconnected: not authorised.
+1791011938: New connection from 172.19.0.1:41380 on port 1883.
+1791011938: Client PyroWatch-sensor_01 [172.19.0.1:41380] disconnected: not authorised.
+1791011941: New connection from 172.19.0.1:41382 on port 1883.
+1791011941: Client PyroWatch-sensor_01 [172.19.0.1:41382] disconnected: not authorised.
+1791011943: New connection from 172.19.0.1:41398 on port 1883.
+1791011943: Client PyroWatch-sensor_01 [172.19.0.1:41398] disconnected: not authorised.
+1791011946: New connection from 172.19.0.1:41404 on port 1883.
+1791011946: Client PyroWatch-sensor_01 [172.19.0.1:41404] disconnected: not authorised.
+1791011944: New connection from 172.19.0.1:32852 on port 1883.
+1791011944: Client PyroWatch-sensor_01 [172.19.0.1:32852] disconnected: not authorised.
+1791011947: New connection from 172.19.0.1:32866 on port 1883.
+1791011947: Client PyroWatch-sensor_01 [172.19.0.1:32866] disconnected: not authorised.
+1791011950: New connection from 172.19.0.1:32876 on port 1883.
+1791011950: Client PyroWatch-sensor_01 [172.19.0.1:32876] disconnected: not authorised.
+1791011952: New connection from 172.19.0.1:32888 on port 1883.
+1791011952: Client PyroWatch-sensor_01 [172.19.0.1:32888] disconnected: not authorised.
+1791011955: New connection from 172.19.0.1:47768 on port 1883.
+1791011955: Client PyroWatch-sensor_01 [172.19.0.1:47768] disconnected: not authorised.
+1791011964: New connection from 172.19.0.1:47772 on port 1883.
+1791011964: Client PyroWatch-sensor_01 [172.19.0.1:47772] disconnected: not authorised.
+1791011967: New connection from 172.19.0.1:47782 on port 1883.
+1791011967: Client PyroWatch-sensor_01 [172.19.0.1:47782] disconnected: not authorised.
+1791011970: New connection from 172.19.0.1:49892 on port 1883.
+1791011970: Client PyroWatch-sensor_01 [172.19.0.1:49892] disconnected: not authorised.
+1791011972: New connection from 172.19.0.1:49902 on port 1883.
+1791011972: Client PyroWatch-sensor_01 [172.19.0.1:49902] disconnected: not authorised.
+1791011975: New connection from 172.19.0.1:49916 on port 1883.
+1791011975: Client PyroWatch-sensor_01 [172.19.0.1:49916] disconnected: not authorised.
+1791011978: New connection from 172.19.0.1:49918 on port 1883.
+1791011978: Client PyroWatch-sensor_01 [172.19.0.1:49918] disconnected: not authorised.
+1791011977: New connection from 172.19.0.1:33268 on port 1883.
+1791011977: Client PyroWatch-sensor_01 [172.19.0.1:33268] disconnected: not authorised.
+1791011980: New connection from 172.19.0.1:33280 on port 1883.
+1791011980: Client PyroWatch-sensor_01 [172.19.0.1:33280] disconnected: not authorised.
+1791011983: New connection from 172.19.0.1:33292 on port 1883.
+1791011983: Client PyroWatch-sensor_01 [172.19.0.1:33292] disconnected: not authorised.
+1791011986: New connection from 172.19.0.1:57116 on port 1883.
+1791011986: Client PyroWatch-sensor_01 [172.19.0.1:57116] disconnected: not authorised.
+1791011989: New connection from 172.19.0.1:57130 on port 1883.
+1791011989: Client PyroWatch-sensor_01 [172.19.0.1:57130] disconnected: not authorised.
+1791011991: New connection from 172.19.0.1:57142 on port 1883.
+1791011991: Client PyroWatch-sensor_01 [172.19.0.1:57142] disconnected: not authorised.
+1791011994: New connection from 172.19.0.1:57154 on port 1883.
+1791011994: Client PyroWatch-sensor_01 [172.19.0.1:57154] disconnected: not authorised.
+1791011997: New connection from 172.19.0.1:58020 on port 1883.
+1791011997: Client PyroWatch-sensor_01 [172.19.0.1:58020] disconnected: not authorised.
+1791012000: New connection from 172.19.0.1:58028 on port 1883.
+1791012000: Client PyroWatch-sensor_01 [172.19.0.1:58028] disconnected: not authorised.
+1791012004: New connection from 172.19.0.1:58032 on port 1883.
+1791012004: Client PyroWatch-sensor_01 [172.19.0.1:58032] disconnected: not authorised.
+1791012009: New connection from 172.19.0.1:55604 on port 1883.
+1791012009: Client PyroWatch-sensor_01 [172.19.0.1:55604] disconnected: not authorised.
+1791012012: New connection from 172.19.0.1:55612 on port 1883.
+1791012012: Client PyroWatch-sensor_01 [172.19.0.1:55612] disconnected: not authorised.
+1791012015: New connection from 172.19.0.1:55620 on port 1883.
+1791012015: Client PyroWatch-sensor_01 [172.19.0.1:55620] disconnected: not authorised.
+1791012019: New connection from 172.19.0.1:45092 on port 1883.
+1791012019: Client PyroWatch-sensor_01 [172.19.0.1:45092] disconnected: not authorised.
+1791012023: New connection from 172.19.0.1:45094 on port 1883.
+1791012023: Client PyroWatch-sensor_01 [172.19.0.1:45094] disconnected: not authorised.
+1791012026: New connection from 172.19.0.1:45096 on port 1883.
+1791012026: Client PyroWatch-sensor_01 [172.19.0.1:45096] disconnected: not authorised.
+1791012029: New connection from 172.19.0.1:35504 on port 1883.
+1791012029: Client PyroWatch-sensor_01 [172.19.0.1:35504] disconnected: not authorised.
+1791012033: New connection from 172.19.0.1:35512 on port 1883.
+1791012033: Client PyroWatch-sensor_01 [172.19.0.1:35512] disconnected: not authorised.
+1791012036: New connection from 172.19.0.1:35520 on port 1883.
+1791012036: Client PyroWatch-sensor_01 [172.19.0.1:35520] disconnected: not authorised.
+1791012053: New connection from 172.19.0.1:57988 on port 1883.
+1791012053: Client PyroWatch-sensor_01-d565 [172.19.0.1:57988] disconnected: not authorised.
+1791012056: New connection from 172.19.0.1:57998 on port 1883.
+1791012056: Client PyroWatch-sensor_01-a2f2 [172.19.0.1:57998] disconnected: not authorised.
+1791012059: New connection from 172.19.0.1:54138 on port 1883.
+1791012059: Client PyroWatch-sensor_01-79b1 [172.19.0.1:54138] disconnected: not authorised.
+1791012062: New connection from 172.19.0.1:54150 on port 1883.
+1791012062: Client PyroWatch-sensor_01-de03 [172.19.0.1:54150] disconnected: not authorised.
+1791012065: New connection from 172.19.0.1:54156 on port 1883.
+1791012065: Client PyroWatch-sensor_01-e469 [172.19.0.1:54156] disconnected: not authorised.
+1791012068: New connection from 172.19.0.1:45474 on port 1883.
+1791012068: Client PyroWatch-sensor_01-a2b3 [172.19.0.1:45474] disconnected: not authorised.
+1791012071: New connection from 172.19.0.1:45476 on port 1883.
+1791012071: Client PyroWatch-sensor_01-791e [172.19.0.1:45476] disconnected: not authorised.
+1791012074: New connection from 172.19.0.1:45478 on port 1883.
+1791012074: Client PyroWatch-sensor_01-2dd7 [172.19.0.1:45478] disconnected: not authorised.
+1791012077: New connection from 172.19.0.1:45492 on port 1883.
+1791012077: Client PyroWatch-sensor_01-8d4d [172.19.0.1:45492] disconnected: not authorised.
+1791012080: New connection from 172.19.0.1:34754 on port 1883.
+1791012080: Client PyroWatch-sensor_01-227e [172.19.0.1:34754] disconnected: not authorised.
+1791012083: New connection from 172.19.0.1:34764 on port 1883.
+1791012083: Client PyroWatch-sensor_01-7f37 [172.19.0.1:34764] disconnected: not authorised.
+1791012086: New connection from 172.19.0.1:34778 on port 1883.
+1791012086: Client PyroWatch-sensor_01-5947 [172.19.0.1:34778] disconnected: not authorised.
+1791012089: New connection from 172.19.0.1:44410 on port 1883.
+1791012089: Client PyroWatch-sensor_01-ec30 [172.19.0.1:44410] disconnected: not authorised.
+1791012092: New connection from 172.19.0.1:44426 on port 1883.
+1791012092: Client PyroWatch-sensor_01-976b [172.19.0.1:44426] disconnected: not authorised.
+1791012095: New connection from 172.19.0.1:44436 on port 1883.
+1791012095: Client PyroWatch-sensor_01-aaa4 [172.19.0.1:44436] disconnected: not authorised.
+1791012098: New connection from 172.19.0.1:40720 on port 1883.
+1791012098: Client PyroWatch-sensor_01-514c [172.19.0.1:40720] disconnected: not authorised.
+1791012101: New connection from 172.19.0.1:40730 on port 1883.
+1791012101: Client PyroWatch-sensor_01-3849 [172.19.0.1:40730] disconnected: not authorised.
+1791012104: New connection from 172.19.0.1:40732 on port 1883.
+1791012104: Client PyroWatch-sensor_01-ae54 [172.19.0.1:40732] disconnected: not authorised.
+1791012107: New connection from 172.19.0.1:40734 on port 1883.
+1791012107: Client PyroWatch-sensor_01-eaaf [172.19.0.1:40734] disconnected: not authorised.
+1791012110: New connection from 172.19.0.1:33284 on port 1883.
+1791012110: Client PyroWatch-sensor_01-1f9e [172.19.0.1:33284] disconnected: not authorised.
+1791012113: New connection from 172.19.0.1:33286 on port 1883.
+1791012113: Client PyroWatch-sensor_01-74c6 [172.19.0.1:33286] disconnected: not authorised.
+1791012116: New connection from 172.19.0.1:33290 on port 1883.
+1791012116: Client PyroWatch-sensor_01-4966 [172.19.0.1:33290] disconnected: not authorised.
+1791012120: New connection from 172.19.0.1:49790 on port 1883.
+1791012120: Client PyroWatch-sensor_01-d5f8 [172.19.0.1:49790] disconnected: not authorised.
+1791012123: New connection from 172.19.0.1:49794 on port 1883.
+1791012123: Client PyroWatch-sensor_01-9d38 [172.19.0.1:49794] disconnected: not authorised.
+1791012126: New connection from 172.19.0.1:49802 on port 1883.
+1791012126: Client PyroWatch-sensor_01-44f0 [172.19.0.1:49802] disconnected: not authorised.
+1791012129: New connection from 172.19.0.1:38392 on port 1883.
+1791012129: Client PyroWatch-sensor_01-1c74 [172.19.0.1:38392] disconnected: not authorised.
+1791012132: New connection from 172.19.0.1:38400 on port 1883.
+1791012132: Client PyroWatch-sensor_01-94a8 [172.19.0.1:38400] disconnected: not authorised.
+1791012135: New connection from 172.19.0.1:38404 on port 1883.
+1791012135: Client PyroWatch-sensor_01-a838 [172.19.0.1:38404] disconnected: not authorised.
+1791012138: New connection from 172.19.0.1:52592 on port 1883.
+1791012138: Client PyroWatch-sensor_01-2cae [172.19.0.1:52592] disconnected: not authorised.
+1791012141: New connection from 172.19.0.1:52600 on port 1883.
+1791012141: Client PyroWatch-sensor_01-e52 [172.19.0.1:52600] disconnected: not authorised.
+1791012144: New connection from 172.19.0.1:52616 on port 1883.
+1791012144: Client PyroWatch-sensor_01-4c0f [172.19.0.1:52616] disconnected: not authorised.
+1791012147: New connection from 172.19.0.1:52620 on port 1883.
+1791012147: Client PyroWatch-sensor_01-5ce2 [172.19.0.1:52620] disconnected: not authorised.
+1791012150: New connection from 172.19.0.1:53382 on port 1883.
+1791012150: Client PyroWatch-sensor_01-f62f [172.19.0.1:53382] disconnected: not authorised.
+1791012153: New connection from 172.19.0.1:53392 on port 1883.
+1791012153: Client PyroWatch-sensor_01-2353 [172.19.0.1:53392] disconnected: not authorised.
+1791012156: New connection from 172.19.0.1:53408 on port 1883.
+1791012156: Client PyroWatch-sensor_01-86a5 [172.19.0.1:53408] disconnected: not authorised.
+1791012159: New connection from 172.19.0.1:47782 on port 1883.
+1791012159: Client PyroWatch-sensor_01-fec8 [172.19.0.1:47782] disconnected: not authorised.
+1791012162: New connection from 172.19.0.1:47790 on port 1883.
+1791012162: Client PyroWatch-sensor_01-1e22 [172.19.0.1:47790] disconnected: not authorised.
+1791012165: New connection from 172.19.0.1:47806 on port 1883.
+1791012165: Client PyroWatch-sensor_01-48fc [172.19.0.1:47806] disconnected: not authorised.
+1791012168: New connection from 172.19.0.1:37948 on port 1883.
+1791012168: Client PyroWatch-sensor_01-552c [172.19.0.1:37948] disconnected: not authorised.
+1791012171: New connection from 172.19.0.1:37954 on port 1883.
+1791012171: Client PyroWatch-sensor_01-c0af [172.19.0.1:37954] disconnected: not authorised.
+1791012237: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791012237: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791012237: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791012237: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791012436: New connection from 172.19.0.1:34884 on port 1883.
+1791012436: Client PyroWatch-sensor_01-842a [172.19.0.1:34884] disconnected: not authorised.
+1791012439: New connection from 172.19.0.1:34886 on port 1883.
+1791012439: Client PyroWatch-sensor_01-9e37 [172.19.0.1:34886] disconnected: not authorised.
+1791012442: New connection from 172.19.0.1:34892 on port 1883.
+1791012442: Client PyroWatch-sensor_01-a9a9 [172.19.0.1:34892] disconnected: not authorised.
+1791012444: New connection from 172.19.0.1:41940 on port 1883.
+1791012444: Client PyroWatch-sensor_01-3dd2 [172.19.0.1:41940] disconnected: not authorised.
+1791012541: New connection from 172.19.0.1:36102 on port 1883.
+1791012541: Client PyroWatch-sensor_01-7e03 [172.19.0.1:36102] disconnected: not authorised.
+1791012544: New connection from 172.19.0.1:36118 on port 1883.
+1791012544: Client PyroWatch-sensor_01-da59 [172.19.0.1:36118] disconnected: not authorised.
+1791012547: New connection from 172.19.0.1:55240 on port 1883.
+1791012547: Client PyroWatch-sensor_01-add8 [172.19.0.1:55240] disconnected: not authorised.
+1791012549: New connection from 172.19.0.1:55250 on port 1883.
+1791012549: Client PyroWatch-sensor_01-c336 [172.19.0.1:55250] disconnected: not authorised.
+1791012552: New connection from 172.19.0.1:55256 on port 1883.
+1791012552: Client PyroWatch-sensor_01-a0e3 [172.19.0.1:55256] disconnected: not authorised.
+1791012555: New connection from 172.19.0.1:55272 on port 1883.
+1791012555: Client PyroWatch-sensor_01-4564 [172.19.0.1:55272] disconnected: not authorised.
+1791012558: New connection from 172.19.0.1:36544 on port 1883.
+1791012558: Client PyroWatch-sensor_01-4f55 [172.19.0.1:36544] disconnected: not authorised.
+1791012561: New connection from 172.19.0.1:36548 on port 1883.
+1791012561: Client PyroWatch-sensor_01-f4bf [172.19.0.1:36548] disconnected: not authorised.
+1791012564: New connection from 172.19.0.1:36558 on port 1883.
+1791012564: Client PyroWatch-sensor_01-bca4 [172.19.0.1:36558] disconnected: not authorised.
+1791012567: New connection from 172.19.0.1:42098 on port 1883.
+1791012567: Client PyroWatch-sensor_01-ddbe [172.19.0.1:42098] disconnected: not authorised.
+1791012570: New connection from 172.19.0.1:42106 on port 1883.
+1791012570: Client PyroWatch-sensor_01-e54a [172.19.0.1:42106] disconnected: not authorised.
+1791012573: New connection from 172.19.0.1:42108 on port 1883.
+1791012573: Client PyroWatch-sensor_01-44c3 [172.19.0.1:42108] disconnected: not authorised.
+1791012576: New connection from 172.19.0.1:56450 on port 1883.
+1791012576: Client PyroWatch-sensor_01-264b [172.19.0.1:56450] disconnected: not authorised.
+1791012579: New connection from 172.19.0.1:56454 on port 1883.
+1791012579: Client PyroWatch-sensor_01-b102 [172.19.0.1:56454] disconnected: not authorised.
+1791012582: New connection from 172.19.0.1:56462 on port 1883.
+1791012582: Client PyroWatch-sensor_01-1688 [172.19.0.1:56462] disconnected: not authorised.
+1791012585: New connection from 172.19.0.1:56478 on port 1883.
+1791012585: Client PyroWatch-sensor_01-68cd [172.19.0.1:56478] disconnected: not authorised.
+1791012588: New connection from 172.19.0.1:57638 on port 1883.
+1791012588: Client PyroWatch-sensor_01-c8ac [172.19.0.1:57638] disconnected: not authorised.
+1791012592: New connection from 172.19.0.1:57640 on port 1883.
+1791012592: Client PyroWatch-sensor_01-cf39 [172.19.0.1:57640] disconnected: not authorised.
+1791012595: New connection from 172.19.0.1:57642 on port 1883.
+1791012595: Client PyroWatch-sensor_01-ea31 [172.19.0.1:57642] disconnected: not authorised.
+1791012598: New connection from 172.19.0.1:33892 on port 1883.
+1791012598: Client PyroWatch-sensor_01-621c [172.19.0.1:33892] disconnected: not authorised.
+1791012601: New connection from 172.19.0.1:33906 on port 1883.
+1791012601: Client PyroWatch-sensor_01-76a1 [172.19.0.1:33906] disconnected: not authorised.
+1791012604: New connection from 172.19.0.1:33912 on port 1883.
+1791012604: Client PyroWatch-sensor_01-250f [172.19.0.1:33912] disconnected: not authorised.
+1791012607: New connection from 172.19.0.1:35276 on port 1883.
+1791012607: Client PyroWatch-sensor_01-1966 [172.19.0.1:35276] disconnected: not authorised.
+1791012704: mosquitto version 2.1.2 terminating
+1791012704: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791012704: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791012704: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791012704: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791012705: mosquitto version 2.1.2 starting
+1791012705: Config loaded from /mosquitto/config/mosquitto.conf.
+1791012705: Bridge support available.
+1791012705: Persistence support available.
+1791012705: TLS support available.
+1791012705: TLS-PSK support available.
+1791012705: Websockets support available.
+1791012705: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1791012705: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1791012705: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1791012705: Plugin builtin-security has registered to receive 'basic-auth' events.
+1791012705: Opening ipv4 listen socket on port 1883.
+1791012705: Opening ipv6 listen socket on port 1883.
+1791012705: mosquitto version 2.1.2 running
+1791012719: New connection from 172.19.0.4:51852 on port 1883.
+1791012719: New client connected from 172.19.0.4:51852 as noderedd6adaff5acbc9f5f (p4, c1, k60, u'pyrowatch_gateway').
+1791012749: New connection from 172.19.0.1:58508 on port 1883.
+1791012749: Client auto-4F6C85E4-C59C-A208-D87A-702A6E4E4C2A [172.19.0.1:58508] disconnected: not authorised.
+1791012783: New connection from 172.19.0.1:55436 on port 1883.
+1791012783: Client PyroWatch-sensor_01-cf36 [172.19.0.1:55436] disconnected: not authorised.
+1791012787: New connection from 172.19.0.1:38044 on port 1883.
+1791012787: Client PyroWatch-sensor_01-cb94 [172.19.0.1:38044] disconnected: not authorised.
+1791012787: New connection from 172.19.0.1:38054 on port 1883.
+1791012787: Client auto-0872660D-FBB5-CDBF-934D-4FEC3D76DBD0 [172.19.0.1:38054] disconnected: not authorised.
+1791012790: New connection from 172.19.0.1:38064 on port 1883.
+1791012790: Client auto-C378770F-010F-0417-D205-ACE7807CA807 [172.19.0.1:38064] disconnected: not authorised.
+1791012790: New connection from 172.19.0.1:38070 on port 1883.
+1791012790: Client PyroWatch-sensor_01-496b [172.19.0.1:38070] disconnected: not authorised.
+1791012793: New connection from 172.19.0.1:38072 on port 1883.
+1791012793: Client PyroWatch-sensor_01-249c [172.19.0.1:38072] disconnected: not authorised.
+1791012796: New connection from 172.19.0.1:38076 on port 1883.
+1791012796: Client PyroWatch-sensor_01-3572 [172.19.0.1:38076] disconnected: not authorised.
+1791012800: New connection from 172.19.0.1:52918 on port 1883.
+1791012800: Client PyroWatch-sensor_01-5478 [172.19.0.1:52918] disconnected: not authorised.
+1791012803: New connection from 172.19.0.1:52928 on port 1883.
+1791012803: Client PyroWatch-sensor_01-9f18 [172.19.0.1:52928] disconnected: not authorised.
+1791012806: New connection from 172.19.0.1:52940 on port 1883.
+1791012806: Client PyroWatch-sensor_01-e51c [172.19.0.1:52940] disconnected: not authorised.
+1791012809: New connection from 172.19.0.1:40984 on port 1883.
+1791012809: Client PyroWatch-sensor_01-373 [172.19.0.1:40984] disconnected: not authorised.
+1791012811: New connection from 172.19.0.1:40994 on port 1883.
+1791012811: Client PyroWatch-sensor_01-d9ff [172.19.0.1:40994] disconnected: not authorised.
+1791012814: New connection from 172.19.0.1:41004 on port 1883.
+1791012814: Client PyroWatch-sensor_01-64d8 [172.19.0.1:41004] disconnected: not authorised.
+1791012817: New connection from 172.19.0.1:49026 on port 1883.
+1791012817: Client PyroWatch-sensor_01-8636 [172.19.0.1:49026] disconnected: not authorised.
+1791012820: New connection from 172.19.0.1:49040 on port 1883.
+1791012820: Client PyroWatch-sensor_01-28eb [172.19.0.1:49040] disconnected: not authorised.
+1791012823: New connection from 172.19.0.1:49054 on port 1883.
+1791012823: Client PyroWatch-sensor_01-b299 [172.19.0.1:49054] disconnected: not authorised.
+1791012826: New connection from 172.19.0.1:49064 on port 1883.
+1791012826: Client PyroWatch-sensor_01-94aa [172.19.0.1:49064] disconnected: not authorised.
+1791012829: New connection from 172.19.0.1:35894 on port 1883.
+1791012829: Client PyroWatch-sensor_01-f932 [172.19.0.1:35894] disconnected: not authorised.
+1791012832: New connection from 172.19.0.1:35908 on port 1883.
+1791012832: Client PyroWatch-sensor_01-190d [172.19.0.1:35908] disconnected: not authorised.
+1791012835: New connection from 172.19.0.1:35914 on port 1883.
+1791012835: Client PyroWatch-sensor_01-8116 [172.19.0.1:35914] disconnected: not authorised.
+1791012838: New connection from 172.19.0.1:40694 on port 1883.
+1791012838: Client PyroWatch-sensor_01-a12c [172.19.0.1:40694] disconnected: not authorised.
+1791012842: New connection from 172.19.0.1:40704 on port 1883.
+1791012842: Client PyroWatch-sensor_01-8044 [172.19.0.1:40704] disconnected: not authorised.
+1791012845: New connection from 172.19.0.1:40706 on port 1883.
+1791012845: Client PyroWatch-sensor_01-e07d [172.19.0.1:40706] disconnected: not authorised.
+1791012848: New connection from 172.19.0.1:34886 on port 1883.
+1791012848: Client PyroWatch-sensor_01-8df5 [172.19.0.1:34886] disconnected: not authorised.
+1791012851: New connection from 172.19.0.1:34892 on port 1883.
+1791012851: Client PyroWatch-sensor_01-77c4 [172.19.0.1:34892] disconnected: not authorised.
+1791012854: New connection from 172.19.0.1:34900 on port 1883.
+1791012854: Client PyroWatch-sensor_01-8add [172.19.0.1:34900] disconnected: not authorised.
+1791012870: New connection from 172.19.0.1:54320 on port 1883.
+1791012870: Client PyroWatch-sensor_01-6b85 [172.19.0.1:54320] disconnected: not authorised.
+1791012873: New connection from 172.19.0.1:54336 on port 1883.
+1791012873: Client PyroWatch-sensor_01-2d3c [172.19.0.1:54336] disconnected: not authorised.
+1791012876: New connection from 172.19.0.1:54340 on port 1883.
+1791012876: Client PyroWatch-sensor_01-4074 [172.19.0.1:54340] disconnected: not authorised.
+1791012879: New connection from 172.19.0.1:33546 on port 1883.
+1791012879: Client PyroWatch-sensor_01-9f87 [172.19.0.1:33546] disconnected: not authorised.
+1791012882: New connection from 172.19.0.1:33550 on port 1883.
+1791012882: Client PyroWatch-sensor_01-a51f [172.19.0.1:33550] disconnected: not authorised.
+1791012885: New connection from 172.19.0.1:33564 on port 1883.
+1791012885: Client PyroWatch-sensor_01-539c [172.19.0.1:33564] disconnected: not authorised.
+1791012888: New connection from 172.19.0.1:36928 on port 1883.
+1791012888: Client PyroWatch-sensor_01-b0b0 [172.19.0.1:36928] disconnected: not authorised.
+1791012891: New connection from 172.19.0.1:36938 on port 1883.
+1791012891: Client PyroWatch-sensor_01-b501 [172.19.0.1:36938] disconnected: not authorised.
+1791012894: New connection from 172.19.0.1:36950 on port 1883.
+1791012894: Client PyroWatch-sensor_01-a4b7 [172.19.0.1:36950] disconnected: not authorised.
+1791012897: New connection from 172.19.0.1:41394 on port 1883.
+1791012897: Client PyroWatch-sensor_01-8c44 [172.19.0.1:41394] disconnected: not authorised.
+1791012900: New connection from 172.19.0.1:41410 on port 1883.
+1791012900: Client PyroWatch-sensor_01-ccd2 [172.19.0.1:41410] disconnected: not authorised.
+1791012903: New connection from 172.19.0.1:41412 on port 1883.
+1791012903: Client PyroWatch-sensor_01-b945 [172.19.0.1:41412] disconnected: not authorised.
+1791012906: New connection from 172.19.0.1:41422 on port 1883.
+1791012906: Client PyroWatch-sensor_01-a2bd [172.19.0.1:41422] disconnected: not authorised.
+1791013664: New connection from 172.19.0.1:41818 on port 1883.
+1791013664: Client auto-EB44F46E-0D58-BB63-1FEB-8866848979C0 [172.19.0.1:41818] disconnected: not authorised.
+1791013677: New connection from 172.19.0.1:54302 on port 1883.
+1791013677: Client PyroWatch-sensor_01-c27a [172.19.0.1:54302] disconnected: not authorised.
+1791013680: New connection from 172.19.0.1:54306 on port 1883.
+1791013680: Client PyroWatch-sensor_01-a052 [172.19.0.1:54306] disconnected: not authorised.
+1791013683: New connection from 172.19.0.1:54318 on port 1883.
+1791013683: Client auto-6247F6B3-2030-D04C-6418-FDEC2FD5A6E5 [172.19.0.1:54318] disconnected: not authorised.
+1791013684: New connection from 172.19.0.1:54322 on port 1883.
+1791013684: Client PyroWatch-sensor_01-3289 [172.19.0.1:54322] disconnected: not authorised.
+1791013687: New connection from 172.19.0.1:43952 on port 1883.
+1791013687: Client PyroWatch-sensor_01-e442 [172.19.0.1:43952] disconnected: not authorised.
+1791013691: New connection from 172.19.0.1:43960 on port 1883.
+1791013691: Client PyroWatch-sensor_01-2794 [172.19.0.1:43960] disconnected: not authorised.
+1791013694: New connection from 172.19.0.1:43974 on port 1883.
+1791013694: Client PyroWatch-sensor_01-ab62 [172.19.0.1:43974] disconnected: not authorised.
+1791013697: New connection from 172.19.0.1:44470 on port 1883.
+1791013697: Client PyroWatch-sensor_01-ff0a [172.19.0.1:44470] disconnected: not authorised.
+1791013701: New connection from 172.19.0.1:44480 on port 1883.
+1791013701: Client PyroWatch-sensor_01-1c69 [172.19.0.1:44480] disconnected: not authorised.
+1791013704: New connection from 172.19.0.1:44494 on port 1883.
+1791013704: Client PyroWatch-sensor_01-1b85 [172.19.0.1:44494] disconnected: not authorised.
+1791013707: New connection from 172.19.0.1:33374 on port 1883.
+1791013707: Client PyroWatch-sensor_01-642c [172.19.0.1:33374] disconnected: not authorised.
+1791013710: New connection from 172.19.0.1:33378 on port 1883.
+1791013710: Client PyroWatch-sensor_01-376e [172.19.0.1:33378] disconnected: not authorised.
+1791013714: New connection from 172.19.0.1:33392 on port 1883.
+1791013714: Client PyroWatch-sensor_01-3f1f [172.19.0.1:33392] disconnected: not authorised.
+1791013717: New connection from 172.19.0.1:53934 on port 1883.
+1791013717: Client PyroWatch-sensor_01-9195 [172.19.0.1:53934] disconnected: not authorised.
+1791013718: New connection from 172.19.0.1:53948 on port 1883.
+1791013718: Client PyroWatch-sensor_01-7e86 [172.19.0.1:53948] disconnected: not authorised.
+1791013722: New connection from 172.19.0.1:53960 on port 1883.
+1791013722: Client PyroWatch-sensor_01-aacf [172.19.0.1:53960] disconnected: not authorised.
+1791013725: New connection from 172.19.0.1:52246 on port 1883.
+1791013725: Client PyroWatch-sensor_01-cb8a [172.19.0.1:52246] disconnected: not authorised.
+1791013728: New connection from 172.19.0.1:52260 on port 1883.
+1791013728: Client PyroWatch-sensor_01-6b63 [172.19.0.1:52260] disconnected: not authorised.
+1791013731: New connection from 172.19.0.1:52270 on port 1883.
+1791013731: Client PyroWatch-sensor_01-35a1 [172.19.0.1:52270] disconnected: not authorised.
+1791013735: New connection from 172.19.0.1:33898 on port 1883.
+1791013735: Client PyroWatch-sensor_01-fa76 [172.19.0.1:33898] disconnected: not authorised.
+1791013736: mosquitto version 2.1.2 terminating
+1791013736: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791013736: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791013736: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791013736: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791013737: mosquitto version 2.1.2 starting
+1791013737: Config loaded from /mosquitto/config/mosquitto.conf.
+1791013737: Bridge support available.
+1791013737: Persistence support available.
+1791013737: TLS support available.
+1791013737: TLS-PSK support available.
+1791013737: Websockets support available.
+1791013737: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1791013737: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1791013737: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1791013737: Plugin builtin-security has registered to receive 'basic-auth' events.
+1791013737: Opening ipv4 listen socket on port 1883.
+1791013737: Opening ipv6 listen socket on port 1883.
+1791013737: mosquitto version 2.1.2 running
+1791013738: New connection from 172.19.0.1:33910 on port 1883.
+1791013738: Client PyroWatch-sensor_01-10f6 [172.19.0.1:33910] disconnected: not authorised.
+1791013741: New connection from 172.19.0.1:33912 on port 1883.
+1791013741: Client PyroWatch-sensor_01-c8cf [172.19.0.1:33912] disconnected: not authorised.
+1791013744: New connection from 172.19.0.1:49680 on port 1883.
+1791013744: Client PyroWatch-sensor_01-58ec [172.19.0.1:49680] disconnected: not authorised.
+1791013746: New connection from 172.19.0.1:49694 on port 1883.
+1791013746: Client PyroWatch-sensor_01-e738 [172.19.0.1:49694] disconnected: not authorised.
+1791013749: New connection from 172.19.0.1:49706 on port 1883.
+1791013749: Client PyroWatch-sensor_01-954e [172.19.0.1:49706] disconnected: not authorised.
+1791013749: New connection from 172.19.0.4:59766 on port 1883.
+1791013749: Client noderedd6adaff5acbc9f5f [172.19.0.4:59766] disconnected: not authorised.
+1791013752: New connection from 172.19.0.1:49714 on port 1883.
+1791013752: Client auto-493D0114-1F81-CBF4-B708-A168BF75A0BC [172.19.0.1:49714] disconnected: not authorised.
+1791013752: New connection from 172.19.0.1:60006 on port 1883.
+1791013752: Client PyroWatch-sensor_01-9ca9 [172.19.0.1:60006] disconnected: not authorised.
+1791013756: New connection from 172.19.0.1:60022 on port 1883.
+1791013756: Client PyroWatch-sensor_01-c2e5 [172.19.0.1:60022] disconnected: not authorised.
+1791013759: New connection from 172.19.0.1:60030 on port 1883.
+1791013759: Client PyroWatch-sensor_01-9d81 [172.19.0.1:60030] disconnected: not authorised.
+1791013762: New connection from 172.19.0.1:57128 on port 1883.
+1791013762: Client PyroWatch-sensor_01-1b3e [172.19.0.1:57128] disconnected: not authorised.
+1791013765: New connection from 172.19.0.4:41264 on port 1883.
+1791013765: Client noderedd6adaff5acbc9f5f [172.19.0.4:41264] disconnected: not authorised.
+1791013776: New connection from 172.19.0.4:57846 on port 1883.
+1791013776: Client noderedd6adaff5acbc9f5f [172.19.0.4:57846] disconnected: not authorised.
+1791013791: New connection from 172.19.0.4:41568 on port 1883.
+1791013791: Client noderedd6adaff5acbc9f5f [172.19.0.4:41568] disconnected: not authorised.
+1791013808: New connection from 172.19.0.4:50250 on port 1883.
+1791013808: Client noderedd6adaff5acbc9f5f [172.19.0.4:50250] disconnected: not authorised.
+1791013823: New connection from 172.19.0.4:53844 on port 1883.
+1791013823: Client noderedd6adaff5acbc9f5f [172.19.0.4:53844] disconnected: not authorised.
+1791013837: New connection from 172.19.0.4:40888 on port 1883.
+1791013837: Client noderedd6adaff5acbc9f5f [172.19.0.4:40888] disconnected: not authorised.
+1791013852: New connection from 172.19.0.4:56650 on port 1883.
+1791013852: Client noderedd6adaff5acbc9f5f [172.19.0.4:56650] disconnected: not authorised.
+1791013865: New connection from 172.19.0.4:35792 on port 1883.
+1791013865: Client noderedd6adaff5acbc9f5f [172.19.0.4:35792] disconnected: not authorised.
+1791013880: New connection from 172.19.0.4:38082 on port 1883.
+1791013880: Client noderedd6adaff5acbc9f5f [172.19.0.4:38082] disconnected: not authorised.
+1791013894: New connection from 172.19.0.4:39896 on port 1883.
+1791013894: Client noderedd6adaff5acbc9f5f [172.19.0.4:39896] disconnected: not authorised.
+1791013909: New connection from 172.19.0.4:58704 on port 1883.
+1791013909: Client noderedd6adaff5acbc9f5f [172.19.0.4:58704] disconnected: not authorised.
+1791013922: New connection from 172.19.0.4:41126 on port 1883.
+1791013922: Client noderedd6adaff5acbc9f5f [172.19.0.4:41126] disconnected: not authorised.
+1791013937: New connection from 172.19.0.4:43326 on port 1883.
+1791013937: Client noderedd6adaff5acbc9f5f [172.19.0.4:43326] disconnected: not authorised.
+1791013941: mosquitto version 2.1.2 terminating
+1791013941: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791013941: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791013941: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791013941: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791013979: mosquitto version 2.1.2 starting
+1791013979: Config loaded from /mosquitto/config/mosquitto.conf.
+1791013979: Bridge support available.
+1791013979: Persistence support available.
+1791013979: TLS support available.
+1791013979: TLS-PSK support available.
+1791013979: Websockets support available.
+1791013979: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1791013979: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1791013979: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1791013979: Plugin builtin-security has registered to receive 'basic-auth' events.
+1791013979: Opening ipv4 listen socket on port 1883.
+1791013979: Opening ipv6 listen socket on port 1883.
+1791013979: mosquitto version 2.1.2 running
+1791013987: New connection from 172.19.0.4:45736 on port 1883.
+1791013987: Client noderedd6adaff5acbc9f5f [172.19.0.4:45736] disconnected: not authorised.
+1791014002: New connection from 172.19.0.4:36568 on port 1883.
+1791014002: Client noderedd6adaff5acbc9f5f [172.19.0.4:36568] disconnected: not authorised.
+1791014015: New connection from 172.19.0.4:54314 on port 1883.
+1791014015: Client noderedd6adaff5acbc9f5f [172.19.0.4:54314] disconnected: not authorised.
+1791014030: New connection from 172.19.0.4:35426 on port 1883.
+1791014030: Client noderedd6adaff5acbc9f5f [172.19.0.4:35426] disconnected: not authorised.
+1791014043: New connection from 172.19.0.4:43666 on port 1883.
+1791014043: Client noderedd6adaff5acbc9f5f [172.19.0.4:43666] disconnected: not authorised.
+1791014058: New connection from 172.19.0.4:60184 on port 1883.
+1791014058: Client noderedd6adaff5acbc9f5f [172.19.0.4:60184] disconnected: not authorised.
+1791014071: New connection from 172.19.0.4:37940 on port 1883.
+1791014071: Client noderedd6adaff5acbc9f5f [172.19.0.4:37940] disconnected: not authorised.
+1791014086: New connection from 172.19.0.4:55592 on port 1883.
+1791014086: Client noderedd6adaff5acbc9f5f [172.19.0.4:55592] disconnected: not authorised.
+1791014098: New connection from 172.19.0.4:59028 on port 1883.
+1791014098: Client noderedd6adaff5acbc9f5f [172.19.0.4:59028] disconnected: not authorised.
+1791014114: New connection from 172.19.0.4:55920 on port 1883.
+1791014114: Client noderedd6adaff5acbc9f5f [172.19.0.4:55920] disconnected: not authorised.
+1791014126: New connection from 172.19.0.4:56906 on port 1883.
+1791014126: Client noderedd6adaff5acbc9f5f [172.19.0.4:56906] disconnected: not authorised.
+1791014141: New connection from 172.19.0.4:41238 on port 1883.
+1791014141: Client noderedd6adaff5acbc9f5f [172.19.0.4:41238] disconnected: not authorised.
+1791014150: New connection from ::1:48164 on port 1883.
+1791014150: Client auto-8092FD0C-3639-1F26-6C6C-C0CBD7C8F3ED [::1:48164] disconnected: not authorised.
+1791014154: New connection from 172.19.0.4:49276 on port 1883.
+1791014154: Client noderedd6adaff5acbc9f5f [172.19.0.4:49276] disconnected: not authorised.
+1791014169: New connection from 172.19.0.4:35096 on port 1883.
+1791014169: Client noderedd6adaff5acbc9f5f [172.19.0.4:35096] disconnected: not authorised.
+1791014182: New connection from 172.19.0.4:54660 on port 1883.
+1791014182: Client noderedd6adaff5acbc9f5f [172.19.0.4:54660] disconnected: not authorised.
+1791014197: New connection from 172.19.0.4:35602 on port 1883.
+1791014197: Client noderedd6adaff5acbc9f5f [172.19.0.4:35602] disconnected: not authorised.
+1791014210: New connection from 172.19.0.4:37466 on port 1883.
+1791014210: Client noderedd6adaff5acbc9f5f [172.19.0.4:37466] disconnected: not authorised.
+1791014225: New connection from 172.19.0.4:42572 on port 1883.
+1791014225: Client noderedd6adaff5acbc9f5f [172.19.0.4:42572] disconnected: not authorised.
+1791014238: New connection from 172.19.0.4:50570 on port 1883.
+1791014238: Client noderedd6adaff5acbc9f5f [172.19.0.4:50570] disconnected: not authorised.
+1791014253: New connection from 172.19.0.4:50618 on port 1883.
+1791014253: Client noderedd6adaff5acbc9f5f [172.19.0.4:50618] disconnected: not authorised.
+1791014265: New connection from 172.19.0.4:40220 on port 1883.
+1791014265: Client noderedd6adaff5acbc9f5f [172.19.0.4:40220] disconnected: not authorised.
+1791014268: New connection from ::1:47604 on port 1883.
+1791014268: Client auto-79A2B6BD-2AD6-D7C4-1F0F-A3A46F5FCA78 [::1:47604] disconnected: not authorised.
+1791014280: New connection from 172.19.0.4:51738 on port 1883.
+1791014280: Client noderedd6adaff5acbc9f5f [172.19.0.4:51738] disconnected: not authorised.
+1791014293: New connection from 172.19.0.4:50088 on port 1883.
+1791014293: Client noderedd6adaff5acbc9f5f [172.19.0.4:50088] disconnected: not authorised.
+1791014308: New connection from 172.19.0.4:52214 on port 1883.
+1791014308: Client noderedd6adaff5acbc9f5f [172.19.0.4:52214] disconnected: not authorised.
+1791014316: New connection from 172.19.0.1:38980 on port 1883.
+1791014316: Client PyroWatch-sensor_01-7983 [172.19.0.1:38980] disconnected: not authorised.
+1791014320: New connection from 172.19.0.1:38996 on port 1883.
+1791014320: Client PyroWatch-sensor_01-6e02 [172.19.0.1:38996] disconnected: not authorised.
+1791014321: New connection from 172.19.0.4:33986 on port 1883.
+1791014321: Client noderedd6adaff5acbc9f5f [172.19.0.4:33986] disconnected: not authorised.
+1791014323: New connection from 172.19.0.1:39006 on port 1883.
+1791014323: Client PyroWatch-sensor_01-b811 [172.19.0.1:39006] disconnected: not authorised.
+1791014326: New connection from 172.19.0.1:57726 on port 1883.
+1791014326: Client PyroWatch-sensor_01-735 [172.19.0.1:57726] disconnected: not authorised.
+1791014329: New connection from 172.19.0.1:57732 on port 1883.
+1791014329: Client PyroWatch-sensor_01-f660 [172.19.0.1:57732] disconnected: not authorised.
+1791014333: New connection from 172.19.0.1:57736 on port 1883.
+1791014333: Client PyroWatch-sensor_01-12d1 [172.19.0.1:57736] disconnected: not authorised.
+1791014336: New connection from 172.19.0.4:48268 on port 1883.
+1791014336: Client noderedd6adaff5acbc9f5f [172.19.0.4:48268] disconnected: not authorised.
+1791014336: New connection from 172.19.0.1:36972 on port 1883.
+1791014336: Client PyroWatch-sensor_01-a8e1 [172.19.0.1:36972] disconnected: not authorised.
+1791014338: New connection from 172.19.0.1:36988 on port 1883.
+1791014338: Client PyroWatch-sensor_01-7ca6 [172.19.0.1:36988] disconnected: not authorised.
+1791014341: New connection from 172.19.0.1:36990 on port 1883.
+1791014341: Client PyroWatch-sensor_01-c9cb [172.19.0.1:36990] disconnected: not authorised.
+1791014344: New connection from 172.19.0.1:59032 on port 1883.
+1791014344: Client PyroWatch-sensor_01-232f [172.19.0.1:59032] disconnected: not authorised.
+1791014348: New connection from 172.19.0.1:59034 on port 1883.
+1791014348: Client PyroWatch-sensor_01-ba67 [172.19.0.1:59034] disconnected: not authorised.
+1791014349: New connection from 172.19.0.4:42676 on port 1883.
+1791014349: Client noderedd6adaff5acbc9f5f [172.19.0.4:42676] disconnected: not authorised.
+1791014351: New connection from 172.19.0.1:59044 on port 1883.
+1791014351: Client PyroWatch-sensor_01-7db2 [172.19.0.1:59044] disconnected: not authorised.
+1791014354: New connection from 172.19.0.1:37546 on port 1883.
+1791014354: Client PyroWatch-sensor_01-2eb [172.19.0.1:37546] disconnected: not authorised.
+1791014357: New connection from 172.19.0.1:37548 on port 1883.
+1791014357: Client PyroWatch-sensor_01-1b22 [172.19.0.1:37548] disconnected: not authorised.
+1791014359: New connection from ::1:51980 on port 1883.
+1791014359: Client auto-9E93C58E-F865-1BF6-BCD1-B60D0866419E [::1:51980] disconnected: not authorised.
+1791014361: New connection from 172.19.0.1:37550 on port 1883.
+1791014361: Client PyroWatch-sensor_01-551b [172.19.0.1:37550] disconnected: not authorised.
+1791014364: New connection from 172.19.0.1:57632 on port 1883.
+1791014364: Client PyroWatch-sensor_01-eb0 [172.19.0.1:57632] disconnected: not authorised.
+1791014362: New connection from 172.19.0.4:44484 on port 1883.
+1791014362: Client noderedd6adaff5acbc9f5f [172.19.0.4:44484] disconnected: not authorised.
+1791014364: New connection from 172.19.0.1:57648 on port 1883.
+1791014364: Client PyroWatch-sensor_01-a02a [172.19.0.1:57648] disconnected: not authorised.
+1791014368: New connection from 172.19.0.1:57656 on port 1883.
+1791014368: Client PyroWatch-sensor_01-6de5 [172.19.0.1:57656] disconnected: not authorised.
+1791014371: New connection from 172.19.0.1:59612 on port 1883.
+1791014371: Client PyroWatch-sensor_01-e44a [172.19.0.1:59612] disconnected: not authorised.
+1791014374: New connection from 172.19.0.1:59622 on port 1883.
+1791014374: Client PyroWatch-sensor_01-5f59 [172.19.0.1:59622] disconnected: not authorised.
+1791014377: New connection from 172.19.0.4:51890 on port 1883.
+1791014377: Client noderedd6adaff5acbc9f5f [172.19.0.4:51890] disconnected: not authorised.
+1791014377: New connection from 172.19.0.1:59624 on port 1883.
+1791014377: Client PyroWatch-sensor_01-5cbf [172.19.0.1:59624] disconnected: not authorised.
+1791014381: New connection from 172.19.0.1:38896 on port 1883.
+1791014381: Client PyroWatch-sensor_01-7c7e [172.19.0.1:38896] disconnected: not authorised.
+1791014384: New connection from 172.19.0.1:38900 on port 1883.
+1791014384: Client PyroWatch-sensor_01-bb27 [172.19.0.1:38900] disconnected: not authorised.
+1791014387: New connection from 172.19.0.1:38902 on port 1883.
+1791014387: Client PyroWatch-sensor_01-4e40 [172.19.0.1:38902] disconnected: not authorised.
+1791014391: New connection from 172.19.0.1:47398 on port 1883.
+1791014391: Client PyroWatch-sensor_01-4c40 [172.19.0.1:47398] disconnected: not authorised.
+1791014389: New connection from 172.19.0.4:38538 on port 1883.
+1791014389: Client noderedd6adaff5acbc9f5f [172.19.0.4:38538] disconnected: not authorised.
+1791014392: New connection from 172.19.0.1:47404 on port 1883.
+1791014392: Client PyroWatch-sensor_01-11c1 [172.19.0.1:47404] disconnected: not authorised.
+1791014395: New connection from 172.19.0.1:47416 on port 1883.
+1791014395: Client PyroWatch-sensor_01-6a28 [172.19.0.1:47416] disconnected: not authorised.
+1791014398: New connection from 172.19.0.1:34010 on port 1883.
+1791014398: Client PyroWatch-sensor_01-8313 [172.19.0.1:34010] disconnected: not authorised.
+1791014401: New connection from 172.19.0.1:34014 on port 1883.
+1791014401: Client PyroWatch-sensor_01-2d04 [172.19.0.1:34014] disconnected: not authorised.
+1791014404: New connection from 172.19.0.4:48800 on port 1883.
+1791014404: Client noderedd6adaff5acbc9f5f [172.19.0.4:48800] disconnected: not authorised.
+1791014405: New connection from 172.19.0.1:34030 on port 1883.
+1791014405: Client PyroWatch-sensor_01-cf4a [172.19.0.1:34030] disconnected: not authorised.
+1791014408: New connection from 172.19.0.1:41696 on port 1883.
+1791014408: Client PyroWatch-sensor_01-a6f9 [172.19.0.1:41696] disconnected: not authorised.
+1791014411: New connection from 172.19.0.1:41710 on port 1883.
+1791014411: Client PyroWatch-sensor_01-f9cf [172.19.0.1:41710] disconnected: not authorised.
+1791014414: New connection from 172.19.0.1:41714 on port 1883.
+1791014414: Client PyroWatch-sensor_01-c024 [172.19.0.1:41714] disconnected: not authorised.
+1791014418: New connection from 172.19.0.1:53002 on port 1883.
+1791014418: Client PyroWatch-sensor_01-75b6 [172.19.0.1:53002] disconnected: not authorised.
+1791014417: New connection from 172.19.0.4:37112 on port 1883.
+1791014417: Client noderedd6adaff5acbc9f5f [172.19.0.4:37112] disconnected: not authorised.
+1791014419: New connection from 172.19.0.1:53016 on port 1883.
+1791014419: Client PyroWatch-sensor_01-77da [172.19.0.1:53016] disconnected: not authorised.
+1791014422: New connection from 172.19.0.1:53024 on port 1883.
+1791014422: Client PyroWatch-sensor_01-7579 [172.19.0.1:53024] disconnected: not authorised.
+1791014425: New connection from 172.19.0.1:53928 on port 1883.
+1791014425: Client PyroWatch-sensor_01-4f5e [172.19.0.1:53928] disconnected: not authorised.
+1791014429: New connection from 172.19.0.1:53936 on port 1883.
+1791014429: Client PyroWatch-sensor_01-c6ff [172.19.0.1:53936] disconnected: not authorised.
+1791014432: New connection from 172.19.0.1:53950 on port 1883.
+1791014432: Client PyroWatch-sensor_01-afee [172.19.0.1:53950] disconnected: not authorised.
+1791014432: New connection from 172.19.0.4:54270 on port 1883.
+1791014432: Client noderedd6adaff5acbc9f5f [172.19.0.4:54270] disconnected: not authorised.
+1791014435: New connection from 172.19.0.1:59472 on port 1883.
+1791014435: Client PyroWatch-sensor_01-227a [172.19.0.1:59472] disconnected: not authorised.
+1791014439: New connection from 172.19.0.1:59476 on port 1883.
+1791014439: Client PyroWatch-sensor_01-ebb0 [172.19.0.1:59476] disconnected: not authorised.
+1791014442: New connection from 172.19.0.1:59478 on port 1883.
+1791014442: Client PyroWatch-sensor_01-27d [172.19.0.1:59478] disconnected: not authorised.
+1791014445: New connection from 172.19.0.1:49450 on port 1883.
+1791014445: Client PyroWatch-sensor_01-1362 [172.19.0.1:49450] disconnected: not authorised.
+1791014445: New connection from 172.19.0.4:45108 on port 1883.
+1791014445: Client noderedd6adaff5acbc9f5f [172.19.0.4:45108] disconnected: not authorised.
+1791014446: New connection from 172.19.0.1:49460 on port 1883.
+1791014446: Client PyroWatch-sensor_01-616 [172.19.0.1:49460] disconnected: not authorised.
+1791014447: mosquitto version 2.1.2 terminating
+1791014447: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791014447: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791014447: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791014447: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791014531: mosquitto version 2.1.2 starting
+1791014531: Config loaded from /mosquitto/config/mosquitto.conf.
+1791014531: Bridge support available.
+1791014531: Persistence support available.
+1791014531: TLS support available.
+1791014531: TLS-PSK support available.
+1791014531: Websockets support available.
+1791014531: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1791014531: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1791014531: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1791014531: Plugin builtin-security has registered to receive 'basic-auth' events.
+1791014531: Opening ipv4 listen socket on port 1883.
+1791014531: Opening ipv6 listen socket on port 1883.
+1791014531: mosquitto version 2.1.2 running
+1791014533: New connection from 172.19.0.1:54062 on port 1883.
+1791014533: New client connected from 172.19.0.1:54062 as PyroWatch-sensor_01-7601 (p4, c1, k15, u'pyrowatch').
+1791014534: New connection from 172.19.0.4:59434 on port 1883.
+1791014534: Client noderedd6adaff5acbc9f5f [172.19.0.4:59434] disconnected: not authorised.
+1791014549: New connection from 172.19.0.4:48436 on port 1883.
+1791014549: Client noderedd6adaff5acbc9f5f [172.19.0.4:48436] disconnected: not authorised.
+1791014561: New connection from 172.19.0.4:41544 on port 1883.
+1791014561: Client noderedd6adaff5acbc9f5f [172.19.0.4:41544] disconnected: not authorised.
+1791014576: New connection from 172.19.0.4:51948 on port 1883.
+1791014576: Client noderedd6adaff5acbc9f5f [172.19.0.4:51948] disconnected: not authorised.
+1791014585: New connection from ::1:47284 on port 1883.
+1791014585: New client connected from ::1:47284 as auto-019E36B4-2016-F565-5B84-A6640B434A78 (p4, c1, k60, u'pyrowatch').
+1791014589: New connection from 172.19.0.4:58238 on port 1883.
+1791014589: Client noderedd6adaff5acbc9f5f [172.19.0.4:58238] disconnected: not authorised.
+1791014604: New connection from 172.19.0.4:43808 on port 1883.
+1791014604: Client noderedd6adaff5acbc9f5f [172.19.0.4:43808] disconnected: not authorised.
+1791014617: New connection from 172.19.0.4:49534 on port 1883.
+1791014617: Client noderedd6adaff5acbc9f5f [172.19.0.4:49534] disconnected: not authorised.
+1791014632: New connection from 172.19.0.4:55154 on port 1883.
+1791014632: Client noderedd6adaff5acbc9f5f [172.19.0.4:55154] disconnected: not authorised.
+1791014645: New connection from 172.19.0.4:49616 on port 1883.
+1791014645: Client noderedd6adaff5acbc9f5f [172.19.0.4:49616] disconnected: not authorised.
+1791014660: New connection from 172.19.0.4:34854 on port 1883.
+1791014660: Client noderedd6adaff5acbc9f5f [172.19.0.4:34854] disconnected: not authorised.
+1791014672: New connection from 172.19.0.4:49864 on port 1883.
+1791014672: Client noderedd6adaff5acbc9f5f [172.19.0.4:49864] disconnected: not authorised.
+1791014687: New connection from 172.19.0.4:40112 on port 1883.
+1791014687: Client noderedd6adaff5acbc9f5f [172.19.0.4:40112] disconnected: not authorised.
+1791014700: New connection from 172.19.0.4:54832 on port 1883.
+1791014700: Client noderedd6adaff5acbc9f5f [172.19.0.4:54832] disconnected: not authorised.
+1791014715: New connection from 172.19.0.4:59320 on port 1883.
+1791014715: Client noderedd6adaff5acbc9f5f [172.19.0.4:59320] disconnected: not authorised.
+1791014728: New connection from 172.19.0.4:41552 on port 1883.
+1791014728: Client noderedd6adaff5acbc9f5f [172.19.0.4:41552] disconnected: not authorised.
+1791014743: New connection from 172.19.0.4:41824 on port 1883.
+1791014743: Client noderedd6adaff5acbc9f5f [172.19.0.4:41824] disconnected: not authorised.
+1791014756: New connection from 172.19.0.4:49142 on port 1883.
+1791014756: Client noderedd6adaff5acbc9f5f [172.19.0.4:49142] disconnected: not authorised.
+1791014771: New connection from 172.19.0.4:46214 on port 1883.
+1791014771: Client noderedd6adaff5acbc9f5f [172.19.0.4:46214] disconnected: not authorised.
+1791014783: New connection from 172.19.0.4:41998 on port 1883.
+1791014783: Client noderedd6adaff5acbc9f5f [172.19.0.4:41998] disconnected: not authorised.
+1791014798: New connection from 172.19.0.4:54340 on port 1883.
+1791014798: Client noderedd6adaff5acbc9f5f [172.19.0.4:54340] disconnected: not authorised.
+1791014811: New connection from 172.19.0.4:50964 on port 1883.
+1791014811: Client noderedd6adaff5acbc9f5f [172.19.0.4:50964] disconnected: not authorised.
+1791014826: New connection from 172.19.0.4:35576 on port 1883.
+1791014826: Client noderedd6adaff5acbc9f5f [172.19.0.4:35576] disconnected: not authorised.
+1791014839: New connection from 172.19.0.4:42686 on port 1883.
+1791014839: Client noderedd6adaff5acbc9f5f [172.19.0.4:42686] disconnected: not authorised.
+1791014854: New connection from 172.19.0.4:53848 on port 1883.
+1791014854: Client noderedd6adaff5acbc9f5f [172.19.0.4:53848] disconnected: not authorised.
+1791014866: New connection from 172.19.0.4:58300 on port 1883.
+1791014866: Client noderedd6adaff5acbc9f5f [172.19.0.4:58300] disconnected: not authorised.
+1791014881: New connection from 172.19.0.4:43830 on port 1883.
+1791014881: Client noderedd6adaff5acbc9f5f [172.19.0.4:43830] disconnected: not authorised.
+1791014896: New connection from 172.19.0.4:38656 on port 1883.
+1791014896: Client noderedd6adaff5acbc9f5f [172.19.0.4:38656] disconnected: not authorised.
+1791014911: New connection from 172.19.0.4:41416 on port 1883.
+1791014911: Client noderedd6adaff5acbc9f5f [172.19.0.4:41416] disconnected: not authorised.
+1791014922: New connection from 172.19.0.4:42418 on port 1883.
+1791014922: Client noderedd6adaff5acbc9f5f [172.19.0.4:42418] disconnected: not authorised.
+1791014937: New connection from 172.19.0.4:50288 on port 1883.
+1791014937: Client noderedd6adaff5acbc9f5f [172.19.0.4:50288] disconnected: not authorised.
+1791014952: New connection from 172.19.0.4:47444 on port 1883.
+1791014952: Client noderedd6adaff5acbc9f5f [172.19.0.4:47444] disconnected: not authorised.
+1791014967: New connection from 172.19.0.4:54654 on port 1883.
+1791014967: Client noderedd6adaff5acbc9f5f [172.19.0.4:54654] disconnected: not authorised.
+1791014980: New connection from 172.19.0.4:37596 on port 1883.
+1791014980: Client noderedd6adaff5acbc9f5f [172.19.0.4:37596] disconnected: not authorised.
+1791014995: New connection from 172.19.0.4:48222 on port 1883.
+1791014995: Client noderedd6adaff5acbc9f5f [172.19.0.4:48222] disconnected: not authorised.
+1791015010: New connection from 172.19.0.4:54666 on port 1883.
+1791015010: Client noderedd6adaff5acbc9f5f [172.19.0.4:54666] disconnected: not authorised.
+1791015025: New connection from 172.19.0.4:44730 on port 1883.
+1791015025: Client noderedd6adaff5acbc9f5f [172.19.0.4:44730] disconnected: not authorised.
+1791015040: New connection from 172.19.0.4:52588 on port 1883.
+1791015040: Client noderedd6adaff5acbc9f5f [172.19.0.4:52588] disconnected: not authorised.
+1791015055: New connection from 172.19.0.4:55934 on port 1883.
+1791015055: Client noderedd6adaff5acbc9f5f [172.19.0.4:55934] disconnected: not authorised.
+1791015070: New connection from 172.19.0.4:42886 on port 1883.
+1791015070: Client noderedd6adaff5acbc9f5f [172.19.0.4:42886] disconnected: not authorised.
+1791015090: New connection from 172.19.0.4:37926 on port 1883.
+1791015090: Client noderedd6adaff5acbc9f5f [172.19.0.4:37926] disconnected: not authorised.
+1791015100: New connection from 172.19.0.4:52824 on port 1883.
+1791015100: Client noderedd6adaff5acbc9f5f [172.19.0.4:52824] disconnected: not authorised.
+1791015119: New connection from 172.19.0.4:43560 on port 1883.
+1791015119: Client noderedd6adaff5acbc9f5f [172.19.0.4:43560] disconnected: not authorised.
+1791015130: New connection from 172.19.0.4:52128 on port 1883.
+1791015130: Client noderedd6adaff5acbc9f5f [172.19.0.4:52128] disconnected: not authorised.
+1791015146: New connection from 172.19.0.4:52518 on port 1883.
+1791015146: Client noderedd6adaff5acbc9f5f [172.19.0.4:52518] disconnected: not authorised.
+1791015158: New connection from 172.19.0.4:39760 on port 1883.
+1791015158: Client noderedd6adaff5acbc9f5f [172.19.0.4:39760] disconnected: not authorised.
+1791015173: New connection from 172.19.0.4:38448 on port 1883.
+1791015173: Client noderedd6adaff5acbc9f5f [172.19.0.4:38448] disconnected: not authorised.
+1791015190: New connection from 172.19.0.4:60790 on port 1883.
+1791015190: Client noderedd6adaff5acbc9f5f [172.19.0.4:60790] disconnected: not authorised.
+1791015200: New connection from 172.19.0.4:44782 on port 1883.
+1791015200: Client nodered2a229bc266ca9c48 [172.19.0.4:44782] disconnected: not authorised.
+1791015215: New connection from 172.19.0.4:37742 on port 1883.
+1791015215: Client nodered2a229bc266ca9c48 [172.19.0.4:37742] disconnected: not authorised.
+1791015229: New connection from 172.19.0.4:42724 on port 1883.
+1791015229: Client nodered2a229bc266ca9c48 [172.19.0.4:42724] disconnected: not authorised.
+1791015244: New connection from 172.19.0.4:43480 on port 1883.
+1791015244: Client nodered2a229bc266ca9c48 [172.19.0.4:43480] disconnected: not authorised.
+1791015250: Client PyroWatch-sensor_01-7601 [172.19.0.1:54062] disconnected: connection closed by client.
+1791015259: New connection from 172.19.0.4:51868 on port 1883.
+1791015259: Client nodered2a229bc266ca9c48 [172.19.0.4:51868] disconnected: not authorised.
+1791015274: New connection from 172.19.0.4:52442 on port 1883.
+1791015274: Client nodered2a229bc266ca9c48 [172.19.0.4:52442] disconnected: not authorised.
+1791015287: New connection from 172.19.0.4:52686 on port 1883.
+1791015287: Client nodered2a229bc266ca9c48 [172.19.0.4:52686] disconnected: not authorised.
+1791015302: New connection from 172.19.0.4:45060 on port 1883.
+1791015302: Client nodered2a229bc266ca9c48 [172.19.0.4:45060] disconnected: not authorised.
+1791015316: New connection from 172.19.0.4:35920 on port 1883.
+1791015316: Client nodered2a229bc266ca9c48 [172.19.0.4:35920] disconnected: not authorised.
+1791015318: New connection from 172.19.0.4:35934 on port 1883.
+1791015318: Client noderedafa9174f90bcb787 [172.19.0.4:35934] disconnected: not authorised.
+1791015331: New connection from 172.19.0.4:33244 on port 1883.
+1791015331: Client noderedafa9174f90bcb787 [172.19.0.4:33244] disconnected: not authorised.
+1791015333: New connection from 172.19.0.4:33256 on port 1883.
+1791015333: Client noderedc44f45a802fdee4c [172.19.0.4:33256] disconnected: not authorised.
+1791015348: New connection from 172.19.0.4:33094 on port 1883.
+1791015348: Client noderedc44f45a802fdee4c [172.19.0.4:33094] disconnected: not authorised.
+1791015361: New connection from 172.19.0.4:54264 on port 1883.
+1791015361: Client noderedc44f45a802fdee4c [172.19.0.4:54264] disconnected: not authorised.
+1791015376: New connection from 172.19.0.4:57686 on port 1883.
+1791015376: Client noderedc44f45a802fdee4c [172.19.0.4:57686] disconnected: not authorised.
+1791015389: New connection from 172.19.0.4:34870 on port 1883.
+1791015389: Client noderedc44f45a802fdee4c [172.19.0.4:34870] disconnected: not authorised.
+1791015404: New connection from 172.19.0.4:55142 on port 1883.
+1791015404: Client noderedc44f45a802fdee4c [172.19.0.4:55142] disconnected: not authorised.
+1791015417: New connection from 172.19.0.4:45630 on port 1883.
+1791015417: Client noderedc44f45a802fdee4c [172.19.0.4:45630] disconnected: not authorised.
+1791015432: New connection from 172.19.0.4:52852 on port 1883.
+1791015432: Client noderedc44f45a802fdee4c [172.19.0.4:52852] disconnected: not authorised.
+1791015445: New connection from 172.19.0.4:58502 on port 1883.
+1791015445: Client noderedc44f45a802fdee4c [172.19.0.4:58502] disconnected: not authorised.
+1791015460: New connection from 172.19.0.4:57946 on port 1883.
+1791015460: Client noderedc44f45a802fdee4c [172.19.0.4:57946] disconnected: not authorised.
+1791015469: New connection from 172.19.0.4:39026 on port 1883.
+1791015469: Client nodered9ec7e981b780d732 [172.19.0.4:39026] disconnected: not authorised.
+1791015482: New connection from 172.19.0.4:36962 on port 1883.
+1791015482: Client nodered9ec7e981b780d732 [172.19.0.4:36962] disconnected: not authorised.
+1791015497: New connection from 172.19.0.4:49284 on port 1883.
+1791015497: Client nodered9ec7e981b780d732 [172.19.0.4:49284] disconnected: not authorised.
+1791015505: New connection from 172.19.0.1:47402 on port 1883.
+1791015505: New client connected from 172.19.0.1:47402 as PyroWatch-sensor_01-2c64 (p4, c1, k15, u'pyrowatch').
+1791015512: New connection from 172.19.0.4:53554 on port 1883.
+1791015512: Client nodered9ec7e981b780d732 [172.19.0.4:53554] disconnected: not authorised.
+1791015527: New connection from 172.19.0.4:56148 on port 1883.
+1791015527: Client nodered9ec7e981b780d732 [172.19.0.4:56148] disconnected: not authorised.
+1791015538: New connection from 172.19.0.4:42716 on port 1883.
+1791015538: Client nodered9ec7e981b780d732 [172.19.0.4:42716] disconnected: not authorised.
+1791015548: New connection from 172.19.0.1:45784 on port 1883.
+1791015548: Client PyroWatch-sensor_01-2c64 [172.19.0.1:47402] disconnected: connection closed by client.
+1791015548: New client connected from 172.19.0.1:45784 as PyroWatch-sensor_01-2f01 (p4, c1, k15, u'pyrowatch').
+1791015553: New connection from 172.19.0.4:35556 on port 1883.
+1791015553: Client nodered9ec7e981b780d732 [172.19.0.4:35556] disconnected: not authorised.
+1791015566: New connection from 172.19.0.4:38646 on port 1883.
+1791015566: Client nodered9ec7e981b780d732 [172.19.0.4:38646] disconnected: not authorised.
+1791015581: New connection from 172.19.0.4:36520 on port 1883.
+1791015581: Client nodered9ec7e981b780d732 [172.19.0.4:36520] disconnected: not authorised.
+1791015594: New connection from 172.19.0.4:53910 on port 1883.
+1791015594: Client nodered9ec7e981b780d732 [172.19.0.4:53910] disconnected: not authorised.
+1791015600: New connection from 172.19.0.4:57948 on port 1883.
+1791015600: Client nodered3d97d31122ca368c [172.19.0.4:57948] disconnected: not authorised.
+1791015613: New connection from 172.19.0.4:52394 on port 1883.
+1791015613: Client nodered3d97d31122ca368c [172.19.0.4:52394] disconnected: not authorised.
+1791015628: New connection from 172.19.0.4:53906 on port 1883.
+1791015628: Client nodered3d97d31122ca368c [172.19.0.4:53906] disconnected: not authorised.
+1791015641: New connection from 172.19.0.4:54646 on port 1883.
+1791015641: Client nodered3d97d31122ca368c [172.19.0.4:54646] disconnected: not authorised.
+1791015657: New connection from 172.19.0.4:43582 on port 1883.
+1791015657: Client nodered652afac90fe30c96 [172.19.0.4:43582] disconnected: not authorised.
+1791015664: New connection from 172.19.0.4:52522 on port 1883.
+1791015664: Client nodered5e73206e4c7a45b3 [172.19.0.4:52522] disconnected: not authorised.
+1791015677: New connection from 172.19.0.4:47980 on port 1883.
+1791015677: Client nodered5e73206e4c7a45b3 [172.19.0.4:47980] disconnected: not authorised.
+1791015692: New connection from 172.19.0.4:40528 on port 1883.
+1791015692: Client nodered5e73206e4c7a45b3 [172.19.0.4:40528] disconnected: not authorised.
+1791015705: New connection from 172.19.0.4:50382 on port 1883.
+1791015705: Client nodered5e73206e4c7a45b3 [172.19.0.4:50382] disconnected: not authorised.
+1791015720: New connection from 172.19.0.4:54038 on port 1883.
+1791015720: Client nodered5e73206e4c7a45b3 [172.19.0.4:54038] disconnected: not authorised.
+1791015732: New connection from 172.19.0.4:59450 on port 1883.
+1791015732: Client nodered5e73206e4c7a45b3 [172.19.0.4:59450] disconnected: not authorised.
+1791015747: New connection from 172.19.0.4:33894 on port 1883.
+1791015747: Client nodered5e73206e4c7a45b3 [172.19.0.4:33894] disconnected: not authorised.
+1791015760: New connection from 172.19.0.4:47062 on port 1883.
+1791015760: Client nodered5e73206e4c7a45b3 [172.19.0.4:47062] disconnected: not authorised.
+1791015775: New connection from 172.19.0.4:58620 on port 1883.
+1791015775: Client nodered5e73206e4c7a45b3 [172.19.0.4:58620] disconnected: not authorised.
+1791015788: New connection from 172.19.0.4:57586 on port 1883.
+1791015788: Client nodered5e73206e4c7a45b3 [172.19.0.4:57586] disconnected: not authorised.
+1791015803: New connection from 172.19.0.4:45706 on port 1883.
+1791015803: Client nodered5e73206e4c7a45b3 [172.19.0.4:45706] disconnected: not authorised.
+1791015816: New connection from 172.19.0.4:43982 on port 1883.
+1791015816: Client nodered5e73206e4c7a45b3 [172.19.0.4:43982] disconnected: not authorised.
+1791015825: Client PyroWatch-sensor_01-2f01 [172.19.0.1:45784] disconnected: connection closed by client.
+1791015831: New connection from 172.19.0.4:56684 on port 1883.
+1791015831: Client nodered5e73206e4c7a45b3 [172.19.0.4:56684] disconnected: not authorised.
+1791015844: New connection from 172.19.0.4:58096 on port 1883.
+1791015844: Client nodered5e73206e4c7a45b3 [172.19.0.4:58096] disconnected: not authorised.
+1791015859: New connection from 172.19.0.4:59592 on port 1883.
+1791015859: Client nodered5e73206e4c7a45b3 [172.19.0.4:59592] disconnected: not authorised.
+1791015871: New connection from 172.19.0.4:47786 on port 1883.
+1791015871: Client nodered5e73206e4c7a45b3 [172.19.0.4:47786] disconnected: not authorised.
+1791015886: New connection from 172.19.0.4:57792 on port 1883.
+1791015886: Client nodered5e73206e4c7a45b3 [172.19.0.4:57792] disconnected: not authorised.
+1791015899: New connection from 172.19.0.4:37162 on port 1883.
+1791015899: Client nodered5e73206e4c7a45b3 [172.19.0.4:37162] disconnected: not authorised.
+1791015914: New connection from 172.19.0.4:36898 on port 1883.
+1791015914: Client nodered5e73206e4c7a45b3 [172.19.0.4:36898] disconnected: not authorised.
+1791015927: New connection from 172.19.0.4:53724 on port 1883.
+1791015927: Client nodered5e73206e4c7a45b3 [172.19.0.4:53724] disconnected: not authorised.
+1791015942: New connection from 172.19.0.4:35926 on port 1883.
+1791015942: Client nodered5e73206e4c7a45b3 [172.19.0.4:35926] disconnected: not authorised.
+1791015956: New connection from 172.19.0.4:35450 on port 1883.
+1791015956: Client noderedee55f65a4137272e [172.19.0.4:35450] disconnected: not authorised.
+1791015971: New connection from 172.19.0.4:41402 on port 1883.
+1791015971: Client noderedee55f65a4137272e [172.19.0.4:41402] disconnected: not authorised.
+1791015983: New connection from 172.19.0.4:54426 on port 1883.
+1791015983: Client noderedee55f65a4137272e [172.19.0.4:54426] disconnected: not authorised.
+1791015998: New connection from 172.19.0.4:43090 on port 1883.
+1791015998: Client noderedee55f65a4137272e [172.19.0.4:43090] disconnected: not authorised.
+1791016011: New connection from 172.19.0.4:55908 on port 1883.
+1791016011: Client noderedee55f65a4137272e [172.19.0.4:55908] disconnected: not authorised.
+1791016026: New connection from 172.19.0.4:35102 on port 1883.
+1791016026: Client noderedee55f65a4137272e [172.19.0.4:35102] disconnected: not authorised.
+1791016039: New connection from 172.19.0.4:32928 on port 1883.
+1791016039: Client noderedee55f65a4137272e [172.19.0.4:32928] disconnected: not authorised.
+1791016054: New connection from 172.19.0.4:34054 on port 1883.
+1791016054: Client noderedee55f65a4137272e [172.19.0.4:34054] disconnected: not authorised.
+1791016067: New connection from 172.19.0.4:35060 on port 1883.
+1791016067: Client noderedee55f65a4137272e [172.19.0.4:35060] disconnected: not authorised.
+1791016082: New connection from 172.19.0.4:59602 on port 1883.
+1791016082: Client noderedee55f65a4137272e [172.19.0.4:59602] disconnected: not authorised.
+1791016095: New connection from 172.19.0.4:41616 on port 1883.
+1791016095: Client noderedee55f65a4137272e [172.19.0.4:41616] disconnected: not authorised.
+1791016095: New connection from 172.19.0.1:38570 on port 1883.
+1791016095: New client connected from 172.19.0.1:38570 as PyroWatch-sensor_01-54d3 (p4, c1, k15, u'pyrowatch').
+1791016110: New connection from 172.19.0.4:50152 on port 1883.
+1791016110: Client noderedee55f65a4137272e [172.19.0.4:50152] disconnected: not authorised.
+1791016123: New connection from 172.19.0.4:34936 on port 1883.
+1791016123: Client noderedee55f65a4137272e [172.19.0.4:34936] disconnected: not authorised.
+1791016138: New connection from 172.19.0.4:53884 on port 1883.
+1791016138: Client noderedee55f65a4137272e [172.19.0.4:53884] disconnected: not authorised.
+1791016150: New connection from 172.19.0.4:42194 on port 1883.
+1791016150: Client noderedee55f65a4137272e [172.19.0.4:42194] disconnected: not authorised.
+1791016165: New connection from 172.19.0.4:43718 on port 1883.
+1791016165: Client noderedee55f65a4137272e [172.19.0.4:43718] disconnected: not authorised.
+1791016178: New connection from 172.19.0.4:53530 on port 1883.
+1791016178: Client noderedee55f65a4137272e [172.19.0.4:53530] disconnected: not authorised.
+1791016193: New connection from 172.19.0.4:46968 on port 1883.
+1791016193: Client noderedee55f65a4137272e [172.19.0.4:46968] disconnected: not authorised.
+1791016206: New connection from 172.19.0.4:45534 on port 1883.
+1791016206: Client noderedee55f65a4137272e [172.19.0.4:45534] disconnected: not authorised.
+1791016221: New connection from 172.19.0.4:58802 on port 1883.
+1791016221: Client noderedee55f65a4137272e [172.19.0.4:58802] disconnected: not authorised.
+1791016222: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791016222: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791016222: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791016222: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791016234: New connection from 172.19.0.4:53160 on port 1883.
+1791016234: Client noderedee55f65a4137272e [172.19.0.4:53160] disconnected: not authorised.
+1791016249: New connection from 172.19.0.4:37790 on port 1883.
+1791016249: Client noderedee55f65a4137272e [172.19.0.4:37790] disconnected: not authorised.
+1791016261: New connection from 172.19.0.4:41838 on port 1883.
+1791016261: Client noderedee55f65a4137272e [172.19.0.4:41838] disconnected: not authorised.
+1791016276: New connection from 172.19.0.4:37640 on port 1883.
+1791016276: Client noderedee55f65a4137272e [172.19.0.4:37640] disconnected: not authorised.
+1791016289: New connection from 172.19.0.4:41900 on port 1883.
+1791016289: Client noderedee55f65a4137272e [172.19.0.4:41900] disconnected: not authorised.
+1791016304: New connection from 172.19.0.4:58390 on port 1883.
+1791016304: Client noderedee55f65a4137272e [172.19.0.4:58390] disconnected: not authorised.
+1791016317: New connection from 172.19.0.4:57162 on port 1883.
+1791016317: Client noderedee55f65a4137272e [172.19.0.4:57162] disconnected: not authorised.
+1791016332: New connection from 172.19.0.4:38038 on port 1883.
+1791016332: Client noderedee55f65a4137272e [172.19.0.4:38038] disconnected: not authorised.
+1791016344: New connection from 172.19.0.4:47322 on port 1883.
+1791016344: Client noderedee55f65a4137272e [172.19.0.4:47322] disconnected: not authorised.
+1791016360: New connection from 172.19.0.4:54662 on port 1883.
+1791016360: Client noderedee55f65a4137272e [172.19.0.4:54662] disconnected: not authorised.
+1791016372: New connection from 172.19.0.4:39074 on port 1883.
+1791016372: Client noderedee55f65a4137272e [172.19.0.4:39074] disconnected: not authorised.
+1791016387: New connection from 172.19.0.4:49066 on port 1883.
+1791016387: Client noderedee55f65a4137272e [172.19.0.4:49066] disconnected: not authorised.
+1791016400: New connection from 172.19.0.4:35488 on port 1883.
+1791016400: Client noderedee55f65a4137272e [172.19.0.4:35488] disconnected: not authorised.
+1791016415: New connection from 172.19.0.4:58070 on port 1883.
+1791016415: Client noderedee55f65a4137272e [172.19.0.4:58070] disconnected: not authorised.
+1791016428: New connection from 172.19.0.4:60524 on port 1883.
+1791016428: Client noderedee55f65a4137272e [172.19.0.4:60524] disconnected: not authorised.
+1791016443: New connection from 172.19.0.4:51126 on port 1883.
+1791016443: Client noderedee55f65a4137272e [172.19.0.4:51126] disconnected: not authorised.
+1791016455: New connection from 172.19.0.4:47858 on port 1883.
+1791016455: Client noderedee55f65a4137272e [172.19.0.4:47858] disconnected: not authorised.
+1791016470: New connection from 172.19.0.4:50810 on port 1883.
+1791016470: Client noderedee55f65a4137272e [172.19.0.4:50810] disconnected: not authorised.
+1791016483: New connection from 172.19.0.4:41178 on port 1883.
+1791016483: Client noderedee55f65a4137272e [172.19.0.4:41178] disconnected: not authorised.
+1791016498: New connection from 172.19.0.4:51736 on port 1883.
+1791016498: Client noderedee55f65a4137272e [172.19.0.4:51736] disconnected: not authorised.
+1791016511: New connection from 172.19.0.4:46036 on port 1883.
+1791016511: Client noderedee55f65a4137272e [172.19.0.4:46036] disconnected: not authorised.
+1791016526: New connection from 172.19.0.4:37320 on port 1883.
+1791016526: Client noderedee55f65a4137272e [172.19.0.4:37320] disconnected: not authorised.
+1791016539: New connection from 172.19.0.4:39606 on port 1883.
+1791016539: Client noderedee55f65a4137272e [172.19.0.4:39606] disconnected: not authorised.
+1791016554: New connection from 172.19.0.4:52574 on port 1883.
+1791016554: Client noderedee55f65a4137272e [172.19.0.4:52574] disconnected: not authorised.
+1791016566: New connection from 172.19.0.4:59986 on port 1883.
+1791016566: Client noderedee55f65a4137272e [172.19.0.4:59986] disconnected: not authorised.
+1791016572: Client PyroWatch-sensor_01-54d3 [172.19.0.1:38570] disconnected: connection closed by client.
+1791016572: New connection from 172.19.0.1:35180 on port 1883.
+1791016572: New client connected from 172.19.0.1:35180 as PyroWatch-sensor_01-5394 (p4, c1, k15, u'pyrowatch').
+1791016581: New connection from 172.19.0.4:42784 on port 1883.
+1791016581: Client noderedee55f65a4137272e [172.19.0.4:42784] disconnected: not authorised.
+1791016593: New connection from 172.19.0.4:56122 on port 1883.
+1791016593: Client noderedee55f65a4137272e [172.19.0.4:56122] disconnected: not authorised.
+1791016608: New connection from 172.19.0.4:41684 on port 1883.
+1791016608: Client noderedee55f65a4137272e [172.19.0.4:41684] disconnected: not authorised.
+1791016622: New connection from 172.19.0.4:45534 on port 1883.
+1791016622: Client noderedee55f65a4137272e [172.19.0.4:45534] disconnected: not authorised.
+1791016637: New connection from 172.19.0.4:33188 on port 1883.
+1791016637: Client noderedee55f65a4137272e [172.19.0.4:33188] disconnected: not authorised.
+1791016649: New connection from 172.19.0.4:33158 on port 1883.
+1791016649: Client noderedee55f65a4137272e [172.19.0.4:33158] disconnected: not authorised.
+1791016664: New connection from 172.19.0.4:37364 on port 1883.
+1791016664: Client noderedee55f65a4137272e [172.19.0.4:37364] disconnected: not authorised.
+1791016677: New connection from 172.19.0.4:52028 on port 1883.
+1791016677: Client noderedee55f65a4137272e [172.19.0.4:52028] disconnected: not authorised.
+1791016692: New connection from 172.19.0.4:53534 on port 1883.
+1791016692: Client noderedee55f65a4137272e [172.19.0.4:53534] disconnected: not authorised.
+1791016705: New connection from 172.19.0.4:52530 on port 1883.
+1791016705: Client noderedee55f65a4137272e [172.19.0.4:52530] disconnected: not authorised.
+1791016720: New connection from 172.19.0.4:42818 on port 1883.
+1791016720: Client noderedee55f65a4137272e [172.19.0.4:42818] disconnected: not authorised.
+1791016730: New connection from 172.19.0.4:41492 on port 1883.
+1791016730: Client noderedee55f65a4137272e [172.19.0.4:41492] disconnected: not authorised.
+1791016745: New connection from 172.19.0.4:38924 on port 1883.
+1791016745: Client noderedee55f65a4137272e [172.19.0.4:38924] disconnected: not authorised.
+1791016760: New connection from 172.19.0.4:33104 on port 1883.
+1791016760: Client noderedee55f65a4137272e [172.19.0.4:33104] disconnected: not authorised.
+1791016775: New connection from 172.19.0.4:51436 on port 1883.
+1791016775: Client noderedee55f65a4137272e [172.19.0.4:51436] disconnected: not authorised.
+1791016788: New connection from 172.19.0.4:60904 on port 1883.
+1791016788: Client noderedee55f65a4137272e [172.19.0.4:60904] disconnected: not authorised.
+1791016803: New connection from 172.19.0.4:33756 on port 1883.
+1791016803: Client noderedee55f65a4137272e [172.19.0.4:33756] disconnected: not authorised.
+1791016816: New connection from 172.19.0.4:46544 on port 1883.
+1791016816: Client noderedee55f65a4137272e [172.19.0.4:46544] disconnected: not authorised.
+1791016831: New connection from 172.19.0.4:44976 on port 1883.
+1791016831: Client noderedee55f65a4137272e [172.19.0.4:44976] disconnected: not authorised.
+1791016832: Client auto-019E36B4-2016-F565-5B84-A6640B434A78 [::1:47284] disconnected.
+1791016835: New connection from ::1:52122 on port 1883.
+1791016835: Client auto-66952DA5-AC3B-5DB7-0BC7-6B262F30AFC3 [::1:52122] disconnected: not authorised.
+1791016843: New connection from 172.19.0.4:33728 on port 1883.
+1791016843: Client noderedee55f65a4137272e [172.19.0.4:33728] disconnected: not authorised.
+1791016851: New connection from ::1:47910 on port 1883.
+1791016851: Client auto-CD42E971-73DD-53B6-E082-EB629C06250B [::1:47910] disconnected: not authorised.
+1791016858: New connection from 172.19.0.4:40174 on port 1883.
+1791016858: Client noderedee55f65a4137272e [172.19.0.4:40174] disconnected: not authorised.
+1791016871: New connection from 172.19.0.4:44430 on port 1883.
+1791016871: Client noderedee55f65a4137272e [172.19.0.4:44430] disconnected: not authorised.
+1791016886: New connection from 172.19.0.4:35094 on port 1883.
+1791016886: Client noderedee55f65a4137272e [172.19.0.4:35094] disconnected: not authorised.
+1791016899: New connection from 172.19.0.4:40146 on port 1883.
+1791016899: Client noderedee55f65a4137272e [172.19.0.4:40146] disconnected: not authorised.
+1791016914: New connection from 172.19.0.4:41338 on port 1883.
+1791016914: Client noderedee55f65a4137272e [172.19.0.4:41338] disconnected: not authorised.
+1791016919: New connection from ::1:49600 on port 1883.
+1791016919: New client connected from ::1:49600 as auto-D137C783-6008-D0FD-1617-F87CE24B1383 (p4, c1, k60, u'pyrowatch').
+1791016927: New connection from 172.19.0.4:58940 on port 1883.
+1791016927: Client noderedee55f65a4137272e [172.19.0.4:58940] disconnected: not authorised.
+1791016942: New connection from 172.19.0.4:52766 on port 1883.
+1791016942: Client noderedee55f65a4137272e [172.19.0.4:52766] disconnected: not authorised.
+1791016954: New connection from 172.19.0.4:43762 on port 1883.
+1791016954: Client noderedee55f65a4137272e [172.19.0.4:43762] disconnected: not authorised.
+1791016969: New connection from 172.19.0.4:56130 on port 1883.
+1791016969: Client noderedee55f65a4137272e [172.19.0.4:56130] disconnected: not authorised.
+1791016982: New connection from 172.19.0.4:49274 on port 1883.
+1791016982: Client noderedee55f65a4137272e [172.19.0.4:49274] disconnected: not authorised.
+1791016993: New connection from 172.19.0.4:34428 on port 1883.
+1791016993: Client nodered73e17b0fc4b9c6f1 [172.19.0.4:34428] disconnected: not authorised.
+1791017006: New connection from 172.19.0.4:53436 on port 1883.
+1791017006: Client nodered73e17b0fc4b9c6f1 [172.19.0.4:53436] disconnected: not authorised.
+1791017021: New connection from 172.19.0.4:38516 on port 1883.
+1791017021: Client nodered73e17b0fc4b9c6f1 [172.19.0.4:38516] disconnected: not authorised.
+1791017033: New connection from 172.19.0.4:54460 on port 1883.
+1791017033: Client nodered73e17b0fc4b9c6f1 [172.19.0.4:54460] disconnected: not authorised.
+1791017048: New connection from 172.19.0.4:55818 on port 1883.
+1791017048: Client nodered73e17b0fc4b9c6f1 [172.19.0.4:55818] disconnected: not authorised.
+1791017052: New connection from 172.19.0.4:51798 on port 1883.
+1791017052: Client noderedfabed0306e8b1270 [172.19.0.4:51798] disconnected: not authorised.
+1791017065: New connection from 172.19.0.4:38390 on port 1883.
+1791017065: Client noderedfabed0306e8b1270 [172.19.0.4:38390] disconnected: not authorised.
+1791017081: New connection from 172.19.0.4:45546 on port 1883.
+1791017081: Client noderedc7fcc2d71229d90a [172.19.0.4:45546] disconnected: not authorised.
+1791017094: New connection from 172.19.0.4:43416 on port 1883.
+1791017094: Client noderedc7fcc2d71229d90a [172.19.0.4:43416] disconnected: not authorised.
+1791017109: New connection from 172.19.0.4:59706 on port 1883.
+1791017109: Client noderedc7fcc2d71229d90a [172.19.0.4:59706] disconnected: not authorised.
+1791017121: New connection from 172.19.0.4:43508 on port 1883.
+1791017121: Client noderedc7fcc2d71229d90a [172.19.0.4:43508] disconnected: not authorised.
+1791017124: New connection from 172.19.0.4:36652 on port 1883.
+1791017124: Client nodered0e9b2d78d920f5fd [172.19.0.4:36652] disconnected: not authorised.
+1791017137: New connection from 172.19.0.4:43248 on port 1883.
+1791017137: Client nodered0e9b2d78d920f5fd [172.19.0.4:43248] disconnected: not authorised.
+1791017152: New connection from 172.19.0.4:41710 on port 1883.
+1791017152: Client nodered0e9b2d78d920f5fd [172.19.0.4:41710] disconnected: not authorised.
+1791017164: New connection from 172.19.0.4:33184 on port 1883.
+1791017164: Client nodered0e9b2d78d920f5fd [172.19.0.4:33184] disconnected: not authorised.
+1791017180: New connection from 172.19.0.4:54362 on port 1883.
+1791017180: Client nodered0e9b2d78d920f5fd [172.19.0.4:54362] disconnected: not authorised.
+1791017192: New connection from 172.19.0.4:48196 on port 1883.
+1791017192: Client nodered0e9b2d78d920f5fd [172.19.0.4:48196] disconnected: not authorised.
+1791017207: New connection from 172.19.0.4:58450 on port 1883.
+1791017207: Client nodered0e9b2d78d920f5fd [172.19.0.4:58450] disconnected: not authorised.
+1791017220: New connection from 172.19.0.4:60080 on port 1883.
+1791017220: Client nodered0e9b2d78d920f5fd [172.19.0.4:60080] disconnected: not authorised.
+1791017235: New connection from 172.19.0.4:33602 on port 1883.
+1791017235: Client nodered0e9b2d78d920f5fd [172.19.0.4:33602] disconnected: not authorised.
+1791017248: New connection from 172.19.0.4:59630 on port 1883.
+1791017248: Client nodered0e9b2d78d920f5fd [172.19.0.4:59630] disconnected: not authorised.
+1791017263: New connection from 172.19.0.4:45110 on port 1883.
+1791017263: Client nodered0e9b2d78d920f5fd [172.19.0.4:45110] disconnected: not authorised.
+1791017276: New connection from 172.19.0.4:36494 on port 1883.
+1791017276: Client nodered0e9b2d78d920f5fd [172.19.0.4:36494] disconnected: not authorised.
+1791017291: New connection from 172.19.0.4:33846 on port 1883.
+1791017291: Client nodered0e9b2d78d920f5fd [172.19.0.4:33846] disconnected: not authorised.
+1791017303: New connection from 172.19.0.4:39142 on port 1883.
+1791017303: Client nodered0e9b2d78d920f5fd [172.19.0.4:39142] disconnected: not authorised.
+1791017318: New connection from 172.19.0.4:46352 on port 1883.
+1791017318: Client nodered0e9b2d78d920f5fd [172.19.0.4:46352] disconnected: not authorised.
+1791017331: New connection from 172.19.0.4:40058 on port 1883.
+1791017331: Client nodered0e9b2d78d920f5fd [172.19.0.4:40058] disconnected: not authorised.
+1791017346: New connection from 172.19.0.4:44654 on port 1883.
+1791017346: Client nodered0e9b2d78d920f5fd [172.19.0.4:44654] disconnected: not authorised.
+1791017359: New connection from 172.19.0.4:34054 on port 1883.
+1791017359: Client nodered0e9b2d78d920f5fd [172.19.0.4:34054] disconnected: not authorised.
+1791017374: New connection from 172.19.0.4:34506 on port 1883.
+1791017374: Client nodered0e9b2d78d920f5fd [172.19.0.4:34506] disconnected: not authorised.
+1791017387: New connection from 172.19.0.4:54170 on port 1883.
+1791017387: Client nodered0e9b2d78d920f5fd [172.19.0.4:54170] disconnected: not authorised.
+1791017402: New connection from 172.19.0.4:52566 on port 1883.
+1791017402: Client nodered0e9b2d78d920f5fd [172.19.0.4:52566] disconnected: not authorised.
+1791017405: Client PyroWatch-sensor_01-5394 [172.19.0.1:35180] disconnected: connection closed by client.
+1791017414: New connection from 172.19.0.4:40368 on port 1883.
+1791017414: Client nodered0e9b2d78d920f5fd [172.19.0.4:40368] disconnected: not authorised.
+1791017429: New connection from 172.19.0.4:38988 on port 1883.
+1791017429: Client nodered0e9b2d78d920f5fd [172.19.0.4:38988] disconnected: not authorised.
+1791017442: New connection from 172.19.0.4:35612 on port 1883.
+1791017442: Client nodered0e9b2d78d920f5fd [172.19.0.4:35612] disconnected: not authorised.
+1791017452: New connection from 172.19.0.1:35528 on port 1883.
+1791017452: New client connected from 172.19.0.1:35528 as PyroWatch-sensor_01-ddfe (p4, c1, k15, u'pyrowatch').
+1791017457: New connection from 172.19.0.4:37742 on port 1883.
+1791017457: Client nodered0e9b2d78d920f5fd [172.19.0.4:37742] disconnected: not authorised.
+1791017466: Client auto-D137C783-6008-D0FD-1617-F87CE24B1383 [::1:49600] disconnected.
+1791017470: New connection from 172.19.0.4:55516 on port 1883.
+1791017470: Client nodered0e9b2d78d920f5fd [172.19.0.4:55516] disconnected: not authorised.
+1791017485: New connection from 172.19.0.4:57398 on port 1883.
+1791017485: Client nodered0e9b2d78d920f5fd [172.19.0.4:57398] disconnected: not authorised.
+1791017494: New connection from 172.19.0.4:33631 on port 1883.
+1791017494: Client 172.19.0.4 [172.19.0.4:33631] disconnected: connection closed by client.
+1791017498: New connection from 172.19.0.4:51326 on port 1883.
+1791017498: Client nodered0e9b2d78d920f5fd [172.19.0.4:51326] disconnected: not authorised.
+1791017513: New connection from 172.19.0.4:48234 on port 1883.
+1791017513: Client nodered0e9b2d78d920f5fd [172.19.0.4:48234] disconnected: not authorised.
+1791017526: New connection from 172.19.0.4:47616 on port 1883.
+1791017526: Client nodered0e9b2d78d920f5fd [172.19.0.4:47616] disconnected: not authorised.
+1791017541: New connection from 172.19.0.4:53726 on port 1883.
+1791017541: Client nodered0e9b2d78d920f5fd [172.19.0.4:53726] disconnected: not authorised.
+1791017553: New connection from 172.19.0.4:35158 on port 1883.
+1791017553: Client nodered0e9b2d78d920f5fd [172.19.0.4:35158] disconnected: not authorised.
+1791017555: New connection from ::1:47612 on port 1883.
+1791017555: New client connected from ::1:47612 as auto-399D61B5-B77A-7ADA-D547-3D73961F7ACF (p4, c1, k60, u'pyrowatch').
+1791017568: New connection from 172.19.0.4:52390 on port 1883.
+1791017568: Client nodered0e9b2d78d920f5fd [172.19.0.4:52390] disconnected: not authorised.
+1791017581: New connection from 172.19.0.4:39942 on port 1883.
+1791017581: Client nodered0e9b2d78d920f5fd [172.19.0.4:39942] disconnected: not authorised.
+1791017596: New connection from 172.19.0.4:60202 on port 1883.
+1791017596: Client nodered0e9b2d78d920f5fd [172.19.0.4:60202] disconnected: not authorised.
+1791017609: New connection from 172.19.0.4:43126 on port 1883.
+1791017609: Client nodered0e9b2d78d920f5fd [172.19.0.4:43126] disconnected: not authorised.
+1791017624: New connection from 172.19.0.4:37168 on port 1883.
+1791017624: Client nodered0e9b2d78d920f5fd [172.19.0.4:37168] disconnected: not authorised.
+1791017637: New connection from 172.19.0.4:44718 on port 1883.
+1791017637: Client nodered0e9b2d78d920f5fd [172.19.0.4:44718] disconnected: not authorised.
+1791017652: New connection from 172.19.0.4:52632 on port 1883.
+1791017652: Client nodered0e9b2d78d920f5fd [172.19.0.4:52632] disconnected: not authorised.
+1791017664: New connection from 172.19.0.4:54398 on port 1883.
+1791017664: Client nodered0e9b2d78d920f5fd [172.19.0.4:54398] disconnected: not authorised.
+1791017679: New connection from 172.19.0.4:45080 on port 1883.
+1791017679: Client nodered0e9b2d78d920f5fd [172.19.0.4:45080] disconnected: not authorised.
+1791017692: New connection from 172.19.0.4:60322 on port 1883.
+1791017692: Client nodered0e9b2d78d920f5fd [172.19.0.4:60322] disconnected: not authorised.
+1791017707: New connection from 172.19.0.4:36278 on port 1883.
+1791017707: Client nodered0e9b2d78d920f5fd [172.19.0.4:36278] disconnected: not authorised.
+1791017720: New connection from 172.19.0.4:54892 on port 1883.
+1791017720: Client nodered0e9b2d78d920f5fd [172.19.0.4:54892] disconnected: not authorised.
+1791017735: New connection from 172.19.0.4:57566 on port 1883.
+1791017735: Client nodered0e9b2d78d920f5fd [172.19.0.4:57566] disconnected: not authorised.
+1791017747: New connection from 172.19.0.4:47664 on port 1883.
+1791017747: Client nodered0e9b2d78d920f5fd [172.19.0.4:47664] disconnected: not authorised.
+1791017762: New connection from 172.19.0.4:44016 on port 1883.
+1791017762: Client nodered0e9b2d78d920f5fd [172.19.0.4:44016] disconnected: not authorised.
+1791017777: New connection from 172.19.0.4:32902 on port 1883.
+1791017777: Client nodered0e9b2d78d920f5fd [172.19.0.4:32902] disconnected: not authorised.
+1791017792: New connection from 172.19.0.4:45540 on port 1883.
+1791017792: Client nodered0e9b2d78d920f5fd [172.19.0.4:45540] disconnected: not authorised.
+1791017803: New connection from 172.19.0.4:54720 on port 1883.
+1791017803: Client nodered0e9b2d78d920f5fd [172.19.0.4:54720] disconnected: not authorised.
+1791017818: New connection from 172.19.0.4:50566 on port 1883.
+1791017818: New client connected from 172.19.0.4:50566 as noderede5e2f779a55f11a9 (p4, c1, k60, u'pyrowatch').
+1791017890: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791017890: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791017890: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791017890: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791018523: Client PyroWatch-sensor_01-ddfe [172.19.0.1:35528] disconnected: connection closed by client.
+1791018574: Client auto-399D61B5-B77A-7ADA-D547-3D73961F7ACF [::1:47612] disconnected.
+1791035055: mosquitto version 2.1.2 starting
+1791035055: Config loaded from /mosquitto/config/mosquitto.conf.
+1791035055: Bridge support available.
+1791035055: Persistence support available.
+1791035055: TLS support available.
+1791035055: TLS-PSK support available.
+1791035055: Websockets support available.
+1791035055: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1791035055: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1791035055: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1791035055: Plugin builtin-security has registered to receive 'basic-auth' events.
+1791035055: Opening ipv4 listen socket on port 1883.
+1791035055: Opening ipv6 listen socket on port 1883.
+1791035055: mosquitto version 2.1.2 running
+1791035071: New connection from 172.19.0.3:56108 on port 1883.
+1791035071: New client connected from 172.19.0.3:56108 as noderedf982a00903925cad (p4, c1, k60, u'pyrowatch').
+1791036857: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791036857: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791036857: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791036857: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791038658: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791038658: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791038658: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791038658: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791074419: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791074419: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791074419: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791074419: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791076147: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791076147: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791076147: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791076147: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791077847: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791077847: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791077847: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791077847: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791079541: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791079541: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791079541: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791079541: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791081319: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791081319: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791081319: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791081319: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791083120: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791083120: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791083120: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791083120: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791084870: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791084870: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791084870: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791084870: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791086578: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791086578: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791086578: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791086578: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791088368: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791088368: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791088368: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791088368: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791090169: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791090169: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791090169: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791090169: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791091970: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791091970: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791091970: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791091970: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791093736: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791093736: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791093736: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791093736: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791095456: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791095456: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791095456: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791095456: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791097171: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791097171: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791097171: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791097171: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791098884: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791098884: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791098884: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791098884: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791100598: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791100598: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791100598: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791100598: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791426149: mosquitto version 2.1.2 starting
+1791426149: Config loaded from /mosquitto/config/mosquitto.conf.
+1791426149: Bridge support available.
+1791426149: Persistence support available.
+1791426149: TLS support available.
+1791426149: TLS-PSK support available.
+1791426149: Websockets support available.
+1791426149: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1791426149: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1791426149: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1791426149: Plugin builtin-security has registered to receive 'basic-auth' events.
+1791426149: Opening ipv4 listen socket on port 1883.
+1791426149: Opening ipv6 listen socket on port 1883.
+1791426149: mosquitto version 2.1.2 running
+1791426176: New connection from 172.19.0.2:39206 on port 1883.
+1791426176: New client connected from 172.19.0.2:39206 as nodered881a7807df2e1ec7 (p4, c1, k60, u'pyrowatch').
+1791427836: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791427836: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791427836: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791427836: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791429496: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791429496: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791429496: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791429496: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791431143: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791431143: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791431143: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791431143: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791432787: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791432787: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791432787: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791432787: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791434429: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791434429: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791434429: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791434429: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791436071: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791436071: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791436071: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791436071: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791437715: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791437715: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791437715: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791437715: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1791439360: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1791439360: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1791439360: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1791439360: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
