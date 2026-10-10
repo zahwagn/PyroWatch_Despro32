@@ -1,7 +1,6 @@
 const USE_MOCK = false;
 
 export async function fetchSensorData() {
-
   if (USE_MOCK) {
     const { mockSensorData } = await import('./mockData.js')
     return mockSensorData
@@ -30,25 +29,18 @@ export async function fetchSensorData() {
 
   const d = result.data
 
-  // ----------------------------------------------------------
-  // NORMALISASI
-  // ----------------------------------------------------------
-  // Node-RED menggunakan snake_case.
-  // React component lama menggunakan camelCase.
-  //
-  // Kita normalisasi di sini supaya component React
-  // tidak perlu mengetahui struktur backend.
-  // ----------------------------------------------------------
-
   return {
     // Sensor
     nodeId: d.node_id,
     timestamp: d.timestamp,
-
     temperature: Number(d.temp ?? 0),
     humidity: Number(d.hum ?? 0),
     co: Number(d.co ?? 0),
     ch4: Number(d.ch4 ?? 0),
+
+    // Soil moisture: moisture percentage plus categorical state
+    soilMoisture: d.soil_moisture == null ? null : Number(d.soil_moisture),
+    soilCondition: d.soil_condition ?? d.soil_status ?? 'Tidak diketahui',
 
     // FRI
     fireRiskIndex: Number(d.fri ?? 0),
@@ -64,8 +56,7 @@ export async function fetchSensorData() {
     spreadRateBase: Number(d.spread_rate_base_cmph ?? 0),
     windEffectFactor: Number(d.wind_effect_factor ?? 0),
     spreadModel: d.spread_model ?? null,
-    spreadDirectionSource:
-      d.spread_direction_source ?? null,
+    spreadDirectionSource: d.spread_direction_source ?? null,
 
     // Weather
     weatherSource: d.weather_source ?? null,
@@ -88,7 +79,6 @@ export async function fetchSensorData() {
 // ============================================================
 
 export async function fetchAIAnalysis() {
-
   if (USE_MOCK) {
     const { mockAIAnalysis } = await import('./mockData.js')
     return mockAIAnalysis
@@ -101,8 +91,6 @@ export async function fetchAIAnalysis() {
     },
   })
 
-  // AI bisa belum tersedia apabila Gemini belum
-  // menghasilkan insight.
   if (res.status === 404) {
     return null
   }
@@ -121,26 +109,12 @@ export async function fetchAIAnalysis() {
 
   const d = result.data
 
-  // ----------------------------------------------------------
-  // NORMALISASI AI
-  // ----------------------------------------------------------
-
   return {
-    analisisRisiko:
-      d.analisis_risiko ?? null,
-
-    estimasiPenyebaran:
-      d.estimasi_penyebaran ?? null,
-
-    faktorPemicu:
-      d.faktor_pemicu ?? null,
-
-    rekomendasi:
-      d.rekomendasi ?? null,
-
-    tingkatKewaspadaan:
-      d.tingkat_kewaspadaan ?? null,
-
+    analisisRisiko: d.analisis_risiko ?? null,
+    estimasiPenyebaran: d.estimasi_penyebaran ?? null,
+    faktorPemicu: d.faktor_pemicu ?? null,
+    rekomendasi: d.rekomendasi ?? null,
+    tingkatKewaspadaan: d.tingkat_kewaspadaan ?? null,
     raw: d,
   }
 }
