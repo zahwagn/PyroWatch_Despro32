@@ -11,6 +11,7 @@ import Header from './components/layout/Header.jsx'
 
 import FireRiskCard from './components/cards/FireRiskCard.jsx'
 import SensorCard from './components/cards/SensorCard.jsx'
+import SoilConditionCard from './components/cards/SoilConditionCard.jsx'
 import WindCard from './components/cards/WindCard.jsx'
 import FireSpreadCard from './components/cards/FireSpreadCard.jsx'
 
@@ -22,9 +23,7 @@ import AIAnalysis from './components/ai/AIAnalysis.jsx'
 
 import { useSensorData } from './hooks/useSensorData.js'
 
-
 export default function App() {
-
   const [view, setView] = useState('monitoring')
   const [expanded, setExpanded] = useState(false)
 
@@ -37,11 +36,6 @@ export default function App() {
     refresh,
   } = useSensorData(5000)
 
-
-  // ==========================================================
-  // LOADING
-  // ==========================================================
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-forest-50">
@@ -52,11 +46,6 @@ export default function App() {
       </div>
     )
   }
-
-
-  // ==========================================================
-  // ERROR
-  // ==========================================================
 
   if (error || !sensor) {
     return (
@@ -77,15 +66,8 @@ export default function App() {
     )
   }
 
-
-  // ==========================================================
-  // DASHBOARD
-  // ==========================================================
-
   return (
-
     <div className="flex min-h-screen bg-forest-50">
-
       <Sidebar
         active={view}
         onNavigate={setView}
@@ -98,23 +80,16 @@ export default function App() {
           expanded ? 'lg:ml-72' : ''
         }`}
       >
-
         <Header
           riskLevel={sensor.riskLevel}
           lastUpdated={lastUpdated}
           onRefresh={refresh}
         />
 
-
-        {/* ==================================================
-            VIEW: MONITORING
-        ================================================== */}
-
         {view === 'monitoring' && (
           <>
-            {/* ROW 1 — SENSOR + FRI */}
-            <div className="grid grid-cols-6 gap-4 mb-4">
-
+            {/* ROW 1 — RISK + SENSOR + SOIL CONDITION */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-7 gap-4 mb-4">
               <FireRiskCard
                 index={sensor.fireRiskIndex}
                 riskLevel={sensor.riskLevel}
@@ -152,12 +127,14 @@ export default function App() {
                 unit="ppm"
               />
 
+              <SoilConditionCard
+                condition={sensor.soilCondition}
+                moisture={sensor.soilMoisture}
+              />
             </div>
 
-
             {/* ROW 2 — WIND + FIRE SPREAD */}
-            <div className="grid grid-cols-3 gap-4 mb-4">
-
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
               <WindCard
                 speed={sensor.windSpeed}
                 direction={sensor.windDirection}
@@ -169,13 +146,10 @@ export default function App() {
                 direction={sensor.windDirection}
                 directionLabel={sensor.windDirectionLabel}
               />
-
             </div>
 
-
             {/* ROW 3 — MACHINE LEARNING */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
-
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
               <MLPredictionCard
                 prediction={sensor.mlPrediction}
                 confidence={sensor.mlConfidence}
@@ -184,48 +158,28 @@ export default function App() {
               <ProbabilityDistributionCard
                 probabilities={sensor.mlProba}
               />
-
             </div>
-
 
             {/* ROW 4 — HOTSPOT MAP */}
             <div className="mb-4">
               <HotspotMap />
             </div>
 
-
             {/* ROW 5 — AI ANALYSIS */}
             <AIAnalysis data={ai} />
           </>
         )}
 
-
-        {/* ==================================================
-            VIEW: PETA
-        ================================================== */}
-
         {view === 'map' && <HotspotMap height="h-[70vh]" />}
 
-
-        {/* ==================================================
-            VIEW: AI
-        ================================================== */}
-
         {view === 'ai' && <AIAnalysis data={ai} />}
-
-
-        {/* ==================================================
-            VIEW: SETELAN
-        ================================================== */}
 
         {view === 'settings' && (
           <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
             <p className="text-base text-gray-500">Settings is not available yet</p>
           </div>
         )}
-
       </main>
-
     </div>
   )
 }
