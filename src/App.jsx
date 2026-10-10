@@ -34,7 +34,7 @@ export default function App() {
     error,
     lastUpdated,
     refresh,
-  } = useSensorData(5000)
+  } = useSensorData(15000)
 
   if (loading) {
     return (
