@@ -89,7 +89,7 @@ export default function App() {
         {view === 'monitoring' && (
           <>
             {/* ROW 1 — RISK + SENSOR + SOIL CONDITION */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-7 gap-4 mb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-8 gap-4 mb-4">
               <FireRiskCard
                 index={sensor.fireRiskIndex}
                 riskLevel={sensor.riskLevel}
@@ -130,6 +130,7 @@ export default function App() {
               <SoilConditionCard
                 condition={sensor.soilCondition}
                 moisture={sensor.soilMoisture}
+                className="xl:col-span-2"
               />
             </div>
 
