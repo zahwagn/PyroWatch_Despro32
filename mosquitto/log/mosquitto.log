@@ -12725,3 +12725,51 @@ To fix this, use `chmod 0700 /mosquitto/config/passwd`.
 1794029622: Client nodered1c047c2c71958138 [172.19.0.4:59058] disconnected.
 1794029622: New connection from 172.19.0.4:36266 on port 1883.
 1794029622: New client connected from 172.19.0.4:36266 as nodered20e8eff0c0c4ea8f (p4, c1, k60, u'pyrowatch').
+1794031071: Client nodered20e8eff0c0c4ea8f [172.19.0.4:36266] disconnected.
+1794031071: New connection from 172.19.0.4:41624 on port 1883.
+1794031071: New client connected from 172.19.0.4:41624 as noderedbf563edb2d26aa9c (p4, c1, k60, u'pyrowatch').
+1794031203: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1794033007: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1794033049: Client noderedbf563edb2d26aa9c [172.19.0.4:41624] disconnected.
+1794033049: New connection from 172.19.0.4:44134 on port 1883.
+1794033049: New client connected from 172.19.0.4:44134 as nodered1711c4cf287d264d (p4, c1, k60, u'pyrowatch').
+1794033459: mosquitto version 2.1.2 starting
+1794033459: Config loaded from /mosquitto/config/mosquitto.conf.
+1794033459: Bridge support available.
+1794033459: Persistence support available.
+1794033459: TLS support available.
+1794033459: TLS-PSK support available.
+1794033459: Websockets support available.
+1794033459: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1794033459: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1794033459: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1794033459: Plugin builtin-security has registered to receive 'basic-auth' events.
+1794033459: Opening ipv4 listen socket on port 1883.
+1794033459: Opening ipv6 listen socket on port 1883.
+1794033459: mosquitto version 2.1.2 running
+1794033481: New connection from 172.19.0.3:35298 on port 1883.
+1794033481: New client connected from 172.19.0.3:35298 as nodered26d7b8ee039e0e53 (p4, c1, k60, u'pyrowatch').
+1794055531: mosquitto version 2.1.2 starting
+1794055531: Config loaded from /mosquitto/config/mosquitto.conf.
+1794055531: Bridge support available.
+1794055531: Persistence support available.
+1794055531: TLS support available.
+1794055531: TLS-PSK support available.
+1794055531: Websockets support available.
+1794055531: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1794055531: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1794055531: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1794055531: Plugin builtin-security has registered to receive 'basic-auth' events.
+1794055531: Opening ipv4 listen socket on port 1883.
+1794055531: Opening ipv6 listen socket on port 1883.
+1794055531: mosquitto version 2.1.2 running
+1794055550: New connection from 172.19.0.2:58098 on port 1883.
+1794055550: New client connected from 172.19.0.2:58098 as noderedc239e00ed0bb7db4 (p4, c1, k60, u'pyrowatch').
