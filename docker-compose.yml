@@ -1,4 +1,3 @@
-version: "3.8"
 
 services:
   mosquitto:
@@ -30,18 +29,24 @@ services:
       - mosquitto
     networks:
       - pyrowatch-net
+
   ml:
     build:
       context: ./ml
+      dockerfile: Dockerfile
     container_name: pyrowatch-ml
     restart: unless-stopped
     ports:
       - "5000:5000"
+    volumes:
+      - ./node-red/data/pyrowatch1.db:/data/pyrowatch1.db:ro
+      - ./ml/models:/app/models
+    environment:
+      - PYROWATCH_DB=/data/pyrowatch1.db
+      - TZ=Asia/Jakarta
     networks:
       - pyrowatch-net
 
-
 networks:
-
   pyrowatch-net:
     driver: bridge

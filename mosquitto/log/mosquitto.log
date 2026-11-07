@@ -12648,3 +12648,80 @@ To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
 
 1792652916: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
 
+1792654724: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1792654724: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1792654724: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1792654724: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1792656532: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1792656532: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1792656532: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1792656532: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1794025647: mosquitto version 2.1.2 starting
+1794025647: Config loaded from /mosquitto/config/mosquitto.conf.
+1794025647: Bridge support available.
+1794025647: Persistence support available.
+1794025647: TLS support available.
+1794025647: TLS-PSK support available.
+1794025647: Websockets support available.
+1794025647: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1794025647: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1794025647: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1794025647: Plugin builtin-security has registered to receive 'basic-auth' events.
+1794025647: Opening ipv4 listen socket on port 1883.
+1794025647: Opening ipv6 listen socket on port 1883.
+1794025647: mosquitto version 2.1.2 running
+1794025664: New connection from 172.19.0.2:44766 on port 1883.
+1794025664: New client connected from 172.19.0.2:44766 as noderedf77cf68a5ab8689d (p4, c1, k60, u'pyrowatch').
+1794027449: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1794027449: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1794027449: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1794027449: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1794027593: mosquitto version 2.1.2 terminating
+1794027593: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1794027593: Warning: File /mosquitto/data//mosquitto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//mosquitto.db.new`.
+
+1794027593: Warning: File /mosquitto/data//mosquitto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//mosquitto.db.new`.
+
+1794027593: Warning: File /mosquitto/data//mosquitto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1794027597: mosquitto version 2.1.2 starting
+1794027597: Config loaded from /mosquitto/config/mosquitto.conf.
+1794027597: Bridge support available.
+1794027597: Persistence support available.
+1794027597: TLS support available.
+1794027597: TLS-PSK support available.
+1794027597: Websockets support available.
+1794027597: Warning: File /mosquitto/config/passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/passwd`.
+
+1794027597: Warning: File /mosquitto/config/passwd owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/passwd`.
+
+1794027597: Warning: File /mosquitto/config/passwd group is not mosquitto. Future versions will refuse to load this file.
+
+1794027597: Plugin builtin-security has registered to receive 'basic-auth' events.
+1794027597: Opening ipv4 listen socket on port 1883.
+1794027597: Opening ipv6 listen socket on port 1883.
+1794027597: mosquitto version 2.1.2 running
+1794027609: New connection from 172.19.0.4:59058 on port 1883.
+1794027609: New client connected from 172.19.0.4:59058 as nodered1c047c2c71958138 (p4, c1, k60, u'pyrowatch').
+1794029399: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1794029622: Client nodered1c047c2c71958138 [172.19.0.4:59058] disconnected.
+1794029622: New connection from 172.19.0.4:36266 on port 1883.
+1794029622: New client connected from 172.19.0.4:36266 as nodered20e8eff0c0c4ea8f (p4, c1, k60, u'pyrowatch').
