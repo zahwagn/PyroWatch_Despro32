@@ -1,0 +1,42 @@
+import { RefreshCw } from 'lucide-react'
+import Logo from '../../assets/pyrowatch_logo.svg'
+
+const riskColors = {
+  Low: 'bg-forest-100 text-forest-700',
+  Moderate: 'bg-yellow-100 text-yellow-700',
+  High: 'bg-orange-100 text-orange-700',
+  Extreme: 'bg-red-100 text-red-700',
+}
+
+const riskDot = {
+  Low: 'bg-forest-500',
+  Moderate: 'bg-yellow-500',
+  High: 'bg-orange-500',
+  Extreme: 'bg-red-500',
+}
+
+export default function Header({ riskLevel = 'Low', lastUpdated, onRefresh }) {
+  const timeStr = lastUpdated
+    ? lastUpdated.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    : '—'
+
+  return (
+    <header className="flex items-center justify-between mb-8">
+      <img src={Logo} alt="PyroWatch" className="w-36 h-auto" />
+
+      <div className="flex items-center gap-3">
+        <span className="text-sm text-gray-500">Diperbarui {timeStr}</span>
+        <button
+          onClick={onRefresh}
+          className="w-9 h-9 flex items-center justify-center rounded-xl bg-white hover:bg-forest-50 border border-gray-200 transition-colors"
+        >
+          <RefreshCw size={15} className="text-gray-500" strokeWidth={2} />
+        </button>
+        <span className={`flex items-center gap-1.5 text-sm font-medium px-3 py-1 rounded-full ${riskColors[riskLevel]}`}>
+          <span className={`w-2 h-2 rounded-full ${riskDot[riskLevel]}`} />
+          {riskLevel}
+        </span>
+      </div>
+    </header>
+  )
+}
