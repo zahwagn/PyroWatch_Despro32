@@ -1,5 +1,22 @@
+cat >> .gitignore <<'EOF'
+
+# Dependencies
 node_modules/
+**/node_modules/
+
+# Build
 dist/
+build/
+
+# Environment
 .env
-.env.local
-*.local
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+EOF
