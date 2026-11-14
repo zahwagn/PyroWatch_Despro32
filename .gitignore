@@ -1,0 +1,18 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Node-RED runtime files
+node-red/data/*.backup
+node-red/data/flows*.json
+node-red/data/.flows*.json.backup
+
+# SQLite database
+*.db
+*.db-shm
+*.db-wal
+
+# OS
+.DS_Store
+Thumbs.db
