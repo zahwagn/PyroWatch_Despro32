@@ -184,7 +184,10 @@ def analyze(data):
                                 'Periksa koneksi sensor dan payload LoRa.',
                 'highlights': [], 'recommendations': None, 'input_status': 'MISSING_SENSOR_VALUES',
                 'forecast_model_version': bundle.get('model_version')}
-    level = core.classify_fri(fri)
+    # Pakai level dari Node-RED bila ada, agar batas kelas (<=0,6 / <=0,8) sama persis dengan dashboard.
+    given_level = str(data.get('fri_level') or '').strip().title()
+    level = given_level if np.isfinite(reported_fri) and given_level in ('Low', 'Moderate', 'High', 'Extreme') \
+        else core.classify_fri(fri)
     X = pd.DataFrame([core.feature_row(feats)], columns=core.FEATURES, dtype=float)
 
     # --- skenario

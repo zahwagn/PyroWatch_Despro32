@@ -69,6 +69,24 @@ Field respons utama untuk dashboard Node-RED:
 | `insight_text`, `highlights[]`, `data_quality[]` | narasi & kartu ringkas |
 | `future_wind_speed`, `future_spread_direction`, `spread_direction_probability`, `forecast_confidence`, `forecast_interpretation` | sesuai kolom tabel `ml_forecasts` |
 
+## Node-RED flow (`node-red/flows/pyrowatch_flows.json`)
+
+`node-red/data/flows.json` tidak di-commit (di-ignore karena ditulis ulang oleh container). Versi flow yang sudah disesuaikan dengan ML v4 ada di `node-red/flows/pyrowatch_flows.json`. Cara memakainya, pilih salah satu:
+* Node-RED → menu ☰ → **Import** → pilih file tersebut → *Replace* tab PyroWatch → **Deploy**, atau
+* salin file itu ke `node-red/data/flows.json`, lalu `docker compose restart node-red`.
+
+Perubahan pada flow:
+
+| Node | Perubahan |
+|---|---|
+| `prepare ML input` | Horizon 30 menit. Saat throttle 60 detik, flow memakai **hasil ML terakhir per node** (`forecast_status: CACHED`), bukan `THROTTLED` tanpa rekomendasi. Data simulasi tidak di-throttle. Field `rain` ikut dikirim. Jika FRI tidak valid, rekomendasi berprioritas `DATA_CHECK`. |
+| `parse ML response` | Meneruskan skenario, eskalasi, drivers, proyeksi komponen, spread/sektor, action plan, dan data_quality. Hasilnya di-cache per node. Status node menampilkan skenario, prioritas, dan peluang High. |
+| `prepare dashboard payload` | Menambah field `ml_scenario*`, `ml_p_high_30m`, `ml_p_extreme_30m`, `ml_eta_*`, `ml_fri_change_15m/30m`, `ml_component_projection_15m`, `ml_source_search_sector`, `ml_threat_sector`, `ml_inspection_radius_m`, `ml_priority`, `ml_action_plan`, `ml_ppe`, `ml_sampling_interval`, dan `ml_data_quality`. Field lama tetap ada. |
+| `prepare SQLite forecast insert` | Kolom `ml_forecasts` diisi: `future_fri`/`future_fri_level` = NULL (tidak ada FRI kedua); `future_fri_range` = rentang ΔFRI30 + pHigh/pExt; arah angin; mode/laju rambat; sektor hilir angin; probabilitas; keyakinan skenario; interpretasi. Skema tabel tidak berubah. |
+| `ML request failure` | Menampilkan action plan terakhir (ditandai sebagai informasi lama) dan langkah pemeriksaan container. |
+| `simulasi sensor dinamis` | Mengirim 10 pembacaan berurutan (1 menit virtual per pembacaan) melalui antrean 1 pesan/detik, sehingga ML dapat membaca tren. Node ID simulasi: `PYROWATCH_SIM_<SKENARIO>`. Ada inject baru: `FUEL_DRYING`, `EARLY_SMOLDERING`, `ACTIVE_SMOLDERING`, `WIND_DRIVEN_FIRE`, `DECAYING`, `SENSOR_ANOMALY`. Skenario lama (LOW … HOT_DRY) tetap tersedia. |
+| `GET /api/sensor/nodes` (baru) | Snapshot terbaru setiap node, untuk dashboard multi-node. |
+
 ### Training & uji
 ```bash
 cd ml
