@@ -1,4 +1,3 @@
-
 services:
   mosquitto:
     image: eclipse-mosquitto:2
@@ -24,9 +23,9 @@ services:
       - ./ml:/ml
     environment:
       - TZ=Asia/Jakarta
-      - GEMINI_API_KEY=${GEMINI_API_KEY}
     depends_on:
       - mosquitto
+      - ml
     networks:
       - pyrowatch-net
 
