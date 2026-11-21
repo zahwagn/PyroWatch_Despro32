@@ -145,7 +145,8 @@ def predict_forecast(data):
             'sample_timestamp':ts.isoformat(),'forecast_timestamp':target_ts.isoformat(),'current_fri':None,
             'current_fri_level':'UNKNOWN','trend':'UNKNOWN','insight_text':'FRI aktual tidak tersedia; model tidak menjalankan prediksi tren risiko.',
             'highlights':[],'recommendations':None,'forecast_model_version':bundle.get('model_version'),'input_status':'MISSING_FRI'}
-    future_fri = predict_value('future_fri', features)
+    predicted_fri_change = predict_value('fri_change_15m', features)
+    future_fri = float(np.clip(current_fri + predicted_fri_change, 0.0, 1.0)) if predicted_fri_change is not None else None
     future_wind = predict_value('future_wind_speed', features)
     future_spread = predict_value('future_observed_spread_rate', features)
     current_level = str(data.get('fri_level') or classify_fri(current_fri)).title()
