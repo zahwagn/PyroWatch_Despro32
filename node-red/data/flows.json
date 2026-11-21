@@ -1,0 +1,561 @@
+[
+    {
+        "id": "1ee34e9aa81e393c",
+        "type": "tab",
+        "label": "PyroWatch",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "63a740c4157a9453",
+        "type": "mqtt in",
+        "z": "1ee34e9aa81e393c",
+        "name": "",
+        "topic": "hutan/sensor/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f69f627d747abb5f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1040,
+        "y": 120,
+        "wires": [
+            [
+                "02e6ca08c718b3bb",
+                "1159044653cf2171"
+            ]
+        ]
+    },
+    {
+        "id": "02e6ca08c718b3bb",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "Validasi Payload Sensor",
+        "func": "let p = msg.payload;\n\nif (Buffer.isBuffer(p)) {\n    p = p.toString();\n}\n\nif (typeof p === \"string\") {\n    try {\n        p = JSON.parse(p);\n    } catch (err) {\n        node.error(\"Payload MQTT bukan JSON valid: \" + err.message, msg);\n        return null;\n    }\n}\n\nif (!p || typeof p !== \"object\" || Array.isArray(p)) {\n    node.error(\"Payload sensor bukan object\", msg);\n    return null;\n}\n\nif (typeof p.node_id !== \"string\" || !p.node_id.trim()) {\n    node.warn(\"Payload tidak memiliki node_id yang valid\");\n    return null;\n}\n\nfunction toBoolean(value) {\n    if (value === true || value === 1) return true;\n\n    if (typeof value === \"string\") {\n        return [\"true\", \"1\", \"yes\"].includes(\n            value.trim().toLowerCase()\n        );\n    }\n\n    return false;\n}\n\nfunction normalizeNumber(field, min, max) {\n    if (\n        p[field] === undefined ||\n        p[field] === null ||\n        p[field] === \"\"\n    ) {\n        p[field] = null;\n        return;\n    }\n\n    const value = Number(p[field]);\n\n    if (\n        !Number.isFinite(value) ||\n        value < min ||\n        value > max\n    ) {\n        node.warn(`${field} tidak valid: ${p[field]}`);\n        p[field] = null;\n        return;\n    }\n\n    p[field] = value;\n}\n\nnormalizeNumber(\"temp\", -40, 80);\nnormalizeNumber(\"hum\", 0, 100);\nnormalizeNumber(\"wind_speed\", 0, 100);\nnormalizeNumber(\"soil_moisture\", 0, 100);\n\nnormalizeNumber(\"co\", 0, 2000);\nnormalizeNumber(\"ch4\", 0, 10000);\n\nfor (const field of [\n    \"mq2_raw\",\n    \"mq7_raw\",\n    \"soil_raw\"\n]) {\n    normalizeNumber(field, 0, 4095);\n}\n\nfor (const field of [\n    \"mq2_vout_v\",\n    \"mq7_vout_v\"\n]) {\n    normalizeNumber(field, 0, 5);\n}\n\nfor (const field of [\n    \"mq2_rs_kohm\",\n    \"mq7_rs_kohm\",\n    \"mq2_r0_kohm\",\n    \"mq7_r0_kohm\"\n]) {\n    normalizeNumber(field, 0, 100000);\n\n    if (p[field] !== null && p[field] <= 0) {\n        p[field] = null;\n    }\n}\n\nnormalizeNumber(\"mq2_response_percent\", 0, 100000);\nnormalizeNumber(\"mq7_response_percent\", 0, 100000);\n\np.gas_calibrated = toBoolean(p.gas_calibrated);\np.gas_calibration_validated =\n    toBoolean(p.gas_calibration_validated);\n\np.mq7_heater_cycle_compliant =\n    toBoolean(p.mq7_heater_cycle_compliant);\n\np.gas_baseline_ready =\n    toBoolean(p.gas_baseline_ready);\n\np.mq2_signal_change_detected =\n    toBoolean(p.mq2_signal_change_detected);\n\np.mq7_signal_change_detected =\n    toBoolean(p.mq7_signal_change_detected);\n\np.gas_signal_change_detected =\n    toBoolean(p.gas_signal_change_detected);\n\nconst ppmAvailable =\n    Number.isFinite(p.co) &&\n    Number.isFinite(p.ch4);\n\nif (!p.gas_calibrated || !ppmAvailable) {\n    p.gas_calibrated = false;\n    p.co = null;\n    p.ch4 = null;\n    p.gas_calibration_validated = false;\n}\n\nconst gasStandardValidated =\n    p.gas_calibrated &&\n    p.gas_calibration_validated &&\n    p.mq7_heater_cycle_compliant &&\n    p.gas_calibration_status === \"GAS_STANDARD_VALIDATED\";\n\nif (gasStandardValidated) {\n    p.gas_calibration_status = \"GAS_STANDARD_VALIDATED\";\n    p.gas_calibration_validated = true;\n} else if (p.gas_calibrated) {\n    p.gas_calibration_status = \"PROVISIONAL_CURVE_ESTIMATE\";\n    p.gas_calibration_validated = false;\n} else {\n    p.gas_calibration_status = \"NOT_CALIBRATED\";\n    p.gas_calibration_validated = false;\n}\n\nif (!p.gas_calibration_method) {\n    p.gas_calibration_method = \"UNKNOWN\";\n}\n\nif (typeof p.soil_condition !== \"string\") {\n    p.soil_condition = \"\";\n}\n\np.soil_condition = p.soil_condition.trim();\n\nif (\n    !p.soil_condition &&\n    Number.isFinite(p.soil_moisture)\n) {\n    if (p.soil_moisture >= 60) {\n        p.soil_condition = \"Tanah Basah\";\n    } else if (p.soil_moisture >= 30) {\n        p.soil_condition = \"Tanah Lembap\";\n    } else {\n        p.soil_condition = \"Tanah Kering\";\n    }\n}\n\nif (!p.soil_condition) {\n    p.soil_condition = \"Tidak diketahui\";\n}\n\np.sensor_timestamp = p.timestamp ?? null;\np.timestamp = new Date().toISOString();\n\np.sample_id =\n    p.sample_id ||\n    `${p.node_id}:${p.uptime_ms ?? Date.now()}`;\n\nmsg.payload = p;\nmsg.sample_id = p.sample_id;\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `Sampel ${p.node_id} valid`\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 180,
+        "wires": [
+            [
+                "eb4c9353781ffe02",
+                "32fe07a82407a352"
+            ]
+        ]
+    },
+    {
+        "id": "f109db3431e4b527",
+        "type": "debug",
+        "z": "1ee34e9aa81e393c",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2000,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "eb4c9353781ffe02",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "hitung FRI",
+        "func": "const d = msg.payload || {};\n\nfunction clamp01(value) {\n    return Math.min(Math.max(value, 0), 1);\n}\n\nfunction fT(temperature) {\n    if (!Number.isFinite(temperature)) return NaN;\n    if (temperature < 25) return 0;\n    if (temperature > 55) return 1;\n\n    return (temperature - 25) / 30;\n}\n\nfunction fH(humidity) {\n    if (!Number.isFinite(humidity)) return NaN;\n    if (humidity < 30) return 1;\n    if (humidity > 90) return 0;\n\n    return (90 - humidity) / 60;\n}\n\nfunction fCO(coPpm) {\n    if (!Number.isFinite(coPpm)) return NaN;\n\n    return clamp01(coPpm / 200);\n}\n\nfunction fCH4(ch4Ppm) {\n    if (!Number.isFinite(ch4Ppm)) return NaN;\n\n    return clamp01(ch4Ppm / 1000);\n}\n\nconst environmentValid =\n    Number.isFinite(d.temp) &&\n    Number.isFinite(d.hum);\n\nconst gasValid =\n    d.gas_calibrated === true &&\n    Number.isFinite(d.co) &&\n    Number.isFinite(d.ch4);\n\nconst gasStandardValidated =\n    d.gas_calibration_validated === true &&\n    d.gas_calibration_status === \"GAS_STANDARD_VALIDATED\" &&\n    d.mq7_heater_cycle_compliant === true;\n\nlet fri = null;\nlet friLevel = \"UNKNOWN\";\nlet friDataStatus = \"WAITING_FOR_CALIBRATED_GAS_PPM\";\n\nlet ft = null;\nlet fh = null;\nlet fco = null;\nlet fch4 = null;\nlet fg = null;\n\nif (!environmentValid) {\n    friDataStatus = \"MISSING_TEMPERATURE_OR_HUMIDITY\";\n} else if (!gasValid) {\n    friDataStatus = \"WAITING_FOR_CALIBRATED_GAS_PPM\";\n} else {\n    ft = fT(d.temp);\n    fh = fH(d.hum);\n    fco = fCO(d.co);\n    fch4 = fCH4(d.ch4);\n\n    fg = Math.max(fco, fch4);\n\n    fri =\n        (0.3 * ft) +\n        (0.2 * fh) +\n        (0.5 * fg);\n\n    fri = clamp01(fri);\n\n    if (fri < 0.4) {\n        friLevel = \"Low\";\n    } else if (fri <= 0.6) {\n        friLevel = \"Moderate\";\n    } else if (fri <= 0.8) {\n        friLevel = \"High\";\n    } else {\n        friLevel = \"Extreme\";\n    }\n\n    friDataStatus = gasStandardValidated\n        ? \"COMPLETE_GAS_STANDARD_VALIDATED\"\n        : \"PROVISIONAL_GAS_CURVE_ESTIMATE\";\n}\n\nmsg.payload = {\n    ...d,\n\n    fri_f_temperature: ft,\n    fri_f_humidity: fh,\n    fri_f_co: fco,\n    fri_f_ch4: fch4,\n    fri_f_gas: fg,\n\n    fri_base: fri === null\n        ? null\n        : Number(fri.toFixed(4)),\n\n    fri: fri === null\n        ? null\n        : Number(fri.toFixed(3)),\n\n    fri_level: friLevel,\n    fri_data_status: friDataStatus\n};\n\nmsg.analytics_data = { ...msg.payload };\n\nflow.set(\"last_fri_data\", msg.payload);\n\nnode.status({\n    fill: fri === null ? \"grey\" :\n        friLevel === \"Low\" ? \"green\" :\n            friLevel === \"Moderate\" ? \"yellow\" :\n                friLevel === \"High\" ? \"orange\" : \"red\",\n    shape: \"dot\",\n    text: fri === null\n        ? `FRI N/A | ${friDataStatus}`\n        : `FRI ${fri.toFixed(3)} | ${friLevel} | ${friDataStatus}`\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 240,
+        "wires": [
+            [
+                "7e61e514e89c117b"
+            ]
+        ]
+    },
+    {
+        "id": "5cc31ec4a6bef3a0",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "insert query",
+        "func": "\nconst d = msg.payload || {};\n\nmsg.params = {\n    $node_id: d.node_id,\n    $timestamp: d.timestamp,\n\n    $co: d.co ?? null,\n    $ch4: d.ch4 ?? null,\n    $temp: d.temp ?? null,\n    $hum: d.hum ?? null,\n\n    // Kolom lama tetap dipertahankan.\n    $wind_speed: d.wind_speed_sensor ??\n        d.wind_speed ?? null,\n\n    // Pemisahan dua sumber angin.\n    $wind_speed_sensor: d.wind_speed_sensor ??\n        d.wind_speed ?? null,\n\n    $wind_speed_weather:\n        d.wind_speed_weather ?? null,\n\n    // Open-Meteo.\n    $wind_direction_deg:\n        d.wind_direction_deg ?? null,\n\n    $wind_direction:\n        d.wind_direction ?? null,\n\n    // FRI aktual.\n    $fri: d.fri ?? null,\n    $fri_level: d.fri_level ?? null,\n\n    // Baseline spread.\n    $spread_rate_base_cmph:\n        d.spread_rate_base_cmph ?? null,\n\n    $wind_effect_factor:\n        d.wind_effect_factor ?? null,\n\n    $spread_rate_cmph:\n        d.spread_rate_cmph ?? null,\n\n    $spread_model:\n        d.spread_model ?? null\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 620,
+        "wires": [
+            [
+                "43c5d3101aed106e"
+            ]
+        ]
+    },
+    {
+        "id": "43c5d3101aed106e",
+        "type": "sqlite",
+        "z": "1ee34e9aa81e393c",
+        "mydb": "f09fc80afd185003",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO sensor_readings\n(\n    node_id,\n    timestamp,\n    co,\n    ch4,\n    temp,\n    hum,\n    wind_speed,\n    wind_speed_sensor,\n    wind_speed_weather,\n    wind_direction_deg,\n    wind_direction,\n    fri,\n    fri_level,\n    spread_rate_base_cmph,\n    wind_effect_factor,\n    spread_rate_cmph,\n    spread_model\n)\nVALUES\n(\n    $node_id,\n    $timestamp,\n    $co,\n    $ch4,\n    $temp,\n    $hum,\n    $wind_speed,\n    $wind_speed_sensor,\n    $wind_speed_weather,\n    $wind_direction_deg,\n    $wind_direction,\n    $fri,\n    $fri_level,\n    $spread_rate_base_cmph,\n    $wind_effect_factor,\n    $spread_rate_cmph,\n    $spread_model\n);",
+        "name": "",
+        "x": 1600,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "83ee5e7401bb4f8b",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "prepare ML forecast input",
+        "func": "const data = msg.payload;\nif (!data || typeof data !== \"object\") { node.error(\"Data sensor untuk ML tidak valid\", msg); return [null, null]; }\nconst snapshot = JSON.parse(JSON.stringify(data));\nmsg.analytics_data = snapshot; msg.sensor_data = snapshot;\nconst valid = v => v !== null && v !== undefined && Number.isFinite(Number(v));\nif (!valid(snapshot.fri)) {\n    msg.ml_result = {forecast_status:\"INSUFFICIENT_INPUTS\",forecast_horizon_minutes:15,\n        insight_text:\"Prediksi tren tidak tersedia karena FRI aktual belum valid.\",trend:\"UNKNOWN\",\n        fri_change:null,highlights:[],recommendations:null,forecast_model_version:null,input_status:\"MISSING_FRI\"};\n    msg.payload = snapshot; return [null, msg];\n}\nconst nodeId = String(snapshot.node_id || \"unknown\");\nconst key = `ml_last_request_${nodeId}`; const now = Date.now(); const last = Number(flow.get(key) || 0);\nif (now-last < 60000) {\n    msg.ml_result = {forecast_status:\"THROTTLED\",forecast_horizon_minutes:15,\n        insight_text:\"Analisis menunggu interval pembaruan 60 detik.\",trend:\"UNKNOWN\",\n        fri_change:null,highlights:[],recommendations:null,forecast_model_version:null,input_status:\"WAITING_INTERVAL\"};\n    msg.payload = snapshot; return [null, msg];\n}\nflow.set(key, now);\nmsg.method=\"POST\"; msg.url=\"http://ml:5000/predict-forecast\";\nmsg.headers={\"Content-Type\":\"application/json\"};\nmsg.payload={node_id:snapshot.node_id,timestamp:snapshot.timestamp,co:snapshot.co,ch4:snapshot.ch4,\n    gas_calibrated:snapshot.gas_calibrated,gas_calibration_validated:snapshot.gas_calibration_validated,\n    gas_calibration_status:snapshot.gas_calibration_status,temp:snapshot.temp,hum:snapshot.hum,\n    fri:snapshot.fri,fri_level:snapshot.fri_level,wind_speed_sensor:snapshot.wind_speed_sensor ?? snapshot.wind_speed,\n    wind_direction_deg:snapshot.wind_direction_deg,wind_direction:snapshot.wind_direction,\n    spread_rate_cmph:snapshot.spread_rate_cmph,soil_condition:snapshot.soil_condition,soil_moisture:snapshot.soil_moisture};\nnode.status({fill:\"green\",shape:\"dot\",text:\"ML menganalisis tren 15 menit\"}); return [msg,null];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 420,
+        "wires": [
+            [
+                "72ddacfcc311848b"
+            ],
+            [
+                "a2c6966fe06d7c88"
+            ]
+        ]
+    },
+    {
+        "id": "961b73dc64d24c51",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "parse ML forecast response",
+        "func": "const r=msg.payload||{}; const sample=msg.analytics_data||msg.sensor_data||{};\nif(!r.forecast_status){\n    msg.ml_result={forecast_status:\"ML_RESPONSE_INVALID\",forecast_horizon_minutes:15,\n        insight_text:\"Respons ML tidak sesuai format.\",trend:\"UNKNOWN\",fri_change:null,highlights:[],\n        recommendations:null,forecast_model_version:null,input_status:\"INVALID_RESPONSE\"};\n    msg.payload={...sample}; return [msg,null];\n}\nmsg.ml_result={forecast_status:r.forecast_status,forecast_horizon_minutes:r.forecast_horizon_minutes??15,\n    insight_text:r.insight_text??\"Analisis tidak tersedia.\",trend:r.trend??\"UNKNOWN\",fri_change:r.fri_change??null,\n    highlights:Array.isArray(r.highlights)?r.highlights:[],recommendations:r.recommendations??null,\n    forecast_model_version:r.forecast_model_version??null,forecast_timestamp:r.forecast_timestamp??null,\n    sample_timestamp:r.sample_timestamp??sample.timestamp,input_status:r.input_status??\"UNKNOWN\",\n    future_wind_speed:r.future_wind_speed??null,future_spread_rate_cmph:r.future_spread_rate_cmph??null,\n    current_fri:r.current_fri??sample.fri,current_fri_level:r.current_fri_level??sample.fri_level};\nmsg.ml_forecast={node_id:sample.node_id,sample_timestamp:r.sample_timestamp??sample.timestamp,\n    forecast_timestamp:r.forecast_timestamp??null,forecast_status:r.forecast_status,\n    forecast_horizon_minutes:r.forecast_horizon_minutes??15,trend:r.trend??\"UNKNOWN\",\n    fri_change:r.fri_change??null,current_fri:r.current_fri??sample.fri,forecast_model_version:r.forecast_model_version??null};\nconst dashboardMsg={...msg,payload:{...sample}};\nconst sqliteMsg={...msg,payload:{...sample},ml_forecast:{...msg.ml_forecast}};\nnode.status({fill:r.forecast_status===\"OK\"?\"green\":\"yellow\",shape:\"dot\",text:`ML ${r.forecast_status} | ${r.trend||\"UNKNOWN\"}`});\nreturn [dashboardMsg,sqliteMsg];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 480,
+        "wires": [
+            [
+                "a2c6966fe06d7c88"
+            ],
+            [
+                "423801390886025e"
+            ]
+        ]
+    },
+    {
+        "id": "72ddacfcc311848b",
+        "type": "http request",
+        "z": "1ee34e9aa81e393c",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://ml:5000/predict-forecast",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1010,
+        "y": 480,
+        "wires": [
+            [
+                "961b73dc64d24c51"
+            ]
+        ]
+    },
+    {
+        "id": "7e61e514e89c117b",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "Weather API",
+        "func": "const data = msg.payload;\nif (!data || typeof data !== \"object\") {\n    node.error(\"Data sensor sebelum Weather API tidak valid\", msg);\n    return null;\n}\nmsg.sensor_data = { ...data };\nmsg.analytics_data = { ...data };\ndelete msg.url;\ndelete msg.method;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 300,
+        "wires": [
+            [
+                "3d8d173ab9b152d0"
+            ]
+        ]
+    },
+    {
+        "id": "3d8d173ab9b152d0",
+        "type": "http request",
+        "z": "1ee34e9aa81e393c",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.open-meteo.com/v1/forecast?latitude=-6.36804&longitude=106.82971&current=wind_direction_10m,wind_speed_10m&wind_speed_unit=ms&timezone=Asia%2FJakarta",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1030,
+        "y": 360,
+        "wires": [
+            [
+                "72a53280b84cc122"
+            ]
+        ]
+    },
+    {
+        "id": "72a53280b84cc122",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "merge Weather Data",
+        "func": "\nconst weather = msg.payload || {};\n\n// Snapshot sensor sebelum request Open-Meteo\nconst d = msg.sensor_data || msg.analytics_data;\n\nif (!d || typeof d !== \"object\") {\n    node.error(\"Snapshot sensor hilang setelah Weather API\", msg);\n    return null;\n}\n\nconst current = weather.current || {};\n\nfunction validNumber(value) {\n    if (\n        value === null ||\n        value === undefined ||\n        value === \"\"\n    ) {\n        return null;\n    }\n\n    const number = Number(value);\n\n    return Number.isFinite(number)\n        ? number\n        : null;\n}\n\n// ============================================\n// 1. KECEPATAN ANGIN DARI ANEMOMETER ESP32\n// ============================================\n\nconst sensorWindSpeed = validNumber(\n    d.wind_speed_sensor ?? d.wind_speed\n);\n\n// ============================================\n// 2. ARAH ANGIN DARI OPEN-METEO\n// ============================================\n\nconst directionDeg = validNumber(\n    current.wind_direction_10m\n);\n\nconst directions = [\n    \"N\",\n    \"NE\",\n    \"E\",\n    \"SE\",\n    \"S\",\n    \"SW\",\n    \"W\",\n    \"NW\"\n];\n\nlet direction = \"UNKNOWN\";\n\nif (directionDeg !== null) {\n    const index =\n        Math.round(directionDeg / 45) % 8;\n\n    direction = directions[index];\n}\n\n// ============================================\n// 3. STATUS DATA WEATHER\n// ============================================\n\nconst weatherStatus =\n    directionDeg !== null\n        ? \"OK\"\n        : \"DIRECTION_UNAVAILABLE\";\n\n// ============================================\n// 4. GABUNGKAN DATA\n// ============================================\n\nmsg.payload = {\n    ...d,\n\n    // Kecepatan angin hanya dari ESP32\n    wind_speed: sensorWindSpeed,\n    wind_speed_sensor: sensorWindSpeed,\n\n    // Tidak menggunakan kecepatan Open-Meteo\n    wind_speed_weather: null,\n\n    // Arah angin hanya dari Open-Meteo\n    wind_direction_deg: directionDeg,\n    wind_direction: direction,\n\n    weather_source: \"Open-Meteo\",\n    weather_status: weatherStatus,\n\n    rain: validNumber(current.rain)\n};\n\nmsg.analytics_data = {\n    ...msg.payload\n};\n\nnode.status({\n    fill: weatherStatus === \"OK\"\n        ? \"green\"\n        : \"yellow\",\n\n    shape: \"dot\",\n\n    text:\n        `Anemometer ${sensorWindSpeed ?? \"-\"} m/s | ` +\n        `Arah ${direction}`\n});\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1300,
+        "y": 360,
+        "wires": [
+            [
+                "1536e9408c2416c1"
+            ]
+        ]
+    },
+    {
+        "id": "1536e9408c2416c1",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "hitung spread & arah",
+        "func": "\nconst d = msg.payload || {};\n\n// ============================================\n// PARAMETER MODEL BASELINE\n// ============================================\n\nconst BASE_SPREAD_CMPH = 2.7;\n\nconst C1 = 0.045;\nconst C2 = 0.131;\n\n// ============================================\n// INPUT ANGIN\n// ============================================\n\n// Kecepatan angin dari anemometer ESP32\nconst windSpeed = Number(\n    d.wind_speed_sensor ?? d.wind_speed\n);\n\n// Arah angin dari Open-Meteo\nconst directionRaw = Number(\n    d.wind_direction_deg\n);\n\n// ============================================\n// VALIDASI KECEPATAN ANGIN\n// ============================================\n\nif (\n    !Number.isFinite(windSpeed) ||\n    windSpeed < 0\n) {\n    msg.payload = {\n        ...d,\n\n        spread_rate_base_cmph:\n            BASE_SPREAD_CMPH,\n\n        wind_effect_factor: null,\n\n        spread_rate_cmph: null,\n\n        spread_model: \"Unavailable\",\n\n        spread_model_status:\n            \"WIND_SPEED_UNAVAILABLE\",\n\n        spread_model_reference: null,\n\n        spread_label_type:\n            \"SEMI_EMPIRICAL_ESTIMATE_NOT_GROUND_TRUTH\"\n    };\n\n    msg.analytics_data = {\n        ...msg.payload\n    };\n\n    node.status({\n        fill: \"yellow\",\n        shape: \"ring\",\n        text: \"Spread estimate unavailable\"\n    });\n\n    return msg;\n}\n\n// ============================================\n// PERHITUNGAN BASELINE SPREAD\n// ============================================\n\n// Catatan:\n// theta = 0 mempertahankan asumsi rumus\n// baseline pada flow sebelumnya.\n// Arah Open-Meteo diteruskan sebagai fitur\n// untuk analisis ML, bukan faktor rumus ini.\n\nconst theta = 0;\n\nconst windEffectFactor = Math.exp(\n    windSpeed * (\n        C1 - C2 * (1 - Math.cos(theta))\n    )\n);\n\nconst spreadRate =\n    BASE_SPREAD_CMPH * windEffectFactor;\n\n// ============================================\n// SIMPAN HASIL PERHITUNGAN\n// ============================================\n\nmsg.payload = {\n    ...d,\n\n    spread_rate_base_cmph:\n        BASE_SPREAD_CMPH,\n\n    wind_effect_factor:\n        Number(windEffectFactor.toFixed(4)),\n\n    spread_rate_cmph:\n        Number(spreadRate.toFixed(2)),\n\n    // Arah angin tetap berasal dari Open-Meteo\n    wind_direction_deg:\n        Number.isFinite(directionRaw)\n            ? Number(directionRaw.toFixed(1))\n            : null,\n\n    wind_direction:\n        d.wind_direction || \"UNKNOWN\",\n\n    spread_model:\n        \"Tropical peatland semi-empirical wind-adjusted model\",\n\n    spread_model_status: \"ESTIMATE\",\n\n    spread_model_reference:\n        \"Huang et al. field baseline + wind effect adaptation\",\n\n    spread_direction_source:\n        \"Open-Meteo meteorological wind direction\",\n\n    spread_label_type:\n        \"SEMI_EMPIRICAL_ESTIMATE_NOT_GROUND_TRUTH\"\n};\n\nmsg.analytics_data = {\n    ...msg.payload\n};\n\nflow.set(\n    \"last_fri_data\",\n    msg.payload\n);\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text:\n        `Baseline spread ${spreadRate.toFixed(2)} cm/h`\n});\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1560,
+        "y": 360,
+        "wires": [
+            [
+                "83ee5e7401bb4f8b"
+            ]
+        ]
+    },
+    {
+        "id": "a2c6966fe06d7c88",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "prepare dashboard payload",
+        "func": "const d=msg.analytics_data||msg.payload||msg.sensor_data||{}; const ml=msg.ml_result||{};\nconst rec=ml.recommendations||null;\nconst out={\n sample_id:d.sample_id||msg.sample_id||null,node_id:d.node_id??null,timestamp:d.timestamp||new Date().toISOString(),sensor_timestamp:d.sensor_timestamp??null,\n temp:d.temp??null,hum:d.hum??null,co:d.gas_calibrated===true?d.co??null:null,ch4:d.gas_calibrated===true?d.ch4??null:null,\n gas_calibrated:d.gas_calibrated===true,gas_calibration_validated:d.gas_calibration_validated===true,\n gas_calibration_status:d.gas_calibration_status||\"NOT_CALIBRATED\",gas_calibration_method:d.gas_calibration_method||\"UNKNOWN\",\n mq7_heater_cycle_compliant:d.mq7_heater_cycle_compliant===true,mq2_raw:d.mq2_raw??null,mq7_raw:d.mq7_raw??null,\n mq2_vout_v:d.mq2_vout_v??null,mq7_vout_v:d.mq7_vout_v??null,mq2_rs_kohm:d.mq2_rs_kohm??null,mq7_rs_kohm:d.mq7_rs_kohm??null,\n mq2_r0_kohm:d.mq2_r0_kohm??null,mq7_r0_kohm:d.mq7_r0_kohm??null,mq2_response_percent:d.mq2_response_percent??null,\n mq7_response_percent:d.mq7_response_percent??null,mq2_signal_change_detected:d.mq2_signal_change_detected===true,\n mq7_signal_change_detected:d.mq7_signal_change_detected===true,gas_signal_change_detected:d.gas_signal_change_detected===true,\n soil_raw:d.soil_raw??null,soil_moisture:d.soil_moisture??null,soil_condition:d.soil_condition||\"Tidak diketahui\",\n wind_speed:d.wind_speed??null,wind_speed_sensor:d.wind_speed_sensor??d.wind_speed??null,wind_speed_weather:null,\n wind_direction_deg:d.wind_direction_deg??null,wind_direction:d.wind_direction||\"UNKNOWN\",weather_source:d.weather_source||\"Open-Meteo\",\n weather_status:d.weather_status||\"UNKNOWN\",rain:d.rain??null,\n fri_f_temperature:d.fri_f_temperature??null,fri_f_humidity:d.fri_f_humidity??null,fri_f_co:d.fri_f_co??null,\n fri_f_ch4:d.fri_f_ch4??null,fri_f_gas:d.fri_f_gas??null,fri_base:d.fri_base??null,fri:d.fri??null,\n fri_level:d.fri_level||\"UNKNOWN\",fri_data_status:d.fri_data_status||\"WAITING_FOR_CALIBRATED_GAS_PPM\",\n spread_rate_base_cmph:d.spread_rate_base_cmph??null,wind_effect_factor:d.wind_effect_factor??null,\n spread_rate_cmph:d.spread_rate_cmph??null,spread_model:d.spread_model||\"Unavailable\",spread_model_status:d.spread_model_status||\"UNKNOWN\",\n spread_model_reference:d.spread_model_reference??null,spread_direction_source:d.spread_direction_source??null,\n spread_label_type:d.spread_label_type||\"SEMI_EMPIRICAL_ESTIMATE_NOT_GROUND_TRUTH\",\n ml_forecast_status:ml.forecast_status||\"UNAVAILABLE\",ml_forecast_horizon_minutes:ml.forecast_horizon_minutes??15,\n ml_forecast_timestamp:ml.forecast_timestamp??null,ml_insight_text:ml.insight_text??\"Analisis ML belum tersedia.\",\n ml_trend:ml.trend??\"UNKNOWN\",ml_fri_change:ml.fri_change??null,ml_current_fri:ml.current_fri??d.fri??null,\n ml_current_fri_level:ml.current_fri_level??d.fri_level??\"UNKNOWN\",ml_future_wind_speed:ml.future_wind_speed??null,\n ml_future_spread_rate_cmph:ml.future_spread_rate_cmph??null,ml_highlights:Array.isArray(ml.highlights)?ml.highlights:[],\n ml_recommendations:rec,ml_model_version:ml.forecast_model_version??null,ml_input_status:ml.input_status??\"UNKNOWN\"\n};\nmsg.dashboard_data=out; msg.payload=out; msg.sample_id=out.sample_id; flow.set(\"last_pyrowatch_payload\",out);\nnode.status({fill:\"green\",shape:\"dot\",text:`Snapshot ${out.sample_id||out.node_id}`}); return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 620,
+        "wires": [
+            [
+                "5cc31ec4a6bef3a0"
+            ]
+        ]
+    },
+    {
+        "id": "16e5bb1f7d61aaa7",
+        "type": "http in",
+        "z": "1ee34e9aa81e393c",
+        "name": "sensor latest",
+        "url": "/api/sensor/latest",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 2010,
+        "y": 440,
+        "wires": [
+            [
+                "706da63da6f118ef"
+            ]
+        ]
+    },
+    {
+        "id": "7a74d2b80d708fce",
+        "type": "http response",
+        "z": "1ee34e9aa81e393c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 2450,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "706da63da6f118ef",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "get sensor latest",
+        "func": "const data = flow.get(\"last_pyrowatch_payload\");\n\nif (!data) {\n    msg.statusCode = 404;\n    msg.payload = {\n        success: false,\n        message: \"Belum ada data sensor\"\n    };\n    return msg;\n}\n\nmsg.statusCode = 200;\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\n\nmsg.payload = {\n    success: true,\n    data: data\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2240,
+        "y": 440,
+        "wires": [
+            [
+                "7a74d2b80d708fce"
+            ]
+        ]
+    },
+    {
+        "id": "1159044653cf2171",
+        "type": "debug",
+        "z": "1ee34e9aa81e393c",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "32fe07a82407a352",
+        "type": "debug",
+        "z": "1ee34e9aa81e393c",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "54884ae451cb35a6",
+        "type": "catch",
+        "z": "1ee34e9aa81e393c",
+        "name": "Catch Open-Meteo errors",
+        "scope": [
+            "3d8d173ab9b152d0"
+        ],
+        "uncaught": false,
+        "x": 1310,
+        "y": 300,
+        "wires": [
+            [
+                "0e3656aed63b8927"
+            ]
+        ]
+    },
+    {
+        "id": "0e3656aed63b8927",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "Open-Meteo fallback",
+        "func": "msg.payload = {};\ndelete msg.error;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1560,
+        "y": 300,
+        "wires": [
+            [
+                "72a53280b84cc122"
+            ]
+        ]
+    },
+    {
+        "id": "75911b012f2890c4",
+        "type": "catch",
+        "z": "1ee34e9aa81e393c",
+        "name": "Catch ML HTTP errors",
+        "scope": [
+            "72ddacfcc311848b"
+        ],
+        "uncaught": false,
+        "x": 880,
+        "y": 560,
+        "wires": [
+            [
+                "88be679563b59e16"
+            ]
+        ]
+    },
+    {
+        "id": "88be679563b59e16",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "ML request failure",
+        "func": "const sample=msg.analytics_data||msg.sensor_data||{};\nmsg.ml_result={forecast_status:\"ML_REQUEST_FAILED\",forecast_horizon_minutes:15,\n    insight_text:\"Prediksi tidak tersedia karena layanan ML gagal diakses. Periksa container ML dan log API.\",\n    trend:\"UNKNOWN\",fri_change:null,highlights:[],recommendations:{priority:\"DATA_CHECK\",\n    trigger_summary:\"Analisis model tidak tersedia.\",\n    monitoring:\"Periksa status container ML, koneksi Node-RED ke ml:5000, dan log layanan.\",\n    early_response:\"Jangan menggunakan hasil prediksi yang gagal sebagai dasar keputusan respons. Tetap ikuti SOP dan verifikasi lapangan.\",\n    area_protection:\"Tentukan area prioritas berdasarkan observasi petugas, bukan keluaran model yang gagal.\",\n    coordination:\"Informasikan gangguan prediksi kepada teknisi dan koordinator; pulihkan layanan sebelum analisis digunakan kembali.\",\n    operational_caveat:\"Keputusan lapangan tetap mengikuti SOP dan konfirmasi petugas.\"},\n    forecast_model_version:null,input_status:\"ML_API_UNAVAILABLE\"};\nmsg.payload={...sample}; delete msg.error; node.status({fill:\"red\",shape:\"ring\",text:\"ML API gagal\"}); return msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 620,
+        "wires": [
+            [
+                "a2c6966fe06d7c88"
+            ]
+        ]
+    },
+    {
+        "id": "423801390886025e",
+        "type": "function",
+        "z": "1ee34e9aa81e393c",
+        "name": "prepare SQLite forecast insert",
+        "func": "const f=msg.ml_forecast||{};\nif(!f.node_id||!f.sample_timestamp){node.warn(\"Forecast tidak disimpan: node_id atau sample_timestamp tidak tersedia.\");return null;}\nconst forecastTimestamp=f.forecast_timestamp||new Date(new Date(f.sample_timestamp).getTime()+(Number(f.forecast_horizon_minutes)||15)*60000).toISOString();\nconst interpretation=`trend=${f.trend||\"UNKNOWN\"}; fri_change=${Number.isFinite(Number(f.fri_change))?Number(f.fri_change).toFixed(4):\"N/A\"}`;\nmsg.params=[f.node_id,f.sample_timestamp,forecastTimestamp,Number(f.forecast_horizon_minutes??15),\n    Number.isFinite(Number(f.current_fri))?Number(f.current_fri):null,\n    null,null,null,null,null,null,null,null,null,null,\n    f.forecast_status??\"UNKNOWN\",interpretation,f.forecast_model_version??null];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 480,
+        "wires": [
+            [
+                "8340ed4f6ae81748"
+            ]
+        ]
+    },
+    {
+        "id": "8340ed4f6ae81748",
+        "type": "sqlite",
+        "z": "1ee34e9aa81e393c",
+        "mydb": "f09fc80afd185003",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO ml_forecasts\n(node_id,sample_timestamp,forecast_timestamp,horizon_minutes,current_fri,future_fri,future_fri_level,future_fri_range,\n future_wind_speed,future_wind_speed_range,future_wind_direction,future_spread_rate_range,future_spread_direction,\n spread_direction_probability,forecast_confidence,forecast_status,forecast_interpretation,forecast_model_version)\nVALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+        "name": "SQLite insert ML forecasts",
+        "x": 1580,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f429394d65fa1ec",
+        "type": "inject",
+        "z": "1ee34e9aa81e393c",
+        "name": "simulation inject",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "hutan/sensor/simulation",
+        "payload": "{   \"node_id\": \"PYROWATCH_SIM_01\",   \"temp\": 40,   \"hum\": 50,   \"co\": 200,   \"ch4\": 380,   \"gas_calibrated\": true,   \"gas_calibration_validated\": false,   \"gas_calibration_status\": \"PROVISIONAL_CURVE_ESTIMATE\",   \"mq7_heater_cycle_compliant\": false,   \"wind_speed_sensor\": 2.5 }",
+        "payloadType": "json",
+        "x": 720,
+        "y": 120,
+        "wires": [
+            [
+                "02e6ca08c718b3bb"
+            ]
+        ]
+    },
+    {
+        "id": "f69f627d747abb5f",
+        "type": "mqtt-broker",
+        "name": "PyroWatch-Mosquitto",
+        "broker": "mosquitto",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f09fc80afd185003",
+        "type": "sqlitedb",
+        "db": "/data/pyrowatch1.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "dd30d4c41c150032",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-sqlite": "2.0.1"
+        }
+    }
+]
