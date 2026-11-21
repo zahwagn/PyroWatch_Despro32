@@ -77,6 +77,59 @@ function ErrorScreen({ error, onRetry }) {
   );
 }
 
+const PRIORITY_DOT = {
+  URGENT: 'bg-red-500',
+  ELEVATED: 'bg-orange-500',
+  WATCH: 'bg-amber-400',
+  DATA_CHECK: 'bg-slate-400',
+  ROUTINE: 'bg-forest-500',
+};
+
+// Pilih node sensor (data dari GET /api/sensor/nodes). Disembunyikan bila hanya ada satu node.
+function NodeSelector({ nodes = [], selected, current, onSelect }) {
+  if (nodes.length < 2) return null;
+
+  return (
+    <div className="mb-4 flex flex-wrap items-center gap-2">
+      <span className="text-xs font-medium text-gray-500">Node:</span>
+
+      <button
+        type="button"
+        onClick={() => onSelect(null)}
+        className={
+          'rounded-full border px-3 py-1 text-xs font-medium ' +
+          (selected === null
+            ? 'border-forest-600 bg-forest-600 text-white'
+            : 'border-gray-200 bg-white text-gray-600 hover:bg-forest-50')
+        }
+      >
+        <span className="block max-w-[16rem] truncate">
+          Terbaru{selected === null && current?.nodeId ? ` (${current.nodeId})` : ''}
+        </span>
+      </button>
+
+      {nodes.map((n) => (
+        <button
+          key={n.nodeId}
+          type="button"
+          onClick={() => onSelect(n.nodeId)}
+          className={
+            'inline-flex max-w-full items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium ' +
+            (selected === n.nodeId
+              ? 'border-forest-600 bg-forest-600 text-white'
+              : 'border-gray-200 bg-white text-gray-600 hover:bg-forest-50')
+          }
+          title={`FRI ${n.riskLevel} · prioritas ${n.priority || '-'}`}
+        >
+          <span className={'h-2 w-2 shrink-0 rounded-full ' + (PRIORITY_DOT[n.priority] || 'bg-gray-300')} />
+          <span className="truncate">{n.nodeId}</span>
+          {n.simulation && <span className="opacity-70">(sim)</span>}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function SensorOverview({ sensor }) {
   return (
     <>
@@ -143,14 +196,16 @@ function SensorOverview({ sensor }) {
 export default function App() {
   const [view, setView] = useState('monitoring');
   const [expanded, setExpanded] = useState(false);
+  const [selectedNode, setSelectedNode] = useState(null); // null = node terbaru
 
   const {
     sensor,
+    nodes,
     loading,
     error,
     lastUpdated,
     refresh,
-  } = useSensorData(15000);
+  } = useSensorData(15000, selectedNode);
 
   if (loading && !sensor) {
     return <LoadingScreen />;
@@ -182,9 +237,18 @@ export default function App() {
       >
         <Header
           riskLevel={sensor.riskLevel}
+          priority={sensor.mlForecast?.priority}
+          scenarioLabel={sensor.mlForecast?.scenarioLabel}
           lastUpdated={lastUpdated}
           onRefresh={refresh}
           refreshing={loading}
+        />
+
+        <NodeSelector
+          nodes={nodes}
+          selected={selectedNode}
+          current={sensor}
+          onSelect={setSelectedNode}
         />
 
         {error && (
@@ -203,17 +267,22 @@ export default function App() {
                 direction={sensor.windDirection}
                 directionLabel={sensor.windDirectionLabel}
                 source={sensor.weatherSource}
+                futureSpeed={sensor.mlForecast?.futureWindSpeed}
+                sourceSector={sensor.mlForecast?.spread?.sourceSector}
+                threatSector={sensor.mlForecast?.spread?.threatSector}
               />
 
               <FireSpreadCard
                 spreadRate={sensor.fireSpread}
                 spreadModelStatus={sensor.spreadModelStatus}
+                mlSpread={sensor.mlForecast?.spread}
               />
             </div>
 
             <div className="mb-4">
               <MLPredictionCard
                 forecast={sensor.mlForecast}
+                sensor={sensor}
               />
             </div>
 
@@ -228,6 +297,7 @@ export default function App() {
         {view === 'analysis' && (
           <MLPredictionCard
             forecast={sensor.mlForecast}
+            sensor={sensor}
           />
         )}
 
@@ -252,6 +322,14 @@ export default function App() {
 
               <p>
                 Status kalibrasi gas: <strong>{sensor.gasCalibrationStatus}</strong>
+              </p>
+
+              <p>
+                Model ML: <strong>{sensor.mlForecast?.modelVersion || '--'}</strong> (status {sensor.mlForecast?.status})
+              </p>
+
+              <p>
+                Riwayat yang dipakai model: <strong>{sensor.mlForecast?.historyPoints ?? '--'}</strong> pembacaan / 15 menit
               </p>
 
               <p>

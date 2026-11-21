@@ -80,3 +80,22 @@ Format AI analysis JSON:
 Edit `src/components/map/HotspotMap.jsx` dan `src/lib/mockData.js`:
 - Swap `mockHotspots` dengan data dari mandum-rimba API
 - Format: `[{ lat, lng, intensity }]`
+
+## Integrasi ML v4 (skenario + eskalasi)
+
+Dashboard membaca `GET /api/sensor/latest` dan `GET /api/sensor/nodes` dari Node-RED (flow `node-red/flows/pyrowatch_flows.json` di branch `master`).
+
+Kartu **Analisis & Prediksi ML** (`src/components/cards/MLPredictionCard.jsx` + `src/components/ml/`) menampilkan:
+- **Skenario terdeteksi** dan komposisi FRI (porsi gas/suhu/kelembapan): menjelaskan *mengapa* FRI bernilai sekian. FRI yang sama bisa berarti pengeringan bahan bakar, smoldering awal, anomali sensor, atau kebakaran yang mereda.
+- **Prediksi eskalasi 30 menit**: peluang FRI mencapai High dan Extreme, perkiraan waktu tercapainya, serta perubahan FRI 15/30 menit beserta rentang 80%. Dashboard tidak menampilkan skor FRI kedua.
+- **Rencana aksi petugas** per fase (Segera 0–15 menit, Lanjutan 15–60 menit, Pasca), lengkap dengan alasan tiap tindakan.
+- **Panduan lapangan**: sektor pencarian sumber (hulu angin), sektor ancaman (hilir angin), radius pemeriksaan, estimasi rambat, APD, dan interval sampling.
+- **Proyeksi komponen sensor 15 menit** dan catatan kualitas data.
+
+Kartu angin menampilkan kompas dengan sektor hulu dan hilir angin. Kartu laju rambat membandingkan baseline Node-RED dengan estimasi sesuai skenario ML. Bila ada lebih dari satu node, pemilih node muncul di bawah header.
+
+Mode tanpa backend (data contoh hasil pipeline asli):
+
+```bash
+VITE_USE_MOCK=true npm run dev
+```

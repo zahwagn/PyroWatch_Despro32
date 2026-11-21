@@ -5,10 +5,12 @@ import {
   useRef,
 } from 'react';
 
-import { fetchSensorData } from '../lib/api.js';
+import { fetchSensorData, fetchNodeList } from '../lib/api.js';
 
-export function useSensorData(pollInterval = 15000) {
+// nodeId = null -> snapshot terbaru dari node mana pun (/api/sensor/latest).
+export function useSensorData(pollInterval = 15000, nodeId = null) {
   const [sensor, setSensor] = useState(null);
+  const [nodes, setNodes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -20,13 +22,18 @@ export function useSensorData(pollInterval = 15000) {
     if (requestInProgress.current) return;
 
     requestInProgress.current = true;
+    setLoading(true);
 
     try {
-      const sensorData = await fetchSensorData();
+      const [sensorData, nodeList] = await Promise.all([
+        fetchSensorData(nodeId),
+        fetchNodeList(),
+      ]);
 
       if (!mounted.current) return;
 
       setSensor(sensorData);
+      setNodes(nodeList);
       setLastUpdated(new Date());
       setError(null);
     } catch (err) {
@@ -46,7 +53,7 @@ export function useSensorData(pollInterval = 15000) {
         setLoading(false);
       }
     }
-  }, []);
+  }, [nodeId]);
 
   useEffect(() => {
     mounted.current = true;
@@ -66,6 +73,7 @@ export function useSensorData(pollInterval = 15000) {
 
   return {
     sensor,
+    nodes,
     loading,
     error,
     lastUpdated,

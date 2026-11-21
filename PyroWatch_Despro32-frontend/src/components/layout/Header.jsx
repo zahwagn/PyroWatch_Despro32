@@ -18,8 +18,18 @@ const riskDots = {
   UNKNOWN: 'bg-gray-400',
 };
 
+const priorityStyles = {
+  URGENT: 'bg-red-600 text-white',
+  ELEVATED: 'bg-orange-500 text-white',
+  WATCH: 'bg-amber-100 text-amber-800',
+  DATA_CHECK: 'bg-slate-200 text-slate-700',
+  ROUTINE: 'bg-forest-100 text-forest-700',
+};
+
 export default function Header({
   riskLevel = 'UNKNOWN',
+  priority = null,
+  scenarioLabel = null,
   lastUpdated,
   onRefresh,
   refreshing = false,
@@ -77,6 +87,18 @@ export default function Header({
 
           FRI {level}
         </span>
+
+        {priority && (
+          <span
+            className={
+              'rounded-full px-3 py-1 text-sm font-semibold ' +
+              (priorityStyles[priority] || priorityStyles.DATA_CHECK)
+            }
+            title={scenarioLabel || undefined}
+          >
+            {priority.replace('_', ' ')}
+          </span>
+        )}
       </div>
     </header>
   );

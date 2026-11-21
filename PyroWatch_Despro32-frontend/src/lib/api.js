@@ -5,7 +5,7 @@
 // Tidak ada endpoint LLM /api/ai/latest.
 // ============================================================
 
-const USE_MOCK = false;
+const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 
 function toNumber(value) {
   if (value === null || value === undefined || value === '') {
@@ -50,149 +50,183 @@ async function requestJson(url) {
 // FETCH SENSOR + ML FORECAST
 // ============================================================
 
-export async function fetchSensorData() {
-  if (USE_MOCK) {
-    const { mockSensorData } = await import('./mockData.js');
-    return mockSensorData;
-  }
+function toArray(value) {
+  return Array.isArray(value) ? value : [];
+}
 
-  const d = await requestJson('/api/sensor/latest');
+function toRange(value) {
+  if (!value || typeof value !== 'object') return null;
+  return {
+    expected: toNumber(value.expected),
+    low: toNumber(value.low),
+    high: toNumber(value.high),
+  };
+}
 
+// ============================================================
+// MAPPING SNAPSHOT NODE-RED -> MODEL FRONTEND
+// ============================================================
+
+export function mapSensorSnapshot(d) {
   if (!d || typeof d !== 'object' || Array.isArray(d)) {
     throw new Error('Format data sensor tidak sesuai.');
   }
 
   // Catatan sumber data:
-  // 1. Wind speed: ESP32 anemometer.
-  // 2. Wind direction: Open-Meteo.
-  // 3. Arah angin bukan arah rambat api.
-  // 4. FRI utama adalah FRI aktual dari sensor.
-  // 5. ML memprediksi perubahan FRI, bukan skor FRI kedua.
+  // 1. Kecepatan angin: anemometer ESP32. Arah angin: Open-Meteo (arah DATANG angin).
+  // 2. FRI utama = FRI aktual dari sensor (rumus WSM di Node-RED).
+  // 3. ML tidak menghitung FRI kedua. ML menjelaskan PENYEBAB FRI (skenario),
+  //    PELUANG ESKALASI 30 menit, proyeksi komponen, dan rencana aksi.
+  const rec = d.ml_recommendations ?? null;
+  const spread = d.ml_spread ?? {};
+  const drivers = d.ml_drivers ?? null;
 
   return {
-    // --------------------------------------------------------
-    // IDENTITAS DAN WAKTU
-    // --------------------------------------------------------
-
     nodeId: d.node_id ?? null,
     timestamp: d.timestamp ?? null,
-
-    // --------------------------------------------------------
-    // DATA SENSOR
-    // --------------------------------------------------------
+    simulation: d.simulation === true,
+    simulationScenario: d.simulation_scenario ?? null,
 
     temperature: toNumber(d.temp),
     humidity: toNumber(d.hum),
-
-    // Data gas hanya ditampilkan jika status kalibrasi aktif.
     co: d.gas_calibrated === true ? toNumber(d.co) : null,
     ch4: d.gas_calibrated === true ? toNumber(d.ch4) : null,
-
     gasCalibrated: d.gas_calibrated === true,
-    gasCalibrationValidated:
-      d.gas_calibration_validated === true,
-    gasCalibrationStatus:
-      d.gas_calibration_status ?? 'NOT_CALIBRATED',
-
-    // --------------------------------------------------------
-    // KONDISI TANAH
-    // --------------------------------------------------------
+    gasCalibrationValidated: d.gas_calibration_validated === true,
+    gasCalibrationStatus: d.gas_calibration_status ?? 'NOT_CALIBRATED',
 
     soilMoisture: toNumber(d.soil_moisture),
     soilCondition: d.soil_condition ?? 'Tidak diketahui',
-
-    // --------------------------------------------------------
-    // FIRE RISK INDEX AKTUAL
-    // --------------------------------------------------------
 
     fireRiskIndex: toNumber(d.fri),
     riskLevel: d.fri_level ?? 'UNKNOWN',
     friDataStatus: d.fri_data_status ?? 'UNKNOWN',
 
-    // --------------------------------------------------------
-    // ANGIN
-    // Kecepatan dari ESP32, arah dari Open-Meteo
-    // --------------------------------------------------------
-
-    windSpeed: toNumber(
-      d.wind_speed_sensor ?? d.wind_speed
-    ),
-
+    windSpeed: toNumber(d.wind_speed_sensor ?? d.wind_speed),
     windDirection: toNumber(d.wind_direction_deg),
     windDirectionLabel: d.wind_direction ?? 'UNKNOWN',
-
     weatherSource: d.weather_source ?? 'Open-Meteo',
     weatherStatus: d.weather_status ?? 'UNKNOWN',
 
-    // --------------------------------------------------------
-    // ESTIMASI LAJU RAMBAT BASELINE
-    // Bukan ground truth dan bukan hasil prediksi ML.
-    // --------------------------------------------------------
-
+    // Baseline semi-empiris Node-RED (bukan ground truth).
     fireSpread: toNumber(d.spread_rate_cmph),
-
-    spreadLabelType:
-      d.spread_label_type ??
-      'SEMI_EMPIRICAL_ESTIMATE_NOT_GROUND_TRUTH',
-
-    spreadModelStatus:
-      d.spread_model_status ?? 'UNKNOWN',
+    spreadLabelType: d.spread_label_type ?? 'SEMI_EMPIRICAL_ESTIMATE_NOT_GROUND_TRUTH',
+    spreadModelStatus: d.spread_model_status ?? 'UNKNOWN',
 
     // --------------------------------------------------------
-    // MACHINE LEARNING FORECAST 15 MENIT
+    // MACHINE LEARNING v4 (skenario + eskalasi 30 menit)
     // --------------------------------------------------------
-
     mlForecast: {
       status: d.ml_forecast_status ?? 'UNAVAILABLE',
+      horizonMinutes: toNumber(d.ml_forecast_horizon_minutes) ?? 30,
+      forecastTimestamp: d.ml_forecast_timestamp ?? null,
+      cachedFromSample: d.ml_cached_from_sample ?? null,
+      historyPoints: toNumber(d.ml_history_points_used),
+      dataQuality: toArray(d.ml_data_quality),
+      modelVersion: d.ml_model_version ?? null,
+      inputStatus: d.ml_input_status ?? 'UNKNOWN',
+      insightText: d.ml_insight_text ?? null,
 
-      horizonMinutes:
-        toNumber(d.ml_forecast_horizon_minutes) ?? 15,
+      scenario: d.ml_scenario ?? null,
+      scenarioLabel: d.ml_scenario_label ?? null,
+      scenarioConfidence: toNumber(d.ml_scenario_confidence),
+      scenarioProbabilities: d.ml_scenario_probabilities ?? {},
+      drivers: drivers
+        ? {
+            contributions: drivers.contributions ?? {},
+            share: drivers.contribution_share ?? {},
+            dominant: drivers.dominant_driver ?? null,
+            gasSource: drivers.gas_source ?? null,
+            notes: toArray(drivers.notes),
+            residual: toNumber(drivers.fri_residual_vs_wsm),
+          }
+        : null,
 
-      forecastTimestamp:
-        d.ml_forecast_timestamp ?? null,
+      trend: d.ml_trend ?? 'UNKNOWN',
+      friChange: toNumber(d.ml_fri_change),
+      friChange15: toRange(d.ml_fri_change_15m),
+      friChange30: toRange(d.ml_fri_change_30m),
+      pHigh30: toNumber(d.ml_p_high_30m),
+      pExtreme30: toNumber(d.ml_p_extreme_30m),
+      etaHighMin: toNumber(d.ml_eta_high_min),
+      etaExtremeMin: toNumber(d.ml_eta_extreme_min),
+      currentFri: toNumber(d.ml_current_fri ?? d.fri),
+      currentFriLevel: d.ml_current_fri_level ?? d.fri_level ?? 'UNKNOWN',
 
-      insightText:
-        d.ml_insight_text ?? null,
+      projection15: d.ml_component_projection_15m ?? {},
+      trendPerMin: d.ml_component_trend_per_min ?? {},
+      futureWindSpeed: toNumber(d.ml_future_wind_speed),
+      futureSpreadRate: toNumber(d.ml_future_spread_rate_cmph),
 
-      trend:
-        d.ml_trend ?? 'UNKNOWN',
+      spread: {
+        mode: spread.mode ?? d.ml_spread_mode ?? null,
+        rateCmph: toNumber(spread.rate_cmph),
+        rateMPerMin: toNumber(spread.rate_m_per_min),
+        distanceM: spread.distance_m ?? null,
+        inspectionRadiusM: toNumber(spread.inspection_radius_m ?? d.ml_inspection_radius_m),
+        sourceSector: spread.source_search_sector ?? d.ml_source_search_sector ?? null,
+        threatSector: spread.threat_sector ?? d.ml_threat_sector ?? null,
+        windFromDeg: toNumber(spread.wind_from_deg),
+        downwindDeg: toNumber(spread.downwind_deg),
+        directionConfidence: spread.direction_confidence ?? null,
+        surfaceTransitionProbability: toNumber(spread.surface_transition_probability),
+      },
 
-      friChange:
-        toNumber(d.ml_fri_change),
-
-      currentFri:
-        toNumber(d.ml_current_fri ?? d.fri),
-
-      currentFriLevel:
-        d.ml_current_fri_level ??
-        d.fri_level ??
-        'UNKNOWN',
-
-      futureWindSpeed:
-        toNumber(d.ml_future_wind_speed),
-
-      futureSpreadRate:
-        toNumber(d.ml_future_spread_rate_cmph),
-
-      highlights:
-        Array.isArray(d.ml_highlights)
-          ? d.ml_highlights
-          : [],
-
-      // Mempertahankan nama field rekomendasi dari backend:
-      // priority, trigger_summary, monitoring, early_response,
-      // area_protection, coordination, operational_caveat.
-      recommendations:
-        d.ml_recommendations ?? null,
-
-      modelVersion:
-        d.ml_model_version ?? null,
-
-      inputStatus:
-        d.ml_input_status ?? 'UNKNOWN',
+      priority: d.ml_priority ?? rec?.priority ?? null,
+      actionPlan: toArray(d.ml_action_plan ?? rec?.action_plan),
+      ppe: d.ml_ppe ?? rec?.ppe ?? null,
+      samplingInterval: d.ml_sampling_interval ?? rec?.sampling_interval ?? null,
+      highlights: toArray(d.ml_highlights),
+      // Field teks lama tetap tersedia: priority, trigger_summary, monitoring,
+      // early_response, area_protection, coordination, operational_caveat.
+      recommendations: rec,
     },
 
-    // Payload asli untuk debugging.
     raw: d,
   };
+}
+
+// ============================================================
+// FETCH SENSOR + ML
+// nodeId opsional: bila diisi, ambil snapshot node itu dari /api/sensor/nodes.
+// ============================================================
+
+export async function fetchSensorData(nodeId = null) {
+  if (USE_MOCK) {
+    const { mockSensorData } = await import('./mockData.js');
+    return mapSensorSnapshot(mockSensorData);
+  }
+
+  if (nodeId) {
+    const nodes = await requestJson('/api/sensor/nodes');
+    const match = toArray(nodes).find((item) => item?.node_id === nodeId);
+    if (match) return mapSensorSnapshot(match);
+  }
+
+  return mapSensorSnapshot(await requestJson('/api/sensor/latest'));
+}
+
+// Daftar node yang pernah mengirim data (endpoint baru di flow Node-RED).
+// Mengembalikan [] bila endpoint belum tersedia agar dashboard tetap jalan.
+export async function fetchNodeList() {
+  if (USE_MOCK) {
+    const { mockSensorData } = await import('./mockData.js');
+    return [{ nodeId: mockSensorData.node_id, timestamp: mockSensorData.timestamp,
+      riskLevel: mockSensorData.fri_level, priority: mockSensorData.ml_priority }];
+  }
+  try {
+    const nodes = await requestJson('/api/sensor/nodes');
+    return toArray(nodes)
+      .filter((item) => item?.node_id)
+      .map((item) => ({
+        nodeId: item.node_id,
+        timestamp: item.timestamp ?? null,
+        riskLevel: item.fri_level ?? 'UNKNOWN',
+        priority: item.ml_priority ?? null,
+        simulation: item.simulation === true,
+      }))
+      .sort((a, b) => String(b.timestamp).localeCompare(String(a.timestamp)));
+  } catch {
+    return [];
+  }
 }
