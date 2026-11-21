@@ -87,6 +87,7 @@ def recommendation_pack(data, trend, future_level, delta_fri, wind_future, curre
     if gas_ok and np.isfinite(co) and co >= 100: triggers.append(f'CO estimasi {co:.0f} ppm')
     if gas_ok and np.isfinite(ch4) and ch4 >= 500: triggers.append(f'CH4 estimasi {ch4:.0f} ppm')
     if not gas_validated and gas_ok: triggers.append('data gas masih estimasi/provisional')
+    if 'kering' in soil.lower(): triggers.append('kondisi tanah dilaporkan kering')
     if risk == 'EXTREME' or (risk == 'HIGH' and trend == 'RISING'):
         priority = 'URGENT'
         actions = [
@@ -134,7 +135,7 @@ def recommendation_pack(data, trend, future_level, delta_fri, wind_future, curre
     if spread_future is None: rationale += ' Proyeksi laju rambat ML tidak ditampilkan karena label pengamatan aktual belum memadai.'
     return {'priority':priority,'trigger_summary':rationale,'monitoring':actions[0],'early_response':actions[1],
         'area_protection':actions[2],'coordination':actions[3],
-        'operational_caveat':'Rekomendasi membantu penentuan prioritas verifikasi. Tindakan pemadaman/evakuasi tetap mengikuti SOP dan konfirmasi petugas.'}
+        'operational_caveat':'Ambang angin 5 m/s, kenaikan angin 1 m/s, suhu 40 °C, RH 35%, CO 100 ppm, dan CH4 500 ppm adalah pemicu awal untuk prioritas pemeriksaan, bukan standar bahaya universal; kalibrasikan dengan data lokasi dan SOP. Prediksi tidak membuktikan adanya api. Verifikasi lapangan dan keputusan pemadaman/evakuasi tetap menjadi kewenangan petugas.'}
 
 def predict_forecast(data):
     if bundle is None: raise RuntimeError('Model belum dimuat.')
