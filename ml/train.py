@@ -46,7 +46,13 @@ def aggregate(df):
         group=group.sort_values('timestamp').set_index('timestamp')
         numeric=group.select_dtypes(include=[np.number])
         if numeric.empty: continue
-        minute=numeric.resample(RESAMPLE_RULE).mean().interpolate(method='time',limit=2,limit_area='inside')
+        raw_minute=numeric.resample(RESAMPLE_RULE).mean()
+        # Predictor values may be interpolated briefly to handle sparse sensor ticks,
+        # but targets must come from actual minute observations, never interpolation.
+        labels=raw_minute[['fri','wind_speed_sensor','observed_spread_rate_cmph']].copy()
+        labels.columns=['fri_label','wind_speed_label','observed_spread_label']
+        minute=raw_minute.interpolate(method='time',limit=2,limit_area='inside')
+        minute=minute.join(labels)
         minute['node_id']=node; frames.append(make_features(minute))
     if not frames: raise ValueError('Tidak ada data historis untuk training.')
     return frames
@@ -63,9 +69,11 @@ def supervised(frames):
             future=frame.iloc[pos]
             sample={'node_id':node,'sample_timestamp':t,'target_timestamp':target_t}
             for col in BASE_FEATURES: sample[col]=row.get(col,np.nan)
-            sample['target_fri']=future.get('fri',np.nan)
-            sample['target_wind_speed']=future.get('wind_speed_sensor',np.nan)
-            sample['target_observed_spread_rate']=future.get('observed_spread_rate_cmph',np.nan)
+            current_fri_label=row.get('fri_label',np.nan)
+            future_fri_label=future.get('fri_label',np.nan)
+            sample['target_fri_change']=(future_fri_label-current_fri_label) if np.isfinite(future_fri_label) and np.isfinite(current_fri_label) else np.nan
+            sample['target_wind_speed']=future.get('wind_speed_label',np.nan)
+            sample['target_observed_spread_rate']=future.get('observed_spread_label',np.nan)
             rows.append(sample)
     ds=pd.DataFrame(rows)
     if ds.empty: raise ValueError('Tidak ada pasangan data historis dengan horizon 15 menit.')
@@ -97,7 +105,7 @@ def main():
     ds=supervised(aggregate(prepare(load_database())))
     features=[c for c in BASE_FEATURES if c in ds and ds[c].notna().any()]
     models={}
-    for key,target in [('future_fri','target_fri'),('future_wind_speed','target_wind_speed'),('future_observed_spread_rate','target_observed_spread_rate')]:
+    for key,target in [('fri_change_15m','target_fri_change'),('future_wind_speed','target_wind_speed'),('future_observed_spread_rate','target_observed_spread_rate')]:
         result=train_target(ds,target,features)
         if result: models[key]=result
     if not models: raise ValueError('Tidak ada target yang memiliki label cukup. Pastikan data sensor dan observasi terkumpul.')
