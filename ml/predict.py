@@ -73,6 +73,7 @@ def get_trend(delta):
 def recommendation_pack(data, trend, future_level, delta_fri, wind_future, current_spread, spread_future):
     risk = future_level.upper()
     wind_now = num(data.get('wind_speed_sensor', data.get('wind_speed')))
+    wind_future = num(wind_future)
     wind_dir = str(data.get('wind_direction') or 'UNKNOWN').upper()
     soil = str(data.get('soil_condition') or 'Tidak diketahui')
     temp, hum = num(data.get('temp')), num(data.get('hum'))
