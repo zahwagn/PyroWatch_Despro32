@@ -1,80 +1,74 @@
-import { useState, useEffect, useCallback } from 'react'
 import {
-  fetchSensorData,
-  fetchAIAnalysis,
-} from '../lib/api.js'
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react';
 
-export function useSensorData(pollInterval = 5000) {
-  const [sensor, setSensor] = useState(null)
-  const [ai, setAi] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [lastUpdated, setLastUpdated] = useState(null)
+import { fetchSensorData } from '../lib/api.js';
+
+export function useSensorData(pollInterval = 15000) {
+  const [sensor, setSensor] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
+
+  const requestInProgress = useRef(false);
+  const mounted = useRef(true);
 
   const refresh = useCallback(async () => {
+    if (requestInProgress.current) return;
+
+    requestInProgress.current = true;
+
     try {
-      const sensorData =
-        await fetchSensorData()
+      const sensorData = await fetchSensorData();
 
-      setSensor(sensorData)
-      setLastUpdated(new Date())
-      setError(null)
-      
-      try {
+      if (!mounted.current) return;
 
-        const aiData =
-          await fetchAIAnalysis()
-
-        setAi(aiData)
-
-      } catch (aiError) {
-
-        console.warn(
-          'AI analysis unavailable:',
-          aiError
-        )
-
-        setAi(null)
-      }
-
+      setSensor(sensorData);
+      setLastUpdated(new Date());
+      setError(null);
     } catch (err) {
+      if (!mounted.current) return;
 
       setError(
         err instanceof Error
           ? err.message
-          : 'Terjadi kesalahan saat mengambil data'
-      )
+          : 'Terjadi kesalahan saat mengambil data sensor.'
+      );
 
+      // Snapshot terakhir tidak dihapus ketika polling gagal.
     } finally {
+      requestInProgress.current = false;
 
-      setLoading(false)
+      if (mounted.current) {
+        setLoading(false);
+      }
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
+    mounted.current = true;
 
-    refresh()
+    refresh();
 
-    const id =
-      setInterval(
-        refresh,
-        pollInterval
-      )
+    const intervalId = window.setInterval(
+      refresh,
+      pollInterval
+    );
 
-    return () =>
-      clearInterval(id)
-
-  }, [
-    refresh,
-    pollInterval,
-  ])
+    return () => {
+      mounted.current = false;
+      window.clearInterval(intervalId);
+    };
+  }, [refresh, pollInterval]);
 
   return {
     sensor,
-    ai,
     loading,
     error,
     lastUpdated,
     refresh,
-  }
+  };
 }

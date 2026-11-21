@@ -1,127 +1,60 @@
-import { Flame } from 'lucide-react'
-import IconBadge from '../ui/IconBadge.jsx'
+import { Flame, Info } from 'lucide-react';
+import IconBadge from '../ui/IconBadge.jsx';
 
 export default function FireSpreadCard({
   spreadRate = null,
+  spreadModelStatus = 'UNKNOWN',
 }) {
-
-  const hasSpread =
+  const available =
     spreadRate !== null &&
     spreadRate !== undefined &&
-    Number.isFinite(Number(spreadRate))
-
-  const value = hasSpread
-    ? Number(spreadRate)
-    : null
-
-  const pct = hasSpread
-    ? Math.min(Math.max(value, 0), 100)
-    : 0
-
-  const barColor = !hasSpread
-    ? 'bg-gray-300'
-    : value < 10
-      ? 'bg-forest-500'
-      : value < 50
-        ? 'bg-yellow-400'
-        : 'bg-red-500'
+    Number.isFinite(Number(spreadRate));
 
   return (
-
-    <div className="
-      bg-white
-      rounded-3xl
-      p-6
-      shadow-sm
-      border
-      border-gray-100
-      flex
-      flex-col
-      gap-4
-    ">
-
+    <section className="flex min-w-0 flex-col gap-4 rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
       <div className="flex items-center gap-3">
+        <IconBadge icon={Flame} tone="red" />
 
-        <IconBadge
-          icon={Flame}
-          tone="red"
-        />
+        <div>
+          <h2 className="text-base font-semibold text-gray-800">
+            Estimasi Laju Rambat Baseline
+          </h2>
 
-        <span className="
-          text-base
-          font-medium
-          text-gray-500
-        ">
-          Laju Rambat Api
-        </span>
-
+          <p className="text-xs text-gray-400">
+            Perhitungan semi-empiris saat ini
+          </p>
+        </div>
       </div>
 
-
-      <div className="flex items-end gap-1.5">
-
-        <span className="
-          text-5xl
-          font-bold
-          text-gray-900
-          tracking-tight
-          leading-none
-        ">
-
-          {hasSpread
-            ? value.toFixed(2)
+      <div className="flex items-end gap-2">
+        <span className="text-5xl font-bold leading-none tracking-tight text-gray-900">
+          {available
+            ? Number(spreadRate).toFixed(2)
             : '--'}
-
         </span>
 
-        <span className="
-          text-lg
-          font-medium
-          text-gray-500
-          mb-1
-        ">
+        <span className="mb-1 text-lg font-medium text-gray-500">
           cm/jam
         </span>
-
       </div>
 
-
-      <p className="
-        text-xs
-        leading-5
-        text-gray-500
-      ">
-
-        Estimasi laju rambat berdasarkan perhitungan model.
-        Nilai ini bukan pengukuran langsung di lapangan.
-
-      </p>
-
-
-      <div className="
-        h-2.5
-        bg-gray-100
-        rounded-full
-        overflow-hidden
-      ">
-
-        <div
-          className={`
-            h-full
-            rounded-full
-            transition-all
-            duration-700
-            ${barColor}
-          `}
-          style={{
-            width: `${Math.max(pct, hasSpread ? 2 : 0)}%`,
-          }}
+      <div className="flex gap-2 rounded-2xl border border-blue-100 bg-blue-50 p-3">
+        <Info
+          size={17}
+          className="mt-0.5 shrink-0 text-blue-700"
         />
 
+        <p className="text-xs leading-5 text-blue-900">
+          Nilai ini merupakan estimasi baseline, bukan hasil
+          pengukuran langsung di lapangan dan bukan label observasi
+          untuk pelatihan ML. Status perhitungan: {spreadModelStatus}.
+        </p>
       </div>
 
-    </div>
-
-  )
-
+      <p className="text-xs leading-5 text-gray-500">
+        Prediksi laju rambat ML hanya ditampilkan apabila data
+        observasi aktual sudah mencukupi untuk pelatihan model.
+      </p>
+    </section>
+  );
 }

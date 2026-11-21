@@ -1,186 +1,152 @@
+// ============================================================
+// PYROWATCH FRONTEND API
+// Source: Node-RED /api/sensor/latest
+// Semua hasil ML dikirim bersama snapshot sensor.
+// Tidak ada endpoint LLM /api/ai/latest.
+// ============================================================
+
 const USE_MOCK = false;
 
+function toNumber(value) {
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+async function requestJson(url) {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+    cache: 'no-store',
+  });
+
+  let body;
+
+  try {
+    body = await response.json();
+  } catch {
+    throw new Error('Respons server bukan JSON yang valid.');
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      body?.message || `Gagal mengambil data (HTTP ${response.status})`
+    );
+  }
+
+  if (body?.success === false) {
+    throw new Error(body.message || 'Data PyroWatch belum tersedia.');
+  }
+
+  return body?.data ?? body;
+}
 
 // ============================================================
-// FETCH SENSOR DATA
+// FETCH SENSOR + ML FORECAST
 // ============================================================
 
 export async function fetchSensorData() {
-
   if (USE_MOCK) {
-
-    const { mockSensorData } =
-      await import('./mockData.js')
-
-    return mockSensorData
+    const { mockSensorData } = await import('./mockData.js');
+    return mockSensorData;
   }
 
+  const d = await requestJson('/api/sensor/latest');
 
-  const res = await fetch(
-    '/api/sensor/latest',
-    {
-      method: 'GET',
-
-      headers: {
-        Accept: 'application/json',
-      },
-    }
-  )
-
-
-  if (!res.ok) {
-
-    throw new Error(
-      `Gagal mengambil data sensor (HTTP ${res.status})`
-    )
-
+  if (!d || typeof d !== 'object' || Array.isArray(d)) {
+    throw new Error('Format data sensor tidak sesuai.');
   }
 
-
-  const result = await res.json()
-
-
-  if (!result.success || !result.data) {
-
-    throw new Error(
-      result.message ||
-      'Data sensor tidak tersedia'
-    )
-
-  }
-
-
-  const d = result.data
-
-
-  // ==========================================================
-  // SENSOR
-  // ==========================================================
+  // Catatan sumber data:
+  // 1. Wind speed: ESP32 anemometer.
+  // 2. Wind direction: Open-Meteo.
+  // 3. Arah angin bukan arah rambat api.
+  // 4. FRI utama adalah FRI aktual dari sensor.
+  // 5. ML memprediksi perubahan FRI, bukan skor FRI kedua.
 
   return {
+    // --------------------------------------------------------
+    // IDENTITAS DAN WAKTU
+    // --------------------------------------------------------
 
-    nodeId:
-      d.node_id ?? null,
+    nodeId: d.node_id ?? null,
+    timestamp: d.timestamp ?? null,
 
-    timestamp:
-      d.timestamp ?? null,
+    // --------------------------------------------------------
+    // DATA SENSOR
+    // --------------------------------------------------------
 
-    temperature:
-      Number(d.temp ?? 0),
+    temperature: toNumber(d.temp),
+    humidity: toNumber(d.hum),
 
-    humidity:
-      Number(d.hum ?? 0),
+    // Data gas hanya ditampilkan jika status kalibrasi aktif.
+    co: d.gas_calibrated === true ? toNumber(d.co) : null,
+    ch4: d.gas_calibrated === true ? toNumber(d.ch4) : null,
 
-    co:
-      d.co == null ? null : Number(d.co),
+    gasCalibrated: d.gas_calibrated === true,
+    gasCalibrationValidated:
+      d.gas_calibration_validated === true,
+    gasCalibrationStatus:
+      d.gas_calibration_status ?? 'NOT_CALIBRATED',
 
-    ch4:
-      d.ch4 == null ? null : Number(d.ch4),
+    // --------------------------------------------------------
+    // KONDISI TANAH
+    // --------------------------------------------------------
 
+    soilMoisture: toNumber(d.soil_moisture),
+    soilCondition: d.soil_condition ?? 'Tidak diketahui',
 
-    // ========================================================
-    // SOIL
-    // ========================================================
+    // --------------------------------------------------------
+    // FIRE RISK INDEX AKTUAL
+    // --------------------------------------------------------
 
-    soilMoisture:
-      d.soil_moisture == null
-        ? null
-        : Number(d.soil_moisture),
+    fireRiskIndex: toNumber(d.fri),
+    riskLevel: d.fri_level ?? 'UNKNOWN',
+    friDataStatus: d.fri_data_status ?? 'UNKNOWN',
 
-    soilCondition:
-      d.soil_condition ??
-      d.soil_status ??
-      'Tidak diketahui',
+    // --------------------------------------------------------
+    // ANGIN
+    // Kecepatan dari ESP32, arah dari Open-Meteo
+    // --------------------------------------------------------
 
+    windSpeed: toNumber(
+      d.wind_speed_sensor ?? d.wind_speed
+    ),
 
-    // ========================================================
-    // FRI
-    // ========================================================
+    windDirection: toNumber(d.wind_direction_deg),
+    windDirectionLabel: d.wind_direction ?? 'UNKNOWN',
 
-    fireRiskIndex:
-      d.fri == null
-        ? null
-        : Number(d.fri),
+    weatherSource: d.weather_source ?? 'Open-Meteo',
+    weatherStatus: d.weather_status ?? 'UNKNOWN',
 
-    riskLevel:
-      d.fri_level ?? 'UNKNOWN',
+    // --------------------------------------------------------
+    // ESTIMASI LAJU RAMBAT BASELINE
+    // Bukan ground truth dan bukan hasil prediksi ML.
+    // --------------------------------------------------------
 
+    fireSpread: toNumber(d.spread_rate_cmph),
 
-    // ========================================================
-    // WIND
-    // Kecepatan = ESP32 anemometer
-    // Arah = Open-Meteo
-    // ========================================================
+    spreadLabelType:
+      d.spread_label_type ??
+      'SEMI_EMPIRICAL_ESTIMATE_NOT_GROUND_TRUTH',
 
-    windSpeed:
-      d.wind_speed_sensor == null
-        ? (
-            d.wind_speed == null
-              ? null
-              : Number(d.wind_speed)
-          )
-        : Number(d.wind_speed_sensor),
+    spreadModelStatus:
+      d.spread_model_status ?? 'UNKNOWN',
 
-    windDirection:
-      d.wind_direction_deg == null
-        ? null
-        : Number(d.wind_direction_deg),
-
-    windDirectionLabel:
-      d.wind_direction ?? 'UNKNOWN',
-
-
-    // ========================================================
-    // FIRE SPREAD
-    // ========================================================
-
-    fireSpread:
-      d.spread_rate_cmph == null
-        ? null
-        : Number(d.spread_rate_cmph),
-
-    spreadRateBase:
-      d.spread_rate_base_cmph == null
-        ? null
-        : Number(d.spread_rate_base_cmph),
-
-    windEffectFactor:
-      d.wind_effect_factor == null
-        ? null
-        : Number(d.wind_effect_factor),
-
-    spreadModel:
-      d.spread_model ?? null,
-
-    spreadDirectionSource:
-      d.spread_direction_source ?? null,
-
-
-    // ========================================================
-    // WEATHER
-    // ========================================================
-
-    weatherSource:
-      d.weather_source ?? null,
-
-    weatherStatus:
-      d.weather_status ?? null,
-
-
-    // ========================================================
-    // ML FORECAST 15 MINUTES
-    // ========================================================
+    // --------------------------------------------------------
+    // MACHINE LEARNING FORECAST 15 MENIT
+    // --------------------------------------------------------
 
     mlForecast: {
-
-      status:
-        d.ml_forecast_status ??
-        'UNAVAILABLE',
+      status: d.ml_forecast_status ?? 'UNAVAILABLE',
 
       horizonMinutes:
-        Number(
-          d.ml_forecast_horizon_minutes ?? 15
-        ),
+        toNumber(d.ml_forecast_horizon_minutes) ?? 15,
 
       forecastTimestamp:
         d.ml_forecast_timestamp ?? null,
@@ -188,118 +154,45 @@ export async function fetchSensorData() {
       insightText:
         d.ml_insight_text ?? null,
 
-      riskLevel:
-        d.ml_risk_level ?? 'UNKNOWN',
-
       trend:
         d.ml_trend ?? 'UNKNOWN',
 
+      friChange:
+        toNumber(d.ml_fri_change),
 
-      // Highlight prediksi
+      currentFri:
+        toNumber(d.ml_current_fri ?? d.fri),
+
+      currentFriLevel:
+        d.ml_current_fri_level ??
+        d.fri_level ??
+        'UNKNOWN',
+
+      futureWindSpeed:
+        toNumber(d.ml_future_wind_speed),
+
+      futureSpreadRate:
+        toNumber(d.ml_future_spread_rate_cmph),
+
       highlights:
         Array.isArray(d.ml_highlights)
           ? d.ml_highlights
           : [],
 
-
-      // Empat rekomendasi
+      // Mempertahankan nama field rekomendasi dari backend:
+      // priority, trigger_summary, monitoring, early_response,
+      // area_protection, coordination, operational_caveat.
       recommendations:
-        d.ml_recommendations ?? {},
+        d.ml_recommendations ?? null,
 
-
-      // Informasi model
       modelVersion:
         d.ml_model_version ?? null,
 
       inputStatus:
         d.ml_input_status ?? 'UNKNOWN',
-
     },
 
-
-    // ========================================================
-    // ORIGINAL NODE-RED PAYLOAD
-    // ========================================================
-
+    // Payload asli untuk debugging.
     raw: d,
-
-  }
-
-}
-
-
-// ============================================================
-// FETCH AI ANALYSIS
-// ============================================================
-
-export async function fetchAIAnalysis() {
-
-  if (USE_MOCK) {
-
-    const { mockAIAnalysis } =
-      await import('./mockData.js')
-
-    return mockAIAnalysis
-
-  }
-
-
-  const res = await fetch(
-    '/api/ai/latest',
-    {
-      method: 'GET',
-
-      headers: {
-        Accept: 'application/json',
-      },
-    }
-  )
-
-
-  if (res.status === 404) {
-    return null
-  }
-
-
-  if (!res.ok) {
-
-    throw new Error(
-      `Gagal mengambil analisis AI (HTTP ${res.status})`
-    )
-
-  }
-
-
-  const result = await res.json()
-
-
-  if (!result.success || !result.data) {
-    return null
-  }
-
-
-  const d = result.data
-
-
-  return {
-
-    analisisRisiko:
-      d.analisis_risiko ?? null,
-
-    estimasiPenyebaran:
-      d.estimasi_penyebaran ?? null,
-
-    faktorPemicu:
-      d.faktor_pemicu ?? null,
-
-    rekomendasi:
-      d.rekomendasi ?? null,
-
-    tingkatKewaspadaan:
-      d.tingkat_kewaspadaan ?? null,
-
-    raw: d,
-
-  }
-
+  };
 }
