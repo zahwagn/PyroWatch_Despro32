@@ -13,6 +13,7 @@ export default function IconBadge({ icon: Icon, tone = 'green', size = 20 }) {
   if (!Icon) return null
   return (
     <span
+      aria-hidden="true"
       className={`w-10 h-10 shrink-0 flex items-center justify-center rounded-full ${tones[tone] ?? tones.green}`}
     >
       <Icon size={size} strokeWidth={2} />

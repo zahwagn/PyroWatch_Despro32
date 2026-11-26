@@ -237,7 +237,7 @@ export default function App() {
       >
         <Header
           riskLevel={sensor.riskLevel}
-          priority={sensor.mlForecast?.priority}
+          priority={view === 'analysis' ? null : sensor.mlForecast?.priority}
           scenarioLabel={sensor.mlForecast?.scenarioLabel}
           lastUpdated={lastUpdated}
           onRefresh={refresh}

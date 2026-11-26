@@ -1,12 +1,13 @@
-import { BrainCircuit, Clock3, ClipboardCheck, AlertTriangle, History } from 'lucide-react';
+import { AlertTriangle, BrainCircuit, ChevronDown, Info } from 'lucide-react';
 
 import IconBadge from '../ui/IconBadge.jsx';
 import ScenarioPanel from '../ml/ScenarioPanel.jsx';
 import EscalationPanel from '../ml/EscalationPanel.jsx';
 import ComponentProjection from '../ml/ComponentProjection.jsx';
-import FieldBrief from '../ml/FieldBrief.jsx';
+import FieldBrief, { getFieldGuidance } from '../ml/FieldBrief.jsx';
 import ActionPlan from '../ml/ActionPlan.jsx';
-import { TONES, priorityInfo } from '../ml/mlFormat.js';
+import OfficerSummary from '../ml/OfficerSummary.jsx';
+import { PRIORITY_STYLE, priorityInfo } from '../ml/mlFormat.js';
 
 function formatDate(value) {
   if (!value) return null;
@@ -17,123 +18,132 @@ function formatDate(value) {
   });
 }
 
-const STATUS_STYLE = {
-  OK: 'bg-forest-100 text-forest-800',
-  PARTIAL: 'bg-amber-100 text-amber-800',
-  CACHED: 'bg-blue-100 text-blue-800',
-};
+function ModelDetails({ label, children }) {
+  return (
+    <details className="min-w-0 [&[open]>summary>svg]:rotate-180">
+      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-gray-900 hover:bg-forest-50 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-forest-700 [&::-webkit-details-marker]:hidden">
+        {label}
+        <ChevronDown size={18} className="shrink-0 text-forest-700" aria-hidden="true" />
+      </summary>
+      <div className="min-w-0 px-4 pb-4 pt-2">{children}</div>
+    </details>
+  );
+}
 
 export default function MLPredictionCard({ forecast = {}, sensor = {} }) {
   const status = forecast?.status || 'UNAVAILABLE';
-  const available = ['OK', 'PARTIAL', 'CACHED'].includes(status) && forecast?.scenario;
+  const available = Boolean(['OK', 'PARTIAL', 'CACHED'].includes(status) && forecast?.scenario);
   const rec = forecast?.recommendations ?? null;
-  const priority = priorityInfo(forecast?.priority || rec?.priority);
-  const pTone = TONES[priority.tone];
+  const priorityCode = forecast?.priority || rec?.priority;
+  const priority = priorityInfo(priorityCode);
   const target = formatDate(forecast?.forecastTimestamp);
+  const cachedSample = formatDate(forecast?.cachedFromSample);
+  const qualityNotes = [...new Set(
+    (Array.isArray(forecast?.dataQuality) ? forecast.dataQuality : [])
+      .filter(note => typeof note === 'string' && note.trim())
+      .map(note => note.trim()),
+  )];
+  const analysis = typeof forecast?.insightText === 'string' ? forecast.insightText.trim() : '';
+  const fieldGuidance = available ? getFieldGuidance(forecast) : [];
 
   return (
-    <section className="flex flex-col gap-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
-      {/* HEADER */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <IconBadge icon={BrainCircuit} tone="violet" />
-          <div>
-            <h2 className="text-base font-semibold text-gray-900">Analisis & Prediksi ML</h2>
-            <p className="text-xs text-gray-500">
-              Penyebab FRI, peluang eskalasi {forecast?.horizonMinutes || 30} menit, dan rencana aksi
-            </p>
+    <section className="dashboard-card flex min-w-0 flex-col gap-5 p-4 sm:gap-6 sm:p-6">
+      <header className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+        <div className="flex min-w-0 items-center gap-3">
+          <IconBadge icon={BrainCircuit} />
+          <h2 className="text-base font-semibold text-gray-900">Analisis & Prediksi ML</h2>
+        </div>
+        {(priorityCode || (available && status !== 'OK')) && (
+          <div className="flex flex-wrap items-center gap-2">
+            {priorityCode && (
+              <span className={`dashboard-status ${PRIORITY_STYLE[priority.tone]}`} title={priority.desc}>
+                Prioritas {priority.label}
+              </span>
+            )}
+            {available && status === 'PARTIAL' && (
+              <span className="dashboard-status text-amber-800">Data terbatas</span>
+            )}
+            {available && status === 'CACHED' && (
+              <span className="dashboard-status text-gray-600">
+                Sampel sebelumnya{cachedSample && ` · ${cachedSample}`}
+              </span>
+            )}
           </div>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <span className={`rounded-full px-3 py-1.5 text-xs font-semibold ${STATUS_STYLE[status] || 'bg-gray-100 text-gray-700'}`}>
-            {status}
-          </span>
-          {(forecast?.priority || rec?.priority) && (
-            <span className={`rounded-full px-3 py-1.5 text-xs font-bold ${pTone.chip}`} title={priority.desc}>
-              Prioritas {priority.label}
-            </span>
-          )}
-        </div>
-      </div>
+        )}
+      </header>
 
-      {status === 'CACHED' && forecast.cachedFromSample && (
-        <p className="-mt-3 inline-flex items-center gap-1.5 text-xs text-blue-700">
-          <History size={13} /> Menampilkan analisis terakhir (sampel {formatDate(forecast.cachedFromSample)}); analisis baru dijalankan tiap 60 detik.
-        </p>
-      )}
-
-      {/* RINGKASAN */}
-      <div className={`rounded-2xl border p-4 ${pTone.soft}`}>
-        <p className={`mb-1 text-xs font-bold uppercase tracking-wide ${pTone.text}`}>
-          Ringkasan untuk petugas — {priority.desc}
-        </p>
-        <p className="text-sm leading-6 text-gray-800">
-          {forecast?.insightText || 'Insight belum tersedia. Periksa status layanan ML dan input sensor.'}
-        </p>
-      </div>
-
-      {forecast?.dataQuality?.length > 0 && (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
-          <p className="mb-1 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-amber-800">
-            <AlertTriangle size={14} /> Catatan kualitas data
-          </p>
-          <ul className="list-disc space-y-1 pl-5 text-xs leading-5 text-amber-900">
-            {forecast.dataQuality.map((q) => <li key={q}>{q}</li>)}
-          </ul>
+      {qualityNotes.length > 0 && (
+        <div className="flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
+          <AlertTriangle size={16} className="mt-0.5 shrink-0 text-amber-800" aria-hidden="true" />
+          <div className="min-w-0 text-sm leading-5 text-amber-900">
+            <p className="font-semibold">Kualitas data</p>
+            <ul className="mt-1 list-disc space-y-1 break-words pl-4">
+              {qualityNotes.map(note => <li key={note}>{note}</li>)}
+            </ul>
+          </div>
         </div>
       )}
 
       {available ? (
-        <>
-          <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-            <ScenarioPanel forecast={forecast} fri={sensor.fireRiskIndex ?? forecast.currentFri}
-              friLevel={sensor.riskLevel ?? forecast.currentFriLevel} />
-            <EscalationPanel forecast={forecast} />
-          </div>
-
-          <ActionPlan plan={forecast.actionPlan} fallback={rec} />
-
-          <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-            <FieldBrief forecast={forecast} />
-            <ComponentProjection
-              current={{ co: sensor.co, ch4: sensor.ch4, temp: sensor.temperature, hum: sensor.humidity, wind: sensor.windSpeed }}
-              projection={forecast.projection15} trendPerMin={forecast.trendPerMin} />
-          </div>
-        </>
+        <OfficerSummary forecast={forecast} />
       ) : (
-        <>
-          <ActionPlan plan={forecast?.actionPlan || []} fallback={rec} />
-          {!rec && (
-            <div className="rounded-2xl border border-amber-100 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
-              Analisis skenario belum tersedia karena input sensor belum lengkap atau layanan ML belum merespons.
-            </div>
-          )}
-        </>
+        <p className="text-sm leading-5 text-gray-600">Prediksi belum tersedia.</p>
       )}
 
+      <ActionPlan plan={forecast?.actionPlan ?? []} fallback={rec} />
+
       {rec?.operational_caveat && (
-        <div className="flex gap-3 rounded-2xl border border-gray-200 bg-gray-50 p-4">
-          <ClipboardCheck className="mt-0.5 shrink-0 text-gray-500" size={18} />
-          <div>
-            <p className="mb-1 text-xs font-semibold text-gray-700">Batasan penggunaan</p>
-            <p className="text-xs leading-5 text-gray-600">{rec.operational_caveat}</p>
-          </div>
+        <div className="flex gap-2.5 text-xs leading-5 text-gray-600">
+          <Info size={15} className="mt-0.5 shrink-0" aria-hidden="true" />
+          <p className="max-w-prose">{rec.operational_caveat}</p>
         </div>
       )}
 
-      <footer className="flex flex-wrap items-center justify-between gap-2 border-t border-gray-100 pt-3 text-xs text-gray-400">
-        <span className="inline-flex items-center gap-1.5">
-          <span className={`h-2 w-2 rounded-full ${available ? 'bg-forest-500' : 'bg-amber-500'}`} />
-          Input: {forecast?.inputStatus || 'UNKNOWN'}
-          {forecast?.historyPoints != null && ` · riwayat ${forecast.historyPoints} pembacaan / 15 menit`}
-        </span>
-        <span className="inline-flex flex-wrap items-center gap-3">
-          {target && (
-            <span className="inline-flex items-center gap-1"><Clock3 size={12} /> Horizon s.d. {target}</span>
+      {(available || analysis) && (
+        <div className="dashboard-panel divide-y divide-gray-100">
+          <ModelDetails label="Detail prediksi">
+            {available && (
+              <div className="space-y-4">
+                <div className="grid gap-4 xl:grid-cols-2">
+                  <ScenarioPanel
+                    forecast={forecast}
+                    fri={sensor.fireRiskIndex ?? forecast.currentFri}
+                    friLevel={sensor.riskLevel ?? forecast.currentFriLevel}
+                  />
+                  <EscalationPanel forecast={forecast} />
+                </div>
+                <ComponentProjection
+                  current={{ co: sensor.co, ch4: sensor.ch4, temp: sensor.temperature, hum: sensor.humidity, wind: sensor.windSpeed }}
+                  projection={forecast.projection15}
+                  trendPerMin={forecast.trendPerMin}
+                />
+              </div>
+            )}
+
+            {analysis && (
+              <div className={`border-t border-gray-100 ${available ? 'mt-4' : ''}`}>
+                <ModelDetails label="Analisis model lengkap">
+                  <p className="max-w-prose whitespace-pre-line break-words text-sm leading-6 text-gray-700">{analysis}</p>
+                </ModelDetails>
+              </div>
+            )}
+
+            <ul className="flex flex-wrap gap-x-4 gap-y-1 border-t border-gray-100 px-1 pt-3 text-xs text-gray-600">
+              <li>Status model {status}</li>
+              {forecast?.inputStatus && forecast.inputStatus !== 'UNKNOWN' && <li>Input {forecast.inputStatus}</li>}
+              {forecast?.historyPoints != null && <li>{forecast.historyPoints} pembacaan dalam 15 menit</li>}
+              {target && <li>Prakiraan hingga {target}</li>}
+              {forecast?.modelVersion && <li>Versi {forecast.modelVersion}</li>}
+            </ul>
+          </ModelDetails>
+
+          {fieldGuidance.length > 0 && (
+            <ModelDetails label="Panduan lapangan">
+              <FieldBrief items={fieldGuidance} />
+            </ModelDetails>
           )}
-          {forecast?.modelVersion && <span>Model {forecast.modelVersion}</span>}
-        </span>
-      </footer>
+        </div>
+      )}
     </section>
   );
 }

@@ -13,21 +13,21 @@ function deltaClass(delta, rising) {
   if (!isNum(delta) || Math.abs(delta) < 1e-9) return 'text-gray-500';
   const up = delta > 0;
   const bad = (up && rising === 'bad') || (!up && rising === 'good');
-  return bad ? 'text-red-600' : 'text-forest-700';
+  return bad ? 'text-red-700' : 'text-forest-700';
 }
 
 // Proyeksi tiap komponen sensor 15 menit ke depan + tren per menit.
 export default function ComponentProjection({ current, projection = {}, trendPerMin = {} }) {
   return (
-    <section>
+    <section className="min-w-0">
       <h3 className="mb-3 text-sm font-semibold text-gray-900">Proyeksi komponen sensor 15 menit</h3>
-      <div className="overflow-x-auto rounded-2xl border border-gray-100">
+      <div className="dashboard-panel overflow-x-auto">
         <table className="w-full min-w-[28rem] text-sm">
-          <thead className="bg-gray-50 text-xs text-gray-500">
+          <thead className="bg-gray-50 text-xs text-gray-600">
             <tr>
-              <th className="px-4 py-2 text-left font-medium">Komponen</th>
-              <th className="px-4 py-2 text-right font-medium">Sekarang → 15 menit</th>
-              <th className="px-4 py-2 text-right font-medium">Tren / menit</th>
+              <th scope="col" className="px-4 py-2 text-left font-medium">Komponen</th>
+              <th scope="col" className="px-4 py-2 text-right font-medium">Sekarang → 15 menit</th>
+              <th scope="col" className="px-4 py-2 text-right font-medium">Tren / menit</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -37,15 +37,15 @@ export default function ComponentProjection({ current, projection = {}, trendPer
               const delta = isNum(now) && isNum(next) ? next - now : null;
               return (
                 <tr key={r.key}>
-                  <td className="px-4 py-2.5 text-gray-700">{r.label}</td>
+                  <th scope="row" className="px-4 py-2.5 text-left font-medium text-gray-700">{r.label}</th>
                   <td className="px-4 py-2.5 text-right">
                     <span className="inline-flex items-center gap-1.5 tabular-nums">
                       <span className="text-gray-500">{fmt(now, r.digits)}</span>
-                      <ArrowRight size={13} className="text-gray-300" />
-                      <span className={`font-semibold ${isNum(next) && r.warn(next) ? 'text-red-600' : 'text-gray-900'}`}>
+                      <ArrowRight size={13} className="text-gray-500" aria-hidden="true" />
+                      <span className={`font-semibold ${isNum(next) && r.warn(next) ? 'text-red-700' : 'text-gray-900'}`}>
                         {fmt(next, r.digits)}
                       </span>
-                      <span className="text-xs text-gray-400">{r.unit}</span>
+                      <span className="text-xs text-gray-500">{r.unit}</span>
                     </span>
                   </td>
                   <td className={`px-4 py-2.5 text-right text-xs tabular-nums ${deltaClass(delta, r.rising)}`}>

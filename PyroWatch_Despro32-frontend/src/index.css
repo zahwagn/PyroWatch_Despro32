@@ -17,3 +17,17 @@
   height: 100%;
   }
 }
+
+@layer components {
+  .dashboard-card {
+    @apply rounded-3xl border border-gray-100 bg-white shadow-sm;
+  }
+
+  .dashboard-panel {
+    @apply rounded-2xl border border-gray-100 bg-white;
+  }
+
+  .dashboard-status {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-current bg-transparent px-2.5 py-1 text-xs font-semibold leading-snug;
+  }
+}

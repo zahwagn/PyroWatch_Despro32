@@ -12,7 +12,7 @@ function autoTone(label = '') {
 
 export default function SensorCard({ icon, label, value, unit, tone }) {
   return (
-    <div className="bg-white rounded-3xl p-6 flex flex-col gap-4 shadow-sm border border-gray-100">
+    <div className="dashboard-card flex flex-col gap-4 p-6">
       <div className="flex items-center gap-3">
         <IconBadge icon={icon} tone={tone ?? autoTone(label)} />
         <span className="text-base font-medium text-gray-500">{label}</span>

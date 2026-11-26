@@ -25,8 +25,8 @@ function Compass({ fromDeg }) {
   return (
     <svg viewBox="0 0 120 120" className="h-32 w-32 shrink-0" role="img"
       aria-label={has ? `Angin datang dari ${Number(fromDeg).toFixed(0)} derajat` : 'Arah angin tidak tersedia'}>
-      <circle cx={c} cy={c} r={r} className="fill-sky-50 stroke-sky-100" strokeWidth="2" />
-      {has && <path d={sectorPath(c, c, r, Number(fromDeg))} className="fill-orange-200/70" />}
+      <circle cx={c} cy={c} r={r} className="fill-gray-50 stroke-gray-200" strokeWidth="2" />
+      {has && <path d={sectorPath(c, c, r, Number(fromDeg))} className="fill-forest-200/70" />}
       {has && <path d={sectorPath(c, c, r, to)} className="fill-red-200/70" />}
       {['U', 'T', 'S', 'B'].map((label, i) => {
         const [x, y] = polar(c, c, r - 8, i * 90);
@@ -60,12 +60,12 @@ export default function WindCard({
   const hasDirection = isNum(direction);
 
   return (
-    <section className="flex min-w-0 flex-col gap-5 rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+    <section className="dashboard-card flex min-w-0 flex-col gap-5 p-4 sm:p-6">
       <div className="flex items-center gap-3">
         <IconBadge icon={Wind} tone="sky" />
         <div>
           <h2 className="text-base font-semibold text-gray-800">Kondisi Angin & Sektor</h2>
-          <p className="text-xs text-gray-400">Kecepatan dari anemometer ESP32, arah dari {source || 'Open-Meteo'}</p>
+          <p className="text-xs text-gray-600">Kecepatan dari anemometer ESP32, arah dari {source || 'Open-Meteo'}</p>
         </div>
       </div>
 
@@ -87,12 +87,12 @@ export default function WindCard({
       </div>
 
       <div className="grid grid-cols-1 gap-2 text-xs leading-5 sm:grid-cols-2">
-        <div className="rounded-xl border border-orange-100 bg-orange-50 p-3 text-orange-900">
-          <p className="font-semibold">▲ Hulu angin: cari sumber</p>
+        <div className="dashboard-panel p-3 text-gray-700">
+          <p className="font-semibold text-forest-700">Hulu angin: cari sumber</p>
           <p>{sourceSector || 'Belum tersedia'}</p>
         </div>
-        <div className="rounded-xl border border-red-100 bg-red-50 p-3 text-red-900">
-          <p className="font-semibold">▼ Hilir angin: area ancaman</p>
+        <div className="dashboard-panel p-3 text-gray-700">
+          <p className="font-semibold text-red-700">Hilir angin: area ancaman</p>
           <p>{threatSector || 'Belum tersedia'}</p>
         </div>
       </div>

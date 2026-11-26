@@ -55,7 +55,7 @@ export default function FireRiskCard({
   return (
     <section
       className={
-        'col-span-2 flex flex-col gap-4 rounded-3xl border-2 bg-white p-6 shadow-sm ' +
+        'dashboard-card col-span-2 flex flex-col gap-4 border-2 p-6 ' +
         style.border +
         ' ' +
         className

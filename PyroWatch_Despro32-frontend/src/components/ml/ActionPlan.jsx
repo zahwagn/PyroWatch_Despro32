@@ -1,90 +1,85 @@
-import { useState } from 'react';
-import { Radar, Flame, ShieldCheck, RadioTower, ChevronDown, ListChecks } from 'lucide-react';
+import { ChevronDown, ListChecks } from 'lucide-react';
 import { CATEGORY_LABEL, PHASE_ORDER } from './mlFormat.js';
 
-const CATEGORY_STYLE = {
-  monitoring: { Icon: Radar, tone: 'bg-blue-50 text-blue-700' },
-  early_response: { Icon: Flame, tone: 'bg-orange-50 text-orange-700' },
-  area_protection: { Icon: ShieldCheck, tone: 'bg-forest-50 text-forest-700' },
-  coordination: { Icon: RadioTower, tone: 'bg-violet-50 text-violet-700' },
+const [immediatePhase, followUpPhase, postPhase] = PHASE_ORDER;
+const PHASE_DETAILS = {
+  [immediatePhase]: { title: 'Segera', time: '0–15 menit', border: 'border-2 border-forest-700' },
+  [followUpPhase]: { title: 'Lanjutan', time: '15–60 menit', border: 'border-2 border-forest-500' },
+  [postPhase]: { title: 'Pasca / Pemantauan' },
 };
 
-const PHASE_STYLE = {
-  'SEGERA (0–15 menit)': 'bg-red-600 text-white',
-  'LANJUTAN (15–60 menit)': 'bg-amber-500 text-white',
-  'PASCA / PEMANTAUAN': 'bg-gray-500 text-white',
-};
-
-function ActionItem({ item, index }) {
-  const [open, setOpen] = useState(false);
-  const style = CATEGORY_STYLE[item.category] || CATEGORY_STYLE.monitoring;
-  const Icon = style.Icon;
+function ActionList({ items }) {
   return (
-    <li className="flex gap-3 rounded-2xl border border-gray-100 bg-white p-4">
-      <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${style.tone}`}>
-        <Icon size={18} />
-      </span>
-      <div className="min-w-0 flex-1">
-        <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-gray-400">
-          {index}. {CATEGORY_LABEL[item.category] || item.category}
-        </p>
-        <p className="text-sm leading-6 text-gray-800">{item.action}</p>
-        {item.reason && (
-          <>
-            <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open}
-              className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-gray-800">
-              <ChevronDown size={14} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
-              {open ? 'Sembunyikan alasan' : 'Lihat alasan'}
-            </button>
-            {open && <p className="mt-1 rounded-xl bg-gray-50 p-3 text-xs leading-5 text-gray-600">{item.reason}</p>}
-          </>
-        )}
-      </div>
-    </li>
+    <ol className="list-decimal space-y-3 pl-6 marker:font-semibold marker:text-gray-700">
+      {items.map((item, index) => (
+        <li key={`${item.category}-${index}`} className="break-words border-b border-gray-100 pb-3 pl-1 last:border-b-0 last:pb-0">
+          <p className="text-xs font-semibold text-gray-600">{CATEGORY_LABEL[item.category] || item.category}</p>
+          <p className="mt-1 max-w-prose text-sm leading-relaxed text-gray-800">{item.action}</p>
+          {item.reason && (
+            <details className="group max-w-prose">
+              <summary className="inline-flex min-h-11 cursor-pointer list-none items-center gap-1 rounded-md pr-2 text-xs font-semibold text-forest-700 hover:text-forest-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 md:min-h-8 [&::-webkit-details-marker]:hidden">
+                <ChevronDown size={14} className="group-open:rotate-180" aria-hidden="true" />
+                Alasan
+              </summary>
+              <p className="pb-1 text-xs leading-relaxed text-gray-700">{item.reason}</p>
+            </details>
+          )}
+        </li>
+      ))}
+    </ol>
   );
 }
 
-// Rencana aksi berurutan per fase waktu.
-export default function ActionPlan({ plan = [], fallback = null }) {
-  const known = PHASE_ORDER.filter((p) => plan.some((a) => a.phase === p));
-  const other = [...new Set(plan.map((a) => a.phase))].filter((p) => !PHASE_ORDER.includes(p));
-  const phases = [...known, ...other];
+function PhaseCard({ phase, items }) {
+  const detail = PHASE_DETAILS[phase] || { title: phase || 'Fase lainnya' };
 
+  return (
+    <section
+      aria-label={detail.time ? `${detail.title}, ${detail.time}` : detail.title}
+      className={`dashboard-panel min-w-0 p-4 sm:p-5 ${detail.border ?? ''}`}
+    >
+      <header className="mb-4 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <h4 className="font-bold text-gray-900">{detail.title}</h4>
+        {detail.time && <span className="text-xs font-medium tabular-nums text-gray-600">{detail.time}</span>}
+      </header>
+      <ActionList items={items} />
+    </section>
+  );
+}
+export default function ActionPlan({ plan = [], fallback = null }) {
   if (!plan.length) {
-    if (!fallback) return null;
-    // Kompatibilitas: tampilkan 4 teks rekomendasi lama.
+    const recommendations = Object.keys(CATEGORY_LABEL)
+      .filter((category) => fallback?.[category])
+      .map((category) => ({ category, action: fallback[category] }));
+    if (!recommendations.length) return null;
+
     return (
       <section>
         <h3 className="mb-3 text-sm font-semibold text-gray-900">Rekomendasi tindakan</h3>
-        <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-          {Object.keys(CATEGORY_LABEL).filter((k) => fallback[k]).map((k, i) => (
-            <ActionItem key={k} index={i + 1} item={{ category: k, action: fallback[k] }} />
-          ))}
-        </ul>
+        <ActionList items={recommendations} />
       </section>
     );
   }
 
-  let counter = 0;
+  const phases = [...new Set([...PHASE_ORDER, ...plan.map(({ phase }) => phase)])]
+    .map((phase) => ({ phase, items: plan.filter((item) => item.phase === phase) }))
+    .filter(({ items }) => items.length);
+  const primaryPhases = phases.filter(({ phase }) => phase === immediatePhase || phase === followUpPhase);
+  const remainingPhases = phases.slice(primaryPhases.length);
+
   return (
     <section>
-      <h3 className="mb-3 inline-flex items-center gap-2 text-sm font-semibold text-gray-900">
-        <ListChecks size={16} className="text-gray-500" /> Rencana aksi petugas
+      <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-900">
+        <ListChecks size={16} className="text-gray-500" aria-hidden="true" />
+        Rencana aksi
       </h3>
       <div className="space-y-4">
-        {phases.map((phase) => (
-          <div key={phase}>
-            <span className={`mb-2 inline-block rounded-full px-3 py-1 text-xs font-bold ${PHASE_STYLE[phase] || 'bg-gray-500 text-white'}`}>
-              {phase}
-            </span>
-            <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-              {plan.filter((a) => a.phase === phase).map((item) => {
-                counter += 1;
-                return <ActionItem key={`${phase}-${counter}`} index={counter} item={item} />;
-              })}
-            </ul>
+        {primaryPhases.length > 0 && (
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] gap-4">
+            {primaryPhases.map(({ phase, items }) => <PhaseCard key={phase} phase={phase} items={items} />)}
           </div>
-        ))}
+        )}
+        {remainingPhases.map(({ phase, items }) => <PhaseCard key={phase ?? 'other'} phase={phase} items={items} />)}
       </div>
     </section>
   );
