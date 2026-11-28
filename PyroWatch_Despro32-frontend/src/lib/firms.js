@@ -2,22 +2,22 @@
 // Daftar API key gratis: https://firms.modaps.eosdis.nasa.gov/api/area/
 
 const FIRMS_API_KEY = import.meta.env.VITE_FIRMS_API_KEY || 'YOUR_FIRMS_API_KEY'
-const SOURCE        = 'VIIRS_SNPP_NRT'
-const AREA          = 'world'
+const SOURCE        = 'VIIRS_NOAA21_NRT'
+// FIRMS area coordinates are west,south,east,north.
+const AREA          = '94,-12,142,7'
 const DAY_RANGE     = 5
 
 const FIRMS_URL = `/firms/api/area/csv/${FIRMS_API_KEY}/${SOURCE}/${AREA}/${DAY_RANGE}`
 
 function parseCSV(csvText) {
   const lines = csvText.trim().split('\n')
-  if (lines.length < 2) return []
 
   const headers = lines[0].split(',').map(h => h.trim())
   const latIdx  = headers.indexOf('latitude')
   const lngIdx  = headers.indexOf('longitude')
   const frpIdx  = headers.indexOf('frp')
 
-  if (latIdx === -1 || lngIdx === -1) return []
+  if (latIdx === -1 || lngIdx === -1) throw new Error('Format respons hotspot FIRMS tidak valid')
 
   return lines.slice(1).map(line => {
     const cols = line.split(',')

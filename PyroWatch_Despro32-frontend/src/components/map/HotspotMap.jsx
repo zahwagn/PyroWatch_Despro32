@@ -5,6 +5,7 @@ import { fetchFIRMSHotspots } from '../../lib/firms.js'
 import { mockHotspots } from '../../lib/mockData.js'
 
 const USE_MOCK = !import.meta.env.VITE_FIRMS_API_KEY
+const REFRESH_INTERVAL_MINUTES = 3
 
 export default function HotspotMap({ height = 'h-80' }) {
   const mapRef      = useRef(null)
@@ -49,7 +50,7 @@ export default function HotspotMap({ height = 'h-80' }) {
   }, [])
 
   useEffect(() => {
-    const interval = setInterval(() => setTick((value) => value + 1), 10 * 60 * 1000)
+    const interval = setInterval(() => setTick((value) => value + 1), REFRESH_INTERVAL_MINUTES * 60 * 1000)
     return () => clearInterval(interval)
   }, [])
 
@@ -87,10 +88,13 @@ export default function HotspotMap({ height = 'h-80' }) {
   useEffect(() => {
     const map = instanceRef.current
     const L = window.L
-    if (!map || !L || !hotspots.length) return
+    if (!map || !L) return
 
     if (heatRef.current) map.removeLayer(heatRef.current)
     if (detailRef.current) map.removeLayer(detailRef.current)
+    heatRef.current = null
+    detailRef.current = null
+    if (!hotspots.length) return
 
     const zoomedOut = zoomLevel <= 5
     const heat = L.heatLayer(
@@ -145,7 +149,7 @@ export default function HotspotMap({ height = 'h-80' }) {
             </span>
           )}
           {error && (
-            <span className="text-sm bg-red-50 text-red-500 px-3 py-1 rounded-full">
+            <span title={error} className="text-sm bg-red-50 text-red-500 px-3 py-1 rounded-full">
               Gagal memuat
             </span>
           )}
@@ -174,7 +178,7 @@ export default function HotspotMap({ height = 'h-80' }) {
       {!USE_MOCK && (
         <div className="px-6 py-3 border-t border-gray-100">
           <p className="text-sm text-gray-500">
-            Sumber: NASA FIRMS VIIRS SNPP Near Real-Time · Diperbarui otomatis tiap 10 menit
+            Sumber: NASA FIRMS VIIRS NOAA-21 Near Real-Time · Dicek otomatis tiap {REFRESH_INTERVAL_MINUTES} menit
           </p>
         </div>
       )}
